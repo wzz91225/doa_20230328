@@ -1,0 +1,309 @@
+options:
+  parameters:
+    author: zzaw
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: d20230402_hier_PeriodicPeakDetector
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Periodic Peak Detector
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 12.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: TH_Factor_Fall
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: TH_Factor_Fall
+    short_id: ''
+    type: eng_float
+    value: '0.4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 12.0]
+    rotation: 0
+    state: true
+- name: TH_Factor_Rise
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: TH_Factor_Rise
+    short_id: ''
+    type: eng_float
+    value: '0.25'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544, 12.0]
+    rotation: 0
+    state: true
+- name: analog_const_source_x_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 332.0]
+    rotation: 0
+    state: true
+- name: analog_sig_source_x_1
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: 1/period_peak_detector
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: byte
+    waveform: analog.GR_SQR_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [64, 324.0]
+    rotation: 0
+    state: true
+- name: blocks_peak_detector_xb_0_0
+  id: blocks_peak_detector_xb
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.001'
+    comment: ''
+    look_ahead: '20'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    threshold_factor_fall: TH_Factor_Fall
+    threshold_factor_rise: TH_Factor_Rise
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 204.0]
+    rotation: 0
+    state: enabled
+- name: blocks_sample_and_hold_xx_0_1_1
+  id: blocks_sample_and_hold_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [984, 240.0]
+    rotation: 0
+    state: enabled
+- name: blocks_sample_and_hold_xx_0_1_1_0
+  id: blocks_sample_and_hold_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1256, 256.0]
+    rotation: 0
+    state: enabled
+- name: blocks_xor_xx_1
+  id: blocks_xor_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 328.0]
+    rotation: 0
+    state: true
+- name: blocks_xor_xx_1_0
+  id: blocks_xor_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 344.0]
+    rotation: 0
+    state: true
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1504, 260.0]
+    rotation: 0
+    state: true
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 188.0]
+    rotation: 0
+    state: true
+- name: period_peak_detector
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: period_peak_detector
+    short_id: ''
+    type: eng_float
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 12.0]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: samp_rate
+    short_id: ''
+    type: eng_float
+    value: 32e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 12.0]
+    rotation: 0
+    state: true
+- name: vsink_sigsrc_updating_sign
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 420.0]
+    rotation: 0
+    state: true
+- name: vsrc_sigsrc_updating_sign
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [984, 388.0]
+    rotation: 0
+    state: true
+
+connections:
+- [analog_const_source_x_0, '0', blocks_xor_xx_1_0, '0']
+- [analog_sig_source_x_1, '0', blocks_xor_xx_1_0, '1']
+- [analog_sig_source_x_1, '0', vsink_sigsrc_updating_sign, '0']
+- [blocks_peak_detector_xb_0_0, '0', blocks_sample_and_hold_xx_0_1_1, '0']
+- [blocks_peak_detector_xb_0_0, '0', blocks_xor_xx_1, '0']
+- [blocks_sample_and_hold_xx_0_1_1, '0', blocks_sample_and_hold_xx_0_1_1_0, '0']
+- [blocks_sample_and_hold_xx_0_1_1_0, '0', pad_sink_0, '0']
+- [blocks_xor_xx_1, '0', blocks_sample_and_hold_xx_0_1_1, '1']
+- [blocks_xor_xx_1_0, '0', blocks_xor_xx_1, '1']
+- [pad_source_0, '0', blocks_peak_detector_xb_0_0, '0']
+- [vsrc_sigsrc_updating_sign, '0', blocks_sample_and_hold_xx_0_1_1_0, '1']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.4.0
