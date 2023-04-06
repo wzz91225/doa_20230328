@@ -2,16 +2,16 @@ options:
   parameters:
     author: zzaw
     catch_exceptions: 'True'
-    category: '[DoA -  wzz91225]'
+    category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
     copyright: ''
-    description: Orthogonal dual channels
+    description: ''
     gen_cmake: 'On'
     gen_linking: dynamic
     generate_options: hb
     hier_block_src_path: '.:'
-    id: HIER_SignalGenerator_AmpComp_2D
+    id: HIER_AddGaussianNoise
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -22,7 +22,7 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: Signal Generator - AmpComp - 2D
+    title: Add Gaussian Noise
     window_size: (1000,1000)
   states:
     bus_sink: false
@@ -33,121 +33,44 @@ options:
     state: enabled
 
 blocks:
-- name: HIER_cos_angle_epb_0
-  id: HIER_cos_angle_epb
+- name: amplitude
+  id: parameter
   parameters:
-    affinity: ''
     alias: ''
     comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
+    hide: none
+    label: ''
+    short_id: ''
+    type: ''
+    value: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 452.0]
+    coordinate: [216, 20.0]
     rotation: 0
     state: true
-- name: HIER_sin_angle_epb_0
-  id: HIER_sin_angle_epb
+- name: analog_noise_source_x_0
+  id: analog_noise_source_x
   parameters:
     affinity: ''
     alias: ''
+    amp: amplitude
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    noise_type: analog.GR_GAUSSIAN
+    seed: random_seed
+    type: complex
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [320, 300.0]
-    rotation: 0
-    state: true
-- name: analog_const_source_x_0
-  id: analog_const_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: '0'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [328, 356.0]
-    rotation: 0
-    state: true
-- name: analog_const_source_x_1
-  id: analog_const_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: '0'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [312, 508.0]
-    rotation: 0
-    state: true
-- name: analog_const_source_x_2
-  id: analog_const_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: parameter_0
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [40, 292.0]
+    coordinate: [64, 284.0]
     rotation: 0
     state: enabled
-- name: blocks_float_to_complex_0
-  id: blocks_float_to_complex
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [592, 304.0]
-    rotation: 0
-    state: true
-- name: blocks_float_to_complex_1
-  id: blocks_float_to_complex
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [576, 456.0]
-    rotation: 0
-    state: true
-- name: blocks_multiply_xx_0
-  id: blocks_multiply_xx
+- name: blocks_add_xx_0
+  id: blocks_add_xx
   parameters:
     affinity: ''
     alias: ''
@@ -161,11 +84,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [880, 288.0]
+    coordinate: [416, 208.0]
     rotation: 0
-    state: true
-- name: blocks_multiply_xx_1
-  id: blocks_multiply_xx
+    state: enabled
+- name: blocks_divide_xx_0
+  id: blocks_divide_xx
   parameters:
     affinity: ''
     alias: ''
@@ -173,13 +96,99 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 376.0]
+    rotation: 0
+    state: true
+- name: blocks_nlog10_ff_0
+  id: blocks_nlog10_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [832, 380.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
     type: complex
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [880, 440.0]
+    coordinate: [1176, 220.0]
+    rotation: 0
+    state: disabled
+- name: blocks_null_sink_1
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1176, 388.0]
+    rotation: 0
+    state: true
+- name: blocks_rms_xx_0
+  id: blocks_rms_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.0001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 364.0]
+    rotation: 0
+    state: true
+- name: blocks_rms_xx_1
+  id: blocks_rms_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.0001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 436.0]
     rotation: 0
     state: true
 - name: pad_sink_0
@@ -188,7 +197,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    label: ch1
+    label: out
     num_streams: '1'
     optional: 'False'
     type: complex
@@ -197,7 +206,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1112, 292.0]
+    coordinate: [1056, 212.0]
     rotation: 0
     state: true
 - name: pad_sink_1
@@ -206,16 +215,16 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    label: ch2
+    label: SNR_dB
     num_streams: '1'
-    optional: 'False'
-    type: complex
+    optional: 'True'
+    type: float
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1096, 444.0]
+    coordinate: [1056, 380.0]
     rotation: 0
     state: true
 - name: pad_source_0
@@ -224,7 +233,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    label: signal
+    label: in
     maxoutbuf: '0'
     minoutbuf: '0'
     num_streams: '1'
@@ -235,36 +244,16 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [656, 196.0]
+    coordinate: [192, 196.0]
     rotation: 0
     state: true
-- name: pad_source_1
-  id: pad_source
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    label: angle
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_streams: '1'
-    optional: 'False'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [104, 204.0]
-    rotation: 0
-    state: disabled
-- name: parameter_0
+- name: random_seed
   id: parameter
   parameters:
     alias: ''
     comment: ''
     hide: none
-    label: angle
+    label: ''
     short_id: ''
     type: ''
     value: '0'
@@ -272,25 +261,22 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [224, 20.0]
+    coordinate: [312, 20.0]
     rotation: 0
-    state: enabled
+    state: true
 
 connections:
-- [HIER_cos_angle_epb_0, '0', blocks_float_to_complex_1, '0']
-- [HIER_sin_angle_epb_0, '0', blocks_float_to_complex_0, '0']
-- [analog_const_source_x_0, '0', blocks_float_to_complex_0, '1']
-- [analog_const_source_x_1, '0', blocks_float_to_complex_1, '1']
-- [analog_const_source_x_2, '0', HIER_cos_angle_epb_0, '0']
-- [analog_const_source_x_2, '0', HIER_sin_angle_epb_0, '0']
-- [blocks_float_to_complex_0, '0', blocks_multiply_xx_0, '1']
-- [blocks_float_to_complex_1, '0', blocks_multiply_xx_1, '1']
-- [blocks_multiply_xx_0, '0', pad_sink_0, '0']
-- [blocks_multiply_xx_1, '0', pad_sink_1, '0']
-- [pad_source_0, '0', blocks_multiply_xx_0, '0']
-- [pad_source_0, '0', blocks_multiply_xx_1, '0']
-- [pad_source_1, '0', HIER_cos_angle_epb_0, '0']
-- [pad_source_1, '0', HIER_sin_angle_epb_0, '0']
+- [analog_noise_source_x_0, '0', blocks_add_xx_0, '1']
+- [analog_noise_source_x_0, '0', blocks_rms_xx_1, '0']
+- [blocks_add_xx_0, '0', blocks_null_sink_0, '0']
+- [blocks_add_xx_0, '0', pad_sink_0, '0']
+- [blocks_divide_xx_0, '0', blocks_nlog10_ff_0, '0']
+- [blocks_nlog10_ff_0, '0', blocks_null_sink_1, '0']
+- [blocks_nlog10_ff_0, '0', pad_sink_1, '0']
+- [blocks_rms_xx_0, '0', blocks_divide_xx_0, '0']
+- [blocks_rms_xx_1, '0', blocks_divide_xx_0, '1']
+- [pad_source_0, '0', blocks_add_xx_0, '0']
+- [pad_source_0, '0', blocks_rms_xx_0, '0']
 
 metadata:
   file_format: 1
