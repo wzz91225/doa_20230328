@@ -396,8 +396,8 @@ blocks:
     coordinate: [304, 1556.0]
     rotation: 0
     state: true
-- name: d20230402_hier_CenterFreqDetector_0
-  id: d20230402_hier_CenterFreqDetector
+- name: d20230402_hier_PeriodicCenterFreqDetector_0
+  id: d20230402_hier_PeriodicCenterFreqDetector
   parameters:
     TH_Factor_Fall: TH_Factor_Fall
     TH_Factor_Rise: TH_Factor_Rise
@@ -413,11 +413,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 1008.0]
+    coordinate: [296, 1008.0]
     rotation: 0
     state: true
-- name: d20230402_hier_CenterFreqDetector_0_0
-  id: d20230402_hier_CenterFreqDetector
+- name: d20230402_hier_PeriodicCenterFreqDetector_1
+  id: d20230402_hier_PeriodicCenterFreqDetector
   parameters:
     TH_Factor_Fall: TH_Factor_Fall
     TH_Factor_Rise: TH_Factor_Rise
@@ -433,7 +433,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 1152.0]
+    coordinate: [296, 1152.0]
     rotation: 0
     state: true
 - name: d20230402_hier_PowerSpectrum_0
@@ -2188,18 +2188,18 @@ connections:
 - [blocks_rms_xx_1, '0', blocks_multiply_xx_1, '1']
 - [blocks_rms_xx_1, '0', d20230404_hier_atan2_epb_2, '1']
 - [blocks_rms_xx_1, '0', qtgui_number_sink_1_0_0_0_0, '1']
-- [d20230402_hier_CenterFreqDetector_0, '0', blocks_null_sink_0, '0']
-- [d20230402_hier_CenterFreqDetector_0, '0', qtgui_number_sink, '0']
-- [d20230402_hier_CenterFreqDetector_0, '1', qtgui_number_sink_1, '0']
-- [d20230402_hier_CenterFreqDetector_0, '2', d20230404_hier_atan2_epb_0, '0']
-- [d20230402_hier_CenterFreqDetector_0, '2', qtgui_number_sink_1_0_0, '0']
-- [d20230402_hier_CenterFreqDetector_0, '3', qtgui_number_sink_1_0, '0']
-- [d20230402_hier_CenterFreqDetector_0_0, '0', blocks_null_sink_1, '0']
-- [d20230402_hier_CenterFreqDetector_0_0, '0', qtgui_number_sink_0, '0']
-- [d20230402_hier_CenterFreqDetector_0_0, '1', qtgui_number_sink_1, '1']
-- [d20230402_hier_CenterFreqDetector_0_0, '2', d20230404_hier_atan2_epb_0, '1']
-- [d20230402_hier_CenterFreqDetector_0_0, '2', qtgui_number_sink_1_0_0, '1']
-- [d20230402_hier_CenterFreqDetector_0_0, '3', qtgui_number_sink_1_0, '1']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '0', blocks_null_sink_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '0', qtgui_number_sink, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '1', qtgui_number_sink_1, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '2', d20230404_hier_atan2_epb_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '2', qtgui_number_sink_1_0_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '3', qtgui_number_sink_1_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_1, '0', blocks_null_sink_1, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_1, '0', qtgui_number_sink_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_1, '1', qtgui_number_sink_1, '1']
+- [d20230402_hier_PeriodicCenterFreqDetector_1, '2', d20230404_hier_atan2_epb_0, '1']
+- [d20230402_hier_PeriodicCenterFreqDetector_1, '2', qtgui_number_sink_1_0_0, '1']
+- [d20230402_hier_PeriodicCenterFreqDetector_1, '3', qtgui_number_sink_1_0, '1']
 - [d20230402_hier_PowerSpectrum_0, '1', qtgui_vector_sink_f_0, '0']
 - [d20230402_hier_PowerSpectrum_1, '1', qtgui_vector_sink_f_0, '1']
 - [d20230404_hier_atan2_epb_0, '1', qtgui_number_sink_2, '0']
@@ -2209,11 +2209,11 @@ connections:
 - [uhd_usrp_source_0, '1', vsink_rx1, '0']
 - [vsrc_rx0, '0', qtgui_freq_sink_x_0, '0']
 - [vsrc_rx0_0, '0', d20230402_hier_PowerSpectrum_0, '0']
-- [vsrc_rx0_1, '0', d20230402_hier_CenterFreqDetector_0, '0']
+- [vsrc_rx0_1, '0', d20230402_hier_PeriodicCenterFreqDetector_0, '0']
 - [vsrc_rx0_2, '0', blocks_rms_xx_0, '0']
 - [vsrc_rx1, '0', qtgui_freq_sink_x_0, '1']
 - [vsrc_rx1_0, '0', d20230402_hier_PowerSpectrum_1, '0']
-- [vsrc_rx1_1, '0', d20230402_hier_CenterFreqDetector_0_0, '0']
+- [vsrc_rx1_1, '0', d20230402_hier_PeriodicCenterFreqDetector_1, '0']
 - [vsrc_rx1_2, '0', blocks_rms_xx_1, '0']
 
 metadata:

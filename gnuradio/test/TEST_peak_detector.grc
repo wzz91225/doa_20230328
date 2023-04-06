@@ -287,8 +287,8 @@ blocks:
     coordinate: [632, 780.0]
     rotation: 0
     state: disabled
-- name: d20230402_hier_CenterFreqDetector_0
-  id: d20230402_hier_CenterFreqDetector
+- name: d20230402_hier_PeriodicCenterFreqDetector_0
+  id: d20230402_hier_PeriodicCenterFreqDetector
   parameters:
     TH_Factor_Fall: TH_Factor_Fall
     TH_Factor_Rise: TH_Factor_Rise
@@ -624,13 +624,13 @@ connections:
 - [blocks_sample_and_hold_xx_0, '0', qtgui_number_sink_1_0_0, '0']
 - [blocks_throttle_0, '0', vsink_sig_src, '0']
 - [d20130403_hier_Bool_NOT_0, '0', blocks_sample_and_hold_xx_0, '1']
-- [d20230402_hier_CenterFreqDetector_0, '0', d20130403_hier_Bool_NOT_0, '0']
-- [d20230402_hier_CenterFreqDetector_0, '0', qtgui_number_sink, '0']
-- [d20230402_hier_CenterFreqDetector_0, '1', blocks_add_const_vxx_0, '0']
-- [d20230402_hier_CenterFreqDetector_0, '1', blocks_sample_and_hold_xx_0, '0']
-- [d20230402_hier_CenterFreqDetector_0, '1', qtgui_number_sink_1, '0']
-- [d20230402_hier_CenterFreqDetector_0, '3', qtgui_number_sink_1, '1']
-- [vsrc_sig_src, '0', d20230402_hier_CenterFreqDetector_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '0', d20130403_hier_Bool_NOT_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '0', qtgui_number_sink, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '1', blocks_add_const_vxx_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '1', blocks_sample_and_hold_xx_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '1', qtgui_number_sink_1, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '3', qtgui_number_sink_1, '1']
+- [vsrc_sig_src, '0', d20230402_hier_PeriodicCenterFreqDetector_0, '0']
 - [vsrc_sig_src, '0', qtgui_sink_x_0, '0']
 
 metadata:
