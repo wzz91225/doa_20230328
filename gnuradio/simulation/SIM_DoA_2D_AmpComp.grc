@@ -484,7 +484,7 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: ''
-    label1: rms^2
+    label1: rms^1
     label10: ''
     label2: ''
     label3: ''

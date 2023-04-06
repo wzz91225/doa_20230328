@@ -79,42 +79,6 @@ blocks:
     coordinate: [304, 204.0]
     rotation: 0
     state: true
-- name: blocks_multiply_xx_0
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [528, 384.0]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_xx_1
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [528, 464.0]
-    rotation: 0
-    state: enabled
 - name: blocks_null_sink_0
   id: blocks_null_sink
   parameters:
@@ -129,7 +93,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1176, 428.0]
+    coordinate: [856, 412.0]
     rotation: 0
     state: enabled
 - name: blocks_rms_xx_0
@@ -178,7 +142,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [784, 400.0]
+    coordinate: [464, 384.0]
     rotation: 0
     state: true
 - name: pad_sink_0
@@ -196,7 +160,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1048, 420.0]
+    coordinate: [728, 404.0]
     rotation: 0
     state: true
 - name: pad_source_0
@@ -275,12 +239,8 @@ blocks:
     state: true
 
 connections:
-- [blocks_multiply_xx_0, '0', d20230404_hier_atan2_epb_0, '0']
-- [blocks_multiply_xx_1, '0', d20230404_hier_atan2_epb_0, '1']
-- [blocks_rms_xx_0, '0', blocks_multiply_xx_0, '0']
-- [blocks_rms_xx_0, '0', blocks_multiply_xx_0, '1']
-- [blocks_rms_xx_1, '0', blocks_multiply_xx_1, '0']
-- [blocks_rms_xx_1, '0', blocks_multiply_xx_1, '1']
+- [blocks_rms_xx_0, '0', d20230404_hier_atan2_epb_0, '0']
+- [blocks_rms_xx_1, '0', d20230404_hier_atan2_epb_0, '1']
 - [d20230404_hier_atan2_epb_0, '1', blocks_null_sink_0, '0']
 - [d20230404_hier_atan2_epb_0, '1', pad_sink_0, '0']
 - [pad_source_0, '0', blocks_rms_xx_0, '0']

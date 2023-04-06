@@ -292,42 +292,6 @@ blocks:
     coordinate: [88, 180.0]
     rotation: 0
     state: true
-- name: blocks_multiply_xx_0
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [584, 1488.0]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_xx_1
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [584, 1568.0]
-    rotation: 0
-    state: enabled
 - name: blocks_null_sink_0
   id: blocks_null_sink
   parameters:
@@ -482,7 +446,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 1288.0]
+    coordinate: [1032, 1288.0]
     rotation: 0
     state: true
 - name: d20230404_hier_atan2_epb_1
@@ -497,11 +461,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [832, 1504.0]
+    coordinate: [584, 1488.0]
     rotation: 0
     state: true
-- name: d20230404_hier_atan2_epb_2
-  id: d20230404_hier_atan2_epb
+- name: d20230406_hier_sqrt_epb_0
+  id: d20230406_hier_sqrt_epb
   parameters:
     affinity: ''
     alias: ''
@@ -512,7 +476,22 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [584, 1712.0]
+    coordinate: [744, 1284.0]
+    rotation: 0
+    state: true
+- name: d20230406_hier_sqrt_epb_1
+  id: d20230406_hier_sqrt_epb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 1332.0]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -908,7 +887,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 1372.0]
+    coordinate: [1032, 1372.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_1_0_0_0
@@ -971,70 +950,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [832, 1580.0]
-    rotation: 0
-    state: enabled
-- name: qtgui_number_sink_1_0_0_0_0
-  id: qtgui_number_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    autoscale: 'False'
-    avg: '0'
-    color1: ("black", "black")
-    color10: ("black", "black")
-    color2: ("black", "black")
-    color3: ("black", "black")
-    color4: ("black", "black")
-    color5: ("black", "black")
-    color6: ("black", "black")
-    color7: ("black", "black")
-    color8: ("black", "black")
-    color9: ("black", "black")
-    comment: ''
-    factor1: '1'
-    factor10: '1'
-    factor2: '1'
-    factor3: '1'
-    factor4: '1'
-    factor5: '1'
-    factor6: '1'
-    factor7: '1'
-    factor8: '1'
-    factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_NONE
-    gui_hint: ''
-    label1: '"rms0^1"'
-    label10: ''
-    label2: '"rms1^1"'
-    label3: ''
-    label4: ''
-    label5: ''
-    label6: ''
-    label7: ''
-    label8: ''
-    label9: ''
-    max: '1'
-    min: '-1'
-    name: '""'
-    nconnections: '2'
-    type: float
-    unit1: ''
-    unit10: ''
-    unit2: ''
-    unit3: ''
-    unit4: ''
-    unit5: ''
-    unit6: ''
-    unit7: ''
-    unit8: ''
-    unit9: ''
-    update_time: '0.10'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [584, 1780.0]
+    coordinate: [584, 1564.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_2
@@ -1067,7 +983,7 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: ''
-    label1: DOA power (deg)
+    label1: DOA pow (deg)
     label10: ''
     label2: ''
     label3: ''
@@ -1097,7 +1013,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1088, 1292.0]
+    coordinate: [1328, 1292.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_2_0
@@ -1130,7 +1046,7 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: ''
-    label1: DOA rms^2 (deg)
+    label1: DOA rms (deg)
     label10: ''
     label2: ''
     label3: ''
@@ -1160,70 +1076,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1096, 1508.0]
-    rotation: 0
-    state: true
-- name: qtgui_number_sink_2_0_0
-  id: qtgui_number_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    autoscale: 'False'
-    avg: '0'
-    color1: ("black", "black")
-    color10: ("black", "black")
-    color2: ("black", "black")
-    color3: ("black", "black")
-    color4: ("black", "black")
-    color5: ("black", "black")
-    color6: ("black", "black")
-    color7: ("black", "black")
-    color8: ("black", "black")
-    color9: ("black", "black")
-    comment: ''
-    factor1: '1'
-    factor10: '1'
-    factor2: '1'
-    factor3: '1'
-    factor4: '1'
-    factor5: '1'
-    factor6: '1'
-    factor7: '1'
-    factor8: '1'
-    factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_HORIZ
-    gui_hint: ''
-    label1: DOA rms^1
-    label10: ''
-    label2: ''
-    label3: ''
-    label4: ''
-    label5: ''
-    label6: ''
-    label7: ''
-    label8: ''
-    label9: ''
-    max: '90'
-    min: '-90'
-    name: '""'
-    nconnections: '1'
-    type: float
-    unit1: ''
-    unit10: ''
-    unit2: ''
-    unit3: ''
-    unit4: ''
-    unit5: ''
-    unit6: ''
-    unit7: ''
-    unit8: ''
-    unit9: ''
-    update_time: '0.10'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1096, 1716.0]
+    coordinate: [848, 1492.0]
     rotation: 0
     state: true
 - name: qtgui_sink_x_0
@@ -2176,35 +2029,28 @@ blocks:
 connections:
 - [analog_sig_source_x_0, '0', qtgui_sink_x_0, '0']
 - [analog_sig_source_x_0, '0', uhd_usrp_sink_0, '0']
-- [blocks_multiply_xx_0, '0', d20230404_hier_atan2_epb_1, '0']
-- [blocks_multiply_xx_0, '0', qtgui_number_sink_1_0_0_0, '0']
-- [blocks_multiply_xx_1, '0', d20230404_hier_atan2_epb_1, '1']
-- [blocks_multiply_xx_1, '0', qtgui_number_sink_1_0_0_0, '1']
-- [blocks_rms_xx_0, '0', blocks_multiply_xx_0, '0']
-- [blocks_rms_xx_0, '0', blocks_multiply_xx_0, '1']
-- [blocks_rms_xx_0, '0', d20230404_hier_atan2_epb_2, '0']
-- [blocks_rms_xx_0, '0', qtgui_number_sink_1_0_0_0_0, '0']
-- [blocks_rms_xx_1, '0', blocks_multiply_xx_1, '0']
-- [blocks_rms_xx_1, '0', blocks_multiply_xx_1, '1']
-- [blocks_rms_xx_1, '0', d20230404_hier_atan2_epb_2, '1']
-- [blocks_rms_xx_1, '0', qtgui_number_sink_1_0_0_0_0, '1']
+- [blocks_rms_xx_0, '0', d20230404_hier_atan2_epb_1, '0']
+- [blocks_rms_xx_0, '0', qtgui_number_sink_1_0_0_0, '0']
+- [blocks_rms_xx_1, '0', d20230404_hier_atan2_epb_1, '1']
+- [blocks_rms_xx_1, '0', qtgui_number_sink_1_0_0_0, '1']
 - [d20230402_hier_PeriodicCenterFreqDetector_0, '0', blocks_null_sink_0, '0']
 - [d20230402_hier_PeriodicCenterFreqDetector_0, '0', qtgui_number_sink, '0']
 - [d20230402_hier_PeriodicCenterFreqDetector_0, '1', qtgui_number_sink_1, '0']
-- [d20230402_hier_PeriodicCenterFreqDetector_0, '2', d20230404_hier_atan2_epb_0, '0']
-- [d20230402_hier_PeriodicCenterFreqDetector_0, '2', qtgui_number_sink_1_0_0, '0']
+- [d20230402_hier_PeriodicCenterFreqDetector_0, '2', d20230406_hier_sqrt_epb_0, '0']
 - [d20230402_hier_PeriodicCenterFreqDetector_0, '3', qtgui_number_sink_1_0, '0']
 - [d20230402_hier_PeriodicCenterFreqDetector_1, '0', blocks_null_sink_1, '0']
 - [d20230402_hier_PeriodicCenterFreqDetector_1, '0', qtgui_number_sink_0, '0']
 - [d20230402_hier_PeriodicCenterFreqDetector_1, '1', qtgui_number_sink_1, '1']
-- [d20230402_hier_PeriodicCenterFreqDetector_1, '2', d20230404_hier_atan2_epb_0, '1']
-- [d20230402_hier_PeriodicCenterFreqDetector_1, '2', qtgui_number_sink_1_0_0, '1']
+- [d20230402_hier_PeriodicCenterFreqDetector_1, '2', d20230406_hier_sqrt_epb_1, '0']
 - [d20230402_hier_PeriodicCenterFreqDetector_1, '3', qtgui_number_sink_1_0, '1']
 - [d20230402_hier_PowerSpectrum_0, '1', qtgui_vector_sink_f_0, '0']
 - [d20230402_hier_PowerSpectrum_1, '1', qtgui_vector_sink_f_0, '1']
 - [d20230404_hier_atan2_epb_0, '1', qtgui_number_sink_2, '0']
 - [d20230404_hier_atan2_epb_1, '1', qtgui_number_sink_2_0, '0']
-- [d20230404_hier_atan2_epb_2, '1', qtgui_number_sink_2_0_0, '0']
+- [d20230406_hier_sqrt_epb_0, '0', d20230404_hier_atan2_epb_0, '0']
+- [d20230406_hier_sqrt_epb_0, '0', qtgui_number_sink_1_0_0, '0']
+- [d20230406_hier_sqrt_epb_1, '0', d20230404_hier_atan2_epb_0, '1']
+- [d20230406_hier_sqrt_epb_1, '0', qtgui_number_sink_1_0_0, '1']
 - [uhd_usrp_source_0, '0', vsink_rx0, '0']
 - [uhd_usrp_source_0, '1', vsink_rx1, '0']
 - [vsrc_rx0, '0', qtgui_freq_sink_x_0, '0']
