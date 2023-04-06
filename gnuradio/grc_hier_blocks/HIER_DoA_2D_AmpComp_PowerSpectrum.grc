@@ -11,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: hb
     hier_block_src_path: '.:'
-    id: d20230406_hier_DoA_2D_AmpComp_PowerSpectrum
+    id: HIER_DoA_2D_AmpComp_PowerSpectrum
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -164,8 +164,8 @@ blocks:
     coordinate: [1288, 636.0]
     rotation: 0
     state: disabled
-- name: d20230402_hier_PeriodicCenterFreqDetector_0
-  id: d20230402_hier_PeriodicCenterFreqDetector
+- name: HIER_PeriodicCenterFreqDetector_0
+  id: HIER_PeriodicCenterFreqDetector
   parameters:
     TH_Factor_Fall: TH_Factor_Fall
     TH_Factor_Rise: TH_Factor_Rise
@@ -184,8 +184,8 @@ blocks:
     coordinate: [256, 336.0]
     rotation: 0
     state: true
-- name: d20230402_hier_PeriodicCenterFreqDetector_1
-  id: d20230402_hier_PeriodicCenterFreqDetector
+- name: HIER_PeriodicCenterFreqDetector_1
+  id: HIER_PeriodicCenterFreqDetector
   parameters:
     TH_Factor_Fall: TH_Factor_Fall
     TH_Factor_Rise: TH_Factor_Rise
@@ -204,8 +204,8 @@ blocks:
     coordinate: [256, 480.0]
     rotation: 0
     state: true
-- name: d20230404_hier_atan2_epb_0
-  id: d20230404_hier_atan2_epb
+- name: HIER_atan2_epb_0
+  id: HIER_atan2_epb
   parameters:
     affinity: ''
     alias: ''
@@ -219,8 +219,8 @@ blocks:
     coordinate: [896, 608.0]
     rotation: 0
     state: true
-- name: d20230406_hier_sqrt_epb_0
-  id: d20230406_hier_sqrt_epb
+- name: HIER_sqrt_epb_0
+  id: HIER_sqrt_epb
   parameters:
     affinity: ''
     alias: ''
@@ -234,8 +234,8 @@ blocks:
     coordinate: [632, 604.0]
     rotation: 0
     state: true
-- name: d20230406_hier_sqrt_epb_1
-  id: d20230406_hier_sqrt_epb
+- name: HIER_sqrt_epb_1
+  id: HIER_sqrt_epb
   parameters:
     affinity: ''
     alias: ''
@@ -399,20 +399,20 @@ blocks:
 connections:
 - [blocks_and_xx_0, '0', blocks_null_sink_0, '0']
 - [blocks_and_xx_0, '0', pad_sink_0, '0']
-- [d20230402_hier_PeriodicCenterFreqDetector_0, '0', blocks_and_xx_0, '0']
-- [d20230402_hier_PeriodicCenterFreqDetector_0, '1', blocks_null_sink_1, '0']
-- [d20230402_hier_PeriodicCenterFreqDetector_0, '1', pad_sink_1, '0']
-- [d20230402_hier_PeriodicCenterFreqDetector_0, '2', d20230406_hier_sqrt_epb_0, '0']
-- [d20230402_hier_PeriodicCenterFreqDetector_1, '0', blocks_and_xx_0, '1']
-- [d20230402_hier_PeriodicCenterFreqDetector_1, '1', blocks_null_sink_2, '0']
-- [d20230402_hier_PeriodicCenterFreqDetector_1, '1', pad_sink_2, '0']
-- [d20230402_hier_PeriodicCenterFreqDetector_1, '2', d20230406_hier_sqrt_epb_1, '0']
-- [d20230404_hier_atan2_epb_0, '1', blocks_null_sink_3, '0']
-- [d20230404_hier_atan2_epb_0, '1', pad_sink_3, '0']
-- [d20230406_hier_sqrt_epb_0, '0', d20230404_hier_atan2_epb_0, '0']
-- [d20230406_hier_sqrt_epb_1, '0', d20230404_hier_atan2_epb_0, '1']
-- [pad_source_0, '0', d20230402_hier_PeriodicCenterFreqDetector_0, '0']
-- [pad_source_1, '0', d20230402_hier_PeriodicCenterFreqDetector_1, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '0', blocks_and_xx_0, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '1', blocks_null_sink_1, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '1', pad_sink_1, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '2', HIER_sqrt_epb_0, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '0', blocks_and_xx_0, '1']
+- [HIER_PeriodicCenterFreqDetector_1, '1', blocks_null_sink_2, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '1', pad_sink_2, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '2', HIER_sqrt_epb_1, '0']
+- [HIER_atan2_epb_0, '1', blocks_null_sink_3, '0']
+- [HIER_atan2_epb_0, '1', pad_sink_3, '0']
+- [HIER_sqrt_epb_0, '0', HIER_atan2_epb_0, '0']
+- [HIER_sqrt_epb_1, '0', HIER_atan2_epb_0, '1']
+- [pad_source_0, '0', HIER_PeriodicCenterFreqDetector_0, '0']
+- [pad_source_1, '0', HIER_PeriodicCenterFreqDetector_1, '0']
 
 metadata:
   file_format: 1

@@ -261,8 +261,8 @@ blocks:
     coordinate: [376, 596.0]
     rotation: 0
     state: true
-- name: d20230320_hier_complex2float_0
-  id: d20230320_hier_complex2float
+- name: HIER_complex2float_0
+  id: HIER_complex2float
   parameters:
     affinity: ''
     alias: ''
@@ -485,7 +485,7 @@ connections:
 - [blocks_multiply_xx_0, '0', blocks_add_xx_0_0, '0']
 - [blocks_multiply_xx_0_0, '0', blocks_add_xx_0_0, '1']
 - [blocks_rms_xx_0, '0', qtgui_time_sink_x_0, '5']
-- [d20230320_hier_complex2float_0, '0', qtgui_time_sink_x_0, '6']
+- [HIER_complex2float_0, '0', qtgui_time_sink_x_0, '6']
 - [sig_imag, '0', qtgui_time_sink_x_0, '1']
 - [sig_imag_0, '0', blocks_add_xx_0, '1']
 - [sig_imag_0, '0', blocks_multiply_xx_0_0, '0']
@@ -499,7 +499,7 @@ connections:
 - [sig_src, '0', blocks_complex_to_mag_squared_0, '0']
 - [sig_src, '0', blocks_complex_to_real_0, '0']
 - [sig_src, '0', blocks_rms_xx_0, '0']
-- [sig_src, '0', d20230320_hier_complex2float_0, '0']
+- [sig_src, '0', HIER_complex2float_0, '0']
 
 metadata:
   file_format: 1

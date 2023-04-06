@@ -6,12 +6,12 @@ options:
     cmake_opt: ''
     comment: ''
     copyright: ''
-    description: ''
+    description: input - radian
     gen_cmake: 'On'
     gen_linking: dynamic
     generate_options: hb
     hier_block_src_path: '.:'
-    id: d20230406_hier_sqrt_epb
+    id: HIER_sin_epb
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -22,7 +22,7 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: sqrt (ebp)
+    title: sin (epb)
     window_size: (1000,1000)
   states:
     bus_sink: false
@@ -45,24 +45,24 @@ blocks:
       \ example - a simple multiply const\"\"\"\n\n    def __init__(self):  # only\
       \ default arguments here\n        \"\"\"arguments to this function show up as\
       \ parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n            self,\n\
-      \            name='sqrt (epb)',   # will show up in GRC\n            in_sig=[np.float32],\n\
-      \            out_sig=[np.float32]\n        )\n        # if an attribute with\
-      \ the same name as a parameter is found,\n        # a callback is registered\
-      \ (properties work, too).\n\n    def work(self, input_items, output_items):\n\
-      \        \"\"\"example: multiply with constant\"\"\"\n        output_items[0][:]\
-      \ = np.sqrt(input_items[0])\n        return len(output_items[0])\n"
+      \            name='sin - radian (epb)',   # will show up in GRC\n          \
+      \  in_sig=[np.float32],\n            out_sig=[np.float32]\n        )\n     \
+      \   # if an attribute with the same name as a parameter is found,\n        #\
+      \ a callback is registered (properties work, too).\n\n    def work(self, input_items,\
+      \ output_items):\n        \"\"\"example: multiply with constant\"\"\"\n    \
+      \    output_items[0][:] = np.sin(input_items[0])\n        return len(output_items[0])\n"
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    _io_cache: ('sqrt (epb)', 'blk', [], [('0', 'float', 1)], [('0', 'float', 1)],
-      'Embedded Python Block example - a simple multiply const', [])
+    _io_cache: ('sin - radian (epb)', 'blk', [], [('0', 'float', 1)], [('0', 'float',
+      1)], 'Embedded Python Block example - a simple multiply const', [])
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [192, 196.0]
+    coordinate: [256, 220.0]
     rotation: 0
     state: true
 - name: pad_sink_0
@@ -71,16 +71,16 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    label: out
+    label: sin
     num_streams: '1'
-    optional: 'False'
+    optional: 'True'
     type: float
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 188.0]
+    coordinate: [464, 212.0]
     rotation: 0
     state: true
 - name: pad_source_0
@@ -100,7 +100,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 188.0]
+    coordinate: [72, 212.0]
     rotation: 0
     state: true
 

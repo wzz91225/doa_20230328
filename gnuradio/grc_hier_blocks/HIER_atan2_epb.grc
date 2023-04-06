@@ -6,12 +6,12 @@ options:
     cmake_opt: ''
     comment: ''
     copyright: ''
-    description: '[-pi/2, pi/2]'
+    description: '[-pi, pi]'
     gen_cmake: 'On'
     gen_linking: dynamic
     generate_options: hb
     hier_block_src_path: '.:'
-    id: d20230403_hier_atan_epb
+    id: HIER_atan2_epb
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -22,7 +22,7 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: atan (epb)
+    title: atan(x/y) (epb)
     window_size: (1000,1000)
   states:
     bus_sink: false
@@ -60,7 +60,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [456, 332.0]
+    coordinate: [480, 348.0]
     rotation: 0
     state: true
 - name: blocks_null_sink_0
@@ -77,7 +77,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 268.0]
+    coordinate: [752, 276.0]
     rotation: 0
     state: true
 - name: blocks_null_sink_0_0
@@ -94,10 +94,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 388.0]
+    coordinate: [752, 404.0]
     rotation: 0
     state: true
-- name: epy_block_0
+- name: epy_block_0_0
   id: epy_block
   parameters:
     _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
@@ -109,24 +109,24 @@ blocks:
       \ example - a simple multiply const\"\"\"\n\n    def __init__(self):  # only\
       \ default arguments here\n        \"\"\"arguments to this function show up as\
       \ parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n            self,\n\
-      \            name='atan (epb)',   # will show up in GRC\n            in_sig=[np.float32],\n\
-      \            out_sig=[np.float32]\n        )\n        # if an attribute with\
-      \ the same name as a parameter is found,\n        # a callback is registered\
-      \ (properties work, too).\n\n    def work(self, input_items, output_items):\n\
+      \            name='atan (epb)',   # will show up in GRC\n            in_sig=[np.float32,\
+      \ np.float32],\n            out_sig=[np.float32]\n        )\n        # if an\
+      \ attribute with the same name as a parameter is found,\n        # a callback\
+      \ is registered (properties work, too).\n\n    def work(self, input_items, output_items):\n\
       \        \"\"\"example: multiply with constant\"\"\"\n        output_items[0][:]\
-      \ = np.arctan(input_items[0])\n        return len(output_items[0])\n"
+      \ = np.arctan2(input_items[0], input_items[1])\n        return len(output_items[0])\n"
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    _io_cache: ('atan (epb)', 'blk', [], [('0', 'float', 1)], [('0', 'float', 1)],
-      'Embedded Python Block example - a simple multiply const', [])
+    _io_cache: ('atan (epb)', 'blk', [], [('0', 'float', 1), ('1', 'float', 1)], [('0',
+      'float', 1)], 'Embedded Python Block example - a simple multiply const', [])
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [256, 220.0]
+    coordinate: [272, 216.0]
     rotation: 0
     state: true
 - name: pad_sink_0
@@ -144,7 +144,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 212.0]
+    coordinate: [752, 220.0]
     rotation: 0
     state: true
 - name: pad_sink_0_0
@@ -162,7 +162,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 332.0]
+    coordinate: [752, 348.0]
     rotation: 0
     state: true
 - name: pad_source_0
@@ -171,7 +171,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    label: in
+    label: x
     maxoutbuf: '0'
     minoutbuf: '0'
     num_streams: '1'
@@ -182,17 +182,38 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [72, 212.0]
+    coordinate: [72, 204.0]
+    rotation: 0
+    state: true
+- name: pad_source_1
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: y
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 268.0]
     rotation: 0
     state: true
 
 connections:
 - [blocks_multiply_const_vxx_0, '0', blocks_null_sink_0_0, '0']
 - [blocks_multiply_const_vxx_0, '0', pad_sink_0_0, '0']
-- [epy_block_0, '0', blocks_multiply_const_vxx_0, '0']
-- [epy_block_0, '0', blocks_null_sink_0, '0']
-- [epy_block_0, '0', pad_sink_0, '0']
-- [pad_source_0, '0', epy_block_0, '0']
+- [epy_block_0_0, '0', blocks_multiply_const_vxx_0, '0']
+- [epy_block_0_0, '0', blocks_null_sink_0, '0']
+- [epy_block_0_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', epy_block_0_0, '0']
+- [pad_source_1, '0', epy_block_0_0, '1']
 
 metadata:
   file_format: 1

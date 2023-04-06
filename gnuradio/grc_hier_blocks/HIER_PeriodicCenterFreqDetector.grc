@@ -11,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: hb
     hier_block_src_path: '.:'
-    id: d20230402_hier_PeriodicCenterFreqDetector
+    id: HIER_PeriodicCenterFreqDetector
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -226,8 +226,8 @@ blocks:
     coordinate: [576, 268.0]
     rotation: 0
     state: enabled
-- name: d20230402_hier_PeriodicPeakDetector_0
-  id: d20230402_hier_PeriodicPeakDetector
+- name: HIER_PeriodicPeakDetector_0
+  id: HIER_PeriodicPeakDetector
   parameters:
     TH_Factor_Fall: TH_Factor_Fall
     TH_Factor_Rise: TH_Factor_Rise
@@ -245,8 +245,8 @@ blocks:
     coordinate: [840, 236.0]
     rotation: 0
     state: true
-- name: d20230402_hier_PowerSpectrum_0
-  id: d20230402_hier_PowerSpectrum
+- name: HIER_PowerSpectrum_0
+  id: HIER_PowerSpectrum
   parameters:
     affinity: ''
     alias: ''
@@ -416,12 +416,12 @@ connections:
 - [blocks_nlog10_ff_0_0_0, '0', blocks_null_sink_2, '0']
 - [blocks_nlog10_ff_0_0_0, '0', pad_sink_3, '0']
 - [blocks_short_to_float_0, '0', blocks_multiply_const_vxx_0, '0']
-- [blocks_vector_to_stream_0, '0', d20230402_hier_PeriodicPeakDetector_0, '0']
-- [d20230402_hier_PeriodicPeakDetector_0, '0', pad_sink_0, '0']
-- [d20230402_hier_PowerSpectrum_0, '0', blocks_argmax_xx_0, '0']
-- [d20230402_hier_PowerSpectrum_0, '0', blocks_max_xx_0, '0']
-- [d20230402_hier_PowerSpectrum_0, '0', blocks_vector_to_stream_0, '0']
-- [pad_source_0, '0', d20230402_hier_PowerSpectrum_0, '0']
+- [blocks_vector_to_stream_0, '0', HIER_PeriodicPeakDetector_0, '0']
+- [HIER_PeriodicPeakDetector_0, '0', pad_sink_0, '0']
+- [HIER_PowerSpectrum_0, '0', blocks_argmax_xx_0, '0']
+- [HIER_PowerSpectrum_0, '0', blocks_max_xx_0, '0']
+- [HIER_PowerSpectrum_0, '0', blocks_vector_to_stream_0, '0']
+- [pad_source_0, '0', HIER_PowerSpectrum_0, '0']
 
 metadata:
   file_format: 1

@@ -195,8 +195,8 @@ blocks:
     coordinate: [576, 820.0]
     rotation: 0
     state: disabled
-- name: d20230403_hier_atan_epb_0
-  id: d20230403_hier_atan_epb
+- name: HIER_atan_epb_0
+  id: HIER_atan_epb
   parameters:
     affinity: ''
     alias: ''
@@ -210,8 +210,8 @@ blocks:
     coordinate: [368, 256.0]
     rotation: 0
     state: true
-- name: d20230404_hier_atan2_epb_0
-  id: d20230404_hier_atan2_epb
+- name: HIER_atan2_epb_0
+  id: HIER_atan2_epb
   parameters:
     affinity: ''
     alias: ''
@@ -543,18 +543,18 @@ blocks:
     state: enabled
 
 connections:
-- [analog_const_source_x_0, '0', d20230403_hier_atan_epb_0, '0']
+- [analog_const_source_x_0, '0', HIER_atan_epb_0, '0']
 - [analog_const_source_x_0, '0', epy_block_0, '0']
-- [analog_const_source_x_0_0, '0', d20230404_hier_atan2_epb_0, '0']
+- [analog_const_source_x_0_0, '0', HIER_atan2_epb_0, '0']
 - [analog_const_source_x_0_0, '0', epy_block_0_0, '0']
-- [analog_const_source_x_0_1, '0', d20230404_hier_atan2_epb_0, '1']
+- [analog_const_source_x_0_1, '0', HIER_atan2_epb_0, '1']
 - [analog_const_source_x_0_1, '0', epy_block_0_0, '1']
 - [blocks_multiply_const_vxx_0, '0', qtgui_number_sink_0_0, '0']
 - [blocks_multiply_const_vxx_0_0, '0', qtgui_number_sink_0_0_0, '0']
-- [d20230403_hier_atan_epb_0, '0', qtgui_number_sink_0, '0']
-- [d20230403_hier_atan_epb_0, '1', qtgui_number_sink_0_0, '0']
-- [d20230404_hier_atan2_epb_0, '0', qtgui_number_sink_0_1, '0']
-- [d20230404_hier_atan2_epb_0, '1', qtgui_number_sink_0_0_0, '0']
+- [HIER_atan_epb_0, '0', qtgui_number_sink_0, '0']
+- [HIER_atan_epb_0, '1', qtgui_number_sink_0_0, '0']
+- [HIER_atan2_epb_0, '0', qtgui_number_sink_0_1, '0']
+- [HIER_atan2_epb_0, '1', qtgui_number_sink_0_0_0, '0']
 - [epy_block_0, '0', blocks_multiply_const_vxx_0, '0']
 - [epy_block_0, '0', qtgui_number_sink_0, '0']
 - [epy_block_0_0, '0', blocks_multiply_const_vxx_0_0, '0']

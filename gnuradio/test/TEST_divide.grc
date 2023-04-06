@@ -127,8 +127,8 @@ blocks:
     coordinate: [520, 264.0]
     rotation: 0
     state: true
-- name: d20230403_hier_atan_epb_0_0
-  id: d20230403_hier_atan_epb
+- name: HIER_atan_epb_0_0
+  id: HIER_atan_epb
   parameters:
     affinity: ''
     alias: ''
@@ -209,8 +209,8 @@ blocks:
 connections:
 - [analog_const_source_x_0, '0', blocks_divide_xx_0_0, '0']
 - [analog_const_source_x_1, '0', blocks_divide_xx_0_0, '1']
-- [blocks_divide_xx_0_0, '0', d20230403_hier_atan_epb_0_0, '0']
-- [d20230403_hier_atan_epb_0_0, '1', qtgui_number_sink_2_0, '0']
+- [blocks_divide_xx_0_0, '0', HIER_atan_epb_0_0, '0']
+- [HIER_atan_epb_0_0, '1', qtgui_number_sink_2_0, '0']
 
 metadata:
   file_format: 1

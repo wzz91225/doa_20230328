@@ -108,6 +108,57 @@ blocks:
     coordinate: [208, 20.0]
     rotation: 0
     state: enabled
+- name: HIER_DoA_2D_AmpComp_PowerSpectrum_0
+  id: HIER_DoA_2D_AmpComp_PowerSpectrum
+  parameters:
+    TH_Factor_Fall: '10'
+    TH_Factor_Rise: '10'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    period_peak_detector: '1'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1024, 216.0]
+    rotation: 0
+    state: true
+- name: HIER_DoA_2D_AmpComp_RMS_0
+  id: HIER_DoA_2D_AmpComp_RMS
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1032, 392.0]
+    rotation: 0
+    state: enabled
+- name: HIER_SignalGenerator_AmpComp_2D_0
+  id: HIER_SignalGenerator_AmpComp_2D
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    parameter_0: real_angle
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 232.0]
+    rotation: 0
+    state: true
 - name: analog_noise_source_x_0
   id: analog_noise_source_x
   parameters:
@@ -204,57 +255,6 @@ blocks:
     coordinate: [784, 408.0]
     rotation: 0
     state: enabled
-- name: d20230406_hier_DoA_2D_AmpComp_PowerSpectrum_0
-  id: d20230406_hier_DoA_2D_AmpComp_PowerSpectrum
-  parameters:
-    TH_Factor_Fall: '10'
-    TH_Factor_Rise: '10'
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    period_peak_detector: '1'
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1024, 216.0]
-    rotation: 0
-    state: true
-- name: d20230406_hier_DoA_2D_AmpComp_RMS_0
-  id: d20230406_hier_DoA_2D_AmpComp_RMS
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1032, 392.0]
-    rotation: 0
-    state: enabled
-- name: d20230406_hier_SignalGenerator_AmpComp_2D_0
-  id: d20230406_hier_SignalGenerator_AmpComp_2D
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    parameter_0: real_angle
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [432, 232.0]
-    rotation: 0
-    state: true
 - name: qtgui_number_sink_0
   id: qtgui_number_sink
   parameters:
@@ -383,17 +383,17 @@ blocks:
     state: true
 
 connections:
+- [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '3', qtgui_number_sink_0, '0']
+- [HIER_DoA_2D_AmpComp_RMS_0, '0', qtgui_number_sink_1, '0']
+- [HIER_SignalGenerator_AmpComp_2D_0, '0', blocks_add_xx_0, '0']
+- [HIER_SignalGenerator_AmpComp_2D_0, '1', blocks_add_xx_1, '0']
 - [analog_noise_source_x_0, '0', blocks_add_xx_0, '1']
 - [analog_noise_source_x_1, '0', blocks_add_xx_1, '1']
-- [analog_sig_source_x_0, '0', d20230406_hier_SignalGenerator_AmpComp_2D_0, '0']
-- [blocks_add_xx_0, '0', d20230406_hier_DoA_2D_AmpComp_PowerSpectrum_0, '0']
-- [blocks_add_xx_0, '0', d20230406_hier_DoA_2D_AmpComp_RMS_0, '0']
-- [blocks_add_xx_1, '0', d20230406_hier_DoA_2D_AmpComp_PowerSpectrum_0, '1']
-- [blocks_add_xx_1, '0', d20230406_hier_DoA_2D_AmpComp_RMS_0, '1']
-- [d20230406_hier_DoA_2D_AmpComp_PowerSpectrum_0, '3', qtgui_number_sink_0, '0']
-- [d20230406_hier_DoA_2D_AmpComp_RMS_0, '0', qtgui_number_sink_1, '0']
-- [d20230406_hier_SignalGenerator_AmpComp_2D_0, '0', blocks_add_xx_0, '0']
-- [d20230406_hier_SignalGenerator_AmpComp_2D_0, '1', blocks_add_xx_1, '0']
+- [analog_sig_source_x_0, '0', HIER_SignalGenerator_AmpComp_2D_0, '0']
+- [blocks_add_xx_0, '0', HIER_DoA_2D_AmpComp_PowerSpectrum_0, '0']
+- [blocks_add_xx_0, '0', HIER_DoA_2D_AmpComp_RMS_0, '0']
+- [blocks_add_xx_1, '0', HIER_DoA_2D_AmpComp_PowerSpectrum_0, '1']
+- [blocks_add_xx_1, '0', HIER_DoA_2D_AmpComp_RMS_0, '1']
 
 metadata:
   file_format: 1
