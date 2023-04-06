@@ -122,7 +122,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 212.0]
+    coordinate: [728, 212.0]
     rotation: 0
     state: true
 - name: HIER_AddGaussianNoise_1
@@ -139,7 +139,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 300.0]
+    coordinate: [728, 300.0]
     rotation: 0
     state: true
 - name: HIER_DoA_2D_AmpComp_PowerSpectrum_0
@@ -158,7 +158,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1112, 184.0]
+    coordinate: [1088, 184.0]
     rotation: 0
     state: true
 - name: HIER_DoA_2D_AmpComp_RMS_0
@@ -174,7 +174,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1112, 360.0]
+    coordinate: [1088, 360.0]
     rotation: 0
     state: enabled
 - name: HIER_SignalGenerator_AmpComp_2D_0
@@ -190,7 +190,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 232.0]
+    coordinate: [408, 232.0]
     rotation: 0
     state: true
 - name: analog_sig_source_x_0
@@ -207,7 +207,7 @@ blocks:
     phase: '0'
     samp_rate: samp_rate
     type: complex
-    waveform: analog.GR_COS_WAVE
+    waveform: analog.GR_CONST_WAVE
   states:
     bus_sink: false
     bus_source: false
@@ -245,7 +245,7 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: ''
-    label1: pow
+    label1: DoA - pow
     label10: ''
     label2: ''
     label3: ''
@@ -275,7 +275,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1552, 252.0]
+    coordinate: [1528, 252.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_1
@@ -308,7 +308,7 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: ''
-    label1: rms
+    label1: DoA - rms
     label10: ''
     label2: ''
     label3: ''
@@ -338,7 +338,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1552, 348.0]
+    coordinate: [1528, 348.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_2
@@ -369,7 +369,7 @@ blocks:
     factor7: '1'
     factor8: '1'
     factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_HORIZ
+    graph_type: qtgui.NUM_GRAPH_NONE
     gui_hint: ''
     label1: CH1 SNR(dB)
     label10: ''
@@ -401,7 +401,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1112, 460.0]
+    coordinate: [1088, 460.0]
     rotation: 0
     state: true
 
