@@ -33,52 +33,6 @@ options:
     state: enabled
 
 blocks:
-- name: fft_size
-  id: variable
-  parameters:
-    comment: ''
-    value: '32768'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [232, 20.0]
-    rotation: 0
-    state: enabled
-- name: TH_Factor_Fall
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: part
-    label: ''
-    short_id: ''
-    type: eng_float
-    value: '10'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [432, 204.0]
-    rotation: 0
-    state: true
-- name: TH_Factor_Rise
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: part
-    label: ''
-    short_id: ''
-    type: eng_float
-    value: '10'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [304, 204.0]
-    rotation: 0
-    state: true
 - name: blocks_null_sink_0
   id: blocks_null_sink
   parameters:
@@ -93,7 +47,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [856, 412.0]
+    coordinate: [856, 284.0]
     rotation: 0
     state: enabled
 - name: blocks_rms_xx_0
@@ -110,7 +64,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [248, 372.0]
+    coordinate: [248, 244.0]
     rotation: 0
     state: true
 - name: blocks_rms_xx_1
@@ -127,7 +81,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [248, 452.0]
+    coordinate: [248, 324.0]
     rotation: 0
     state: true
 - name: d20230404_hier_atan2_epb_0
@@ -142,7 +96,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 384.0]
+    coordinate: [464, 256.0]
     rotation: 0
     state: true
 - name: pad_sink_0
@@ -160,7 +114,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 404.0]
+    coordinate: [728, 276.0]
     rotation: 0
     state: true
 - name: pad_source_0
@@ -180,7 +134,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [48, 372.0]
+    coordinate: [48, 244.0]
     rotation: 0
     state: true
 - name: pad_source_1
@@ -200,24 +154,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [48, 452.0]
-    rotation: 0
-    state: true
-- name: period_peak_detector
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: none
-    label: ''
-    short_id: ''
-    type: eng_float
-    value: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [152, 204.0]
+    coordinate: [48, 324.0]
     rotation: 0
     state: true
 - name: samp_rate
@@ -234,7 +171,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 204.0]
+    coordinate: [240, 20.0]
     rotation: 0
     state: true
 
