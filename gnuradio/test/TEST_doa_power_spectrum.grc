@@ -270,96 +270,6 @@ blocks:
     coordinate: [192, 12.0]
     rotation: 0
     state: enabled
-- name: analog_sig_source_x_0
-  id: analog_sig_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    amp: amp_sig_src
-    comment: ''
-    freq: freq_sig_src
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    offset: '0'
-    phase: '0'
-    samp_rate: samp_rate
-    type: complex
-    waveform: analog.GR_COS_WAVE
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [88, 180.0]
-    rotation: 0
-    state: true
-- name: blocks_null_sink_0
-  id: blocks_null_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    bus_structure_sink: '[[0,],]'
-    comment: ''
-    num_inputs: '1'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1056, 1004.0]
-    rotation: 0
-    state: true
-- name: blocks_null_sink_1
-  id: blocks_null_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    bus_structure_sink: '[[0,],]'
-    comment: ''
-    num_inputs: '1'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1056, 1148.0]
-    rotation: 0
-    state: true
-- name: blocks_rms_xx_0
-  id: blocks_rms_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha: '0.0001'
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [304, 1476.0]
-    rotation: 0
-    state: true
-- name: blocks_rms_xx_1
-  id: blocks_rms_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha: '0.0001'
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [304, 1556.0]
-    rotation: 0
-    state: true
 - name: HIER_PeriodicCenterFreqDetector_0
   id: HIER_PeriodicCenterFreqDetector
   parameters:
@@ -492,6 +402,96 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [744, 1332.0]
+    rotation: 0
+    state: true
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: amp_sig_src
+    comment: ''
+    freq: freq_sig_src
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [88, 180.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1056, 1004.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_1
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1056, 1148.0]
+    rotation: 0
+    state: true
+- name: blocks_rms_xx_0
+  id: blocks_rms_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.0001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 1476.0]
+    rotation: 0
+    state: true
+- name: blocks_rms_xx_1
+  id: blocks_rms_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.0001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 1556.0]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -2027,30 +2027,30 @@ blocks:
     state: true
 
 connections:
+- [HIER_PeriodicCenterFreqDetector_0, '0', blocks_null_sink_0, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '0', qtgui_number_sink, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '1', qtgui_number_sink_1, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '2', HIER_sqrt_epb_0, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '3', qtgui_number_sink_1_0, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '0', blocks_null_sink_1, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '0', qtgui_number_sink_0, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '1', qtgui_number_sink_1, '1']
+- [HIER_PeriodicCenterFreqDetector_1, '2', HIER_sqrt_epb_1, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '3', qtgui_number_sink_1_0, '1']
+- [HIER_PowerSpectrum_0, '1', qtgui_vector_sink_f_0, '0']
+- [HIER_PowerSpectrum_1, '1', qtgui_vector_sink_f_0, '1']
+- [HIER_atan2_epb_0, '1', qtgui_number_sink_2, '0']
+- [HIER_atan2_epb_1, '1', qtgui_number_sink_2_0, '0']
+- [HIER_sqrt_epb_0, '0', HIER_atan2_epb_0, '0']
+- [HIER_sqrt_epb_0, '0', qtgui_number_sink_1_0_0, '0']
+- [HIER_sqrt_epb_1, '0', HIER_atan2_epb_0, '1']
+- [HIER_sqrt_epb_1, '0', qtgui_number_sink_1_0_0, '1']
 - [analog_sig_source_x_0, '0', qtgui_sink_x_0, '0']
 - [analog_sig_source_x_0, '0', uhd_usrp_sink_0, '0']
 - [blocks_rms_xx_0, '0', HIER_atan2_epb_1, '0']
 - [blocks_rms_xx_0, '0', qtgui_number_sink_1_0_0_0, '0']
 - [blocks_rms_xx_1, '0', HIER_atan2_epb_1, '1']
 - [blocks_rms_xx_1, '0', qtgui_number_sink_1_0_0_0, '1']
-- [HIER_PeriodicCenterFreqDetector_0, '0', blocks_null_sink_0, '0']
-- [HIER_PeriodicCenterFreqDetector_0, '0', qtgui_number_sink, '0']
-- [HIER_PeriodicCenterFreqDetector_0, '1', qtgui_number_sink_1, '0']
-- [HIER_sqrt_epb_0, '0']
-- [HIER_PeriodicCenterFreqDetector_0, '3', qtgui_number_sink_1_0, '0']
-- [HIER_PeriodicCenterFreqDetector_1, '0', blocks_null_sink_1, '0']
-- [HIER_PeriodicCenterFreqDetector_1, '0', qtgui_number_sink_0, '0']
-- [HIER_PeriodicCenterFreqDetector_1, '1', qtgui_number_sink_1, '1']
-- [HIER_sqrt_epb_1, '0']
-- [HIER_PeriodicCenterFreqDetector_1, '3', qtgui_number_sink_1_0, '1']
-- [HIER_PowerSpectrum_0, '1', qtgui_vector_sink_f_0, '0']
-- [HIER_PowerSpectrum_1, '1', qtgui_vector_sink_f_0, '1']
-- [HIER_atan2_epb_0, '1', qtgui_number_sink_2, '0']
-- [HIER_atan2_epb_1, '1', qtgui_number_sink_2_0, '0']
-- [HIER_atan2_epb_0, '0']
-- [HIER_sqrt_epb_0, '0', qtgui_number_sink_1_0_0, '0']
-- [HIER_atan2_epb_0, '1']
-- [HIER_sqrt_epb_1, '0', qtgui_number_sink_1_0_0, '1']
 - [uhd_usrp_source_0, '0', vsink_rx0, '0']
 - [uhd_usrp_source_0, '1', vsink_rx1, '0']
 - [vsrc_rx0, '0', qtgui_freq_sink_x_0, '0']

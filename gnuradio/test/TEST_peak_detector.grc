@@ -162,6 +162,41 @@ blocks:
     coordinate: [192, 12.0]
     rotation: 0
     state: enabled
+- name: HIER_Bool_NOT_0
+  id: HIER_Bool_NOT
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 780.0]
+    rotation: 0
+    state: disabled
+- name: HIER_PeriodicCenterFreqDetector_0
+  id: HIER_PeriodicCenterFreqDetector
+  parameters:
+    TH_Factor_Fall: TH_Factor_Fall
+    TH_Factor_Rise: TH_Factor_Rise
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: fft_size
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    period_peak_detector: '1'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 472.0]
+    rotation: 0
+    state: true
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
@@ -272,41 +307,6 @@ blocks:
     coordinate: [376, 164.0]
     rotation: 0
     state: disabled
-- name: HIER_Bool_NOT_0
-  id: HIER_Bool_NOT
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [632, 780.0]
-    rotation: 0
-    state: disabled
-- name: HIER_PeriodicCenterFreqDetector_0
-  id: HIER_PeriodicCenterFreqDetector
-  parameters:
-    TH_Factor_Fall: TH_Factor_Fall
-    TH_Factor_Rise: TH_Factor_Rise
-    affinity: ''
-    alias: ''
-    comment: ''
-    fft_size: fft_size
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    period_peak_detector: '1'
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [248, 472.0]
-    rotation: 0
-    state: true
 - name: qtgui_number_sink
   id: qtgui_number_sink
   parameters:
@@ -616,6 +616,13 @@ blocks:
     state: true
 
 connections:
+- [HIER_Bool_NOT_0, '0', blocks_sample_and_hold_xx_0, '1']
+- [HIER_PeriodicCenterFreqDetector_0, '0', HIER_Bool_NOT_0, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '0', qtgui_number_sink, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '1', blocks_add_const_vxx_0, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '1', blocks_sample_and_hold_xx_0, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '1', qtgui_number_sink_1, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '3', qtgui_number_sink_1, '1']
 - [analog_sig_source_x_0, '0', blocks_throttle_0, '0']
 - [analog_sig_source_x_0, '0', vsink_sig_src, '0']
 - [blocks_abs_xx_0, '0', blocks_multiply_const_vxx_1, '0']
@@ -623,13 +630,6 @@ connections:
 - [blocks_multiply_const_vxx_1, '0', qtgui_number_sink_1_0, '0']
 - [blocks_sample_and_hold_xx_0, '0', qtgui_number_sink_1_0_0, '0']
 - [blocks_throttle_0, '0', vsink_sig_src, '0']
-- [HIER_Bool_NOT_0, '0', blocks_sample_and_hold_xx_0, '1']
-- [HIER_Bool_NOT_0, '0']
-- [HIER_PeriodicCenterFreqDetector_0, '0', qtgui_number_sink, '0']
-- [HIER_PeriodicCenterFreqDetector_0, '1', blocks_add_const_vxx_0, '0']
-- [HIER_PeriodicCenterFreqDetector_0, '1', blocks_sample_and_hold_xx_0, '0']
-- [HIER_PeriodicCenterFreqDetector_0, '1', qtgui_number_sink_1, '0']
-- [HIER_PeriodicCenterFreqDetector_0, '3', qtgui_number_sink_1, '1']
 - [vsrc_sig_src, '0', HIER_PeriodicCenterFreqDetector_0, '0']
 - [vsrc_sig_src, '0', qtgui_sink_x_0, '0']
 
