@@ -51,7 +51,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 20.0]
+    coordinate: [760, 20.0]
     rotation: 0
     state: true
 - name: amp_signal
@@ -75,6 +75,27 @@ blocks:
     coordinate: [496, 20.0]
     rotation: 0
     state: true
+- name: freq_signal
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: samp_rate - 1
+    value: 1e3
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 20.0]
+    rotation: 0
+    state: true
 - name: real_angle
   id: variable_qtgui_range
   parameters:
@@ -93,7 +114,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 20.0]
+    coordinate: [624, 20.0]
     rotation: 0
     state: true
 - name: samp_rate
@@ -193,6 +214,51 @@ blocks:
     coordinate: [408, 232.0]
     rotation: 0
     state: true
+- name: HIER_complex2float_0
+  id: HIER_complex2float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [540.0, 496]
+    rotation: 270
+    state: true
+- name: HIER_complex2float_1
+  id: HIER_complex2float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [572.0, 496]
+    rotation: 270
+    state: true
+- name: HIER_complex2float_2
+  id: HIER_complex2float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [604.0, 496]
+    rotation: 270
+    state: true
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
@@ -200,14 +266,14 @@ blocks:
     alias: ''
     amp: amp_signal
     comment: ''
-    freq: '1000'
+    freq: freq_signal
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
     phase: '0'
     samp_rate: samp_rate
     type: complex
-    waveform: analog.GR_CONST_WAVE
+    waveform: analog.GR_SIN_WAVE
   states:
     bus_sink: false
     bus_source: false
@@ -275,7 +341,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1528, 252.0]
+    coordinate: [1560, 252.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_1
@@ -338,7 +404,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1528, 348.0]
+    coordinate: [1560, 348.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_2
@@ -404,19 +470,251 @@ blocks:
     coordinate: [1088, 460.0]
     rotation: 0
     state: true
+- name: qtgui_number_sink_3
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: detected
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '0'
+    name: '""'
+    nconnections: '1'
+    type: byte
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1560, 156.0]
+    rotation: 0
+    state: true
+- name: qtgui_number_sink_4
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: freq1
+    label10: ''
+    label2: freq2
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: samp_rate - 1
+    min: '0'
+    name: '""'
+    nconnections: '2'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1752, 204.0]
+    rotation: 0
+    state: true
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'True'
+    gui_hint: ''
+    label1: signal
+    label10: Signal 10
+    label2: channel1
+    label3: channel2
+    label4: channel1_imag
+    label5: channel2_real
+    label6: channel2_imag
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '""'
+    nconnections: '3'
+    size: int(freq_signal)
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '5'
+    ymin: '-5'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544.0, 704]
+    rotation: 270
+    state: enabled
 
 connections:
 - [HIER_AddGaussianNoise_0, '0', HIER_DoA_2D_AmpComp_PowerSpectrum_0, '0']
 - [HIER_AddGaussianNoise_0, '0', HIER_DoA_2D_AmpComp_RMS_0, '0']
+- [HIER_AddGaussianNoise_0, '0', HIER_complex2float_1, '0']
 - [HIER_AddGaussianNoise_0, '1', qtgui_number_sink_2, '0']
 - [HIER_AddGaussianNoise_1, '0', HIER_DoA_2D_AmpComp_PowerSpectrum_0, '1']
 - [HIER_AddGaussianNoise_1, '0', HIER_DoA_2D_AmpComp_RMS_0, '1']
+- [HIER_AddGaussianNoise_1, '0', HIER_complex2float_2, '0']
 - [HIER_AddGaussianNoise_1, '1', qtgui_number_sink_2, '1']
+- [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '0', qtgui_number_sink_3, '0']
+- [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '1', qtgui_number_sink_4, '0']
+- [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '2', qtgui_number_sink_4, '1']
 - [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '3', qtgui_number_sink_0, '0']
 - [HIER_DoA_2D_AmpComp_RMS_0, '0', qtgui_number_sink_1, '0']
 - [HIER_SignalGenerator_AmpComp_2D_0, '0', HIER_AddGaussianNoise_0, '0']
 - [HIER_SignalGenerator_AmpComp_2D_0, '1', HIER_AddGaussianNoise_1, '0']
+- [HIER_complex2float_0, '0', qtgui_time_sink_x_0, '0']
+- [HIER_complex2float_1, '0', qtgui_time_sink_x_0, '1']
+- [HIER_complex2float_2, '0', qtgui_time_sink_x_0, '2']
 - [analog_sig_source_x_0, '0', HIER_SignalGenerator_AmpComp_2D_0, '0']
+- [analog_sig_source_x_0, '0', HIER_complex2float_0, '0']
 
 metadata:
   file_format: 1
