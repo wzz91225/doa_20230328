@@ -1,0 +1,401 @@
+options:
+  parameters:
+    author: zzaw
+    catch_exceptions: 'True'
+    category: '[DoA -  wzz91225]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Both [0, pi/2] - Single Narrowband  Signal
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: HIER_DoA_3D_AmpComp_PowerSpectrum
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: DoA - 3D - Amplitude Comparison - Power Spectrum
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 20.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: fft_size
+  id: variable
+  parameters:
+    comment: ''
+    value: '32768'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 20.0]
+    rotation: 0
+    state: enabled
+- name: HIER_PeriodicCenterFreqDetector_0
+  id: HIER_PeriodicCenterFreqDetector
+  parameters:
+    TH_Factor_Fall: TH_Factor_Fall
+    TH_Factor_Rise: TH_Factor_Rise
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: fft_size
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    period_peak_detector: '1'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 336.0]
+    rotation: 0
+    state: true
+- name: HIER_PeriodicCenterFreqDetector_1
+  id: HIER_PeriodicCenterFreqDetector
+  parameters:
+    TH_Factor_Fall: TH_Factor_Fall
+    TH_Factor_Rise: TH_Factor_Rise
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: fft_size
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    period_peak_detector: '1'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 480.0]
+    rotation: 0
+    state: true
+- name: HIER_atan2_epb_0
+  id: HIER_atan2_epb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 608.0]
+    rotation: 0
+    state: true
+- name: HIER_sqrt_epb_0
+  id: HIER_sqrt_epb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 612.0]
+    rotation: 0
+    state: true
+- name: HIER_sqrt_epb_1
+  id: HIER_sqrt_epb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 660.0]
+    rotation: 0
+    state: true
+- name: TH_Factor_Fall
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: part
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 208.0]
+    rotation: 0
+    state: true
+- name: TH_Factor_Rise
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: part
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 208.0]
+    rotation: 0
+    state: true
+- name: blocks_and_xx_0
+  id: blocks_and_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 336.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 356.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_1
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 436.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_2
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 516.0]
+    rotation: 0
+    state: true
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: detected
+    num_streams: '1'
+    optional: 'True'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [880, 332.0]
+    rotation: 0
+    state: true
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: freq_ch1
+    num_streams: '1'
+    optional: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [880, 412.0]
+    rotation: 0
+    state: true
+- name: pad_sink_2
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: freq_ch2
+    num_streams: '1'
+    optional: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [880, 492.0]
+    rotation: 0
+    state: true
+- name: pad_sink_3
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: angle
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1160, 620.0]
+    rotation: 0
+    state: true
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: ch1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 372.0]
+    rotation: 0
+    state: true
+- name: pad_source_1
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: ch2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 516.0]
+    rotation: 0
+    state: true
+- name: period_peak_detector
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [152, 208.0]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: 32e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 208.0]
+    rotation: 0
+    state: true
+
+connections:
+- [HIER_PeriodicCenterFreqDetector_0, '0', blocks_and_xx_0, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '1', blocks_null_sink_1, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '1', pad_sink_1, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '2', HIER_sqrt_epb_0, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '0', blocks_and_xx_0, '1']
+- [HIER_PeriodicCenterFreqDetector_1, '1', blocks_null_sink_2, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '1', pad_sink_2, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '2', HIER_sqrt_epb_1, '0']
+- [HIER_atan2_epb_0, '1', pad_sink_3, '0']
+- [HIER_sqrt_epb_0, '0', HIER_atan2_epb_0, '0']
+- [HIER_sqrt_epb_1, '0', HIER_atan2_epb_0, '1']
+- [blocks_and_xx_0, '0', blocks_null_sink_0, '0']
+- [blocks_and_xx_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', HIER_PeriodicCenterFreqDetector_0, '0']
+- [pad_source_1, '0', HIER_PeriodicCenterFreqDetector_1, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.4.0

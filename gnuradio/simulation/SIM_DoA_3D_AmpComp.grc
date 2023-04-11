@@ -1,0 +1,1053 @@
+options:
+  parameters:
+    author: zzaw
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: SIM_DoA_3D_AmpComp
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: SIMULATION - DoA_3D_AmpComp
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 20.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: amp_noise
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: 1e-3
+    stop: '1'
+    value: '0.1'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [968, 20.0]
+    rotation: 0
+    state: true
+- name: amp_signal
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: 1e-2
+    stop: '1'
+    value: '1'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 20.0]
+    rotation: 0
+    state: true
+- name: freq_signal
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: samp_rate - 1
+    value: 1e3
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 20.0]
+    rotation: 0
+    state: true
+- name: real_azimuth_angle
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '90'
+    value: '45'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [624, 20.0]
+    rotation: 0
+    state: true
+- name: real_pitch_angle
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '90'
+    value: '45'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 20.0]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 20.0]
+    rotation: 0
+    state: enabled
+- name: HIER_AddGaussianNoise_0
+  id: HIER_AddGaussianNoise
+  parameters:
+    affinity: ''
+    alias: ''
+    amplitude: amp_noise
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    random_seed: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 572.0]
+    rotation: 0
+    state: true
+- name: HIER_AddGaussianNoise_1
+  id: HIER_AddGaussianNoise
+  parameters:
+    affinity: ''
+    alias: ''
+    amplitude: amp_noise
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    random_seed: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 660.0]
+    rotation: 0
+    state: true
+- name: HIER_AddGaussianNoise_2
+  id: HIER_AddGaussianNoise
+  parameters:
+    affinity: ''
+    alias: ''
+    amplitude: amp_noise
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    random_seed: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 748.0]
+    rotation: 0
+    state: true
+- name: HIER_DoA_2D_AmpComp_PowerSpectrum_0
+  id: HIER_DoA_2D_AmpComp_PowerSpectrum
+  parameters:
+    TH_Factor_Fall: '10'
+    TH_Factor_Rise: '10'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    period_peak_detector: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 1072.0]
+    rotation: 0
+    state: disabled
+- name: HIER_DoA_3D_AmpComp_RMS_0
+  id: HIER_DoA_3D_AmpComp_RMS
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 1248.0]
+    rotation: 0
+    state: true
+- name: HIER_RxSim_OrthogonalTripleChannel_0
+  id: HIER_RxSim_OrthogonalTripleChannel
+  parameters:
+    affinity: ''
+    alias: ''
+    azimuth_angle: real_azimuth_angle
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    pitch_angle: real_pitch_angle
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 320.0]
+    rotation: 0
+    state: true
+- name: HIER_complex2float_0
+  id: HIER_complex2float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1208, 244.0]
+    rotation: 0
+    state: true
+- name: HIER_complex2float_1
+  id: HIER_complex2float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1112, 572.0]
+    rotation: 0
+    state: true
+- name: HIER_complex2float_2
+  id: HIER_complex2float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1112, 660.0]
+    rotation: 0
+    state: true
+- name: HIER_complex2float_3
+  id: HIER_complex2float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1112, 748.0]
+    rotation: 0
+    state: true
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: amp_signal
+    comment: ''
+    freq: freq_signal
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_SIN_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 196.0]
+    rotation: 0
+    state: true
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate * 1e6
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 236.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("blue", "red")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: doa_rms_azimuth
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '90'
+    min: '0'
+    name: '""'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 1380.0]
+    rotation: 0
+    state: true
+- name: qtgui_number_sink_1
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: doa_rms_pitch
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '90'
+    min: '0'
+    name: '""'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 1476.0]
+    rotation: 0
+    state: true
+- name: qtgui_number_sink_2
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: ''
+    label1: CH1 SNR(dB)
+    label10: ''
+    label2: CH2 SNR(dB)
+    label3: CH3 SNR(dB)
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '50'
+    min: '-50'
+    name: '""'
+    nconnections: '3'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 828.0]
+    rotation: 0
+    state: true
+- name: qtgui_number_sink_3
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: detected
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '0'
+    name: '""'
+    nconnections: '1'
+    type: byte
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 1044.0]
+    rotation: 0
+    state: disabled
+- name: qtgui_number_sink_4
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: freq1
+    label10: ''
+    label2: freq2
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: samp_rate - 1
+    min: '0'
+    name: '""'
+    nconnections: '2'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [984, 1092.0]
+    rotation: 0
+    state: disabled
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'True'
+    gui_hint: ''
+    label1: signal
+    label10: Signal 10
+    label2: channel1
+    label3: channel2
+    label4: channel3
+    label5: channel2_real
+    label6: channel2_imag
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '""'
+    nconnections: '4'
+    size: int(freq_signal)
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '5'
+    ymin: '-5'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1472, 248.0]
+    rotation: 0
+    state: enabled
+- name: vsink_doa_rms_azimuth
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '403'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 1252.0]
+    rotation: 0
+    state: enabled
+- name: vsink_doa_rms_pitch
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '404'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 1316.0]
+    rotation: 0
+    state: true
+- name: vsink_rx_ch1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 564.0]
+    rotation: 0
+    state: true
+- name: vsink_rx_ch2
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 652.0]
+    rotation: 0
+    state: true
+- name: vsink_rx_ch3
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '6'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 740.0]
+    rotation: 0
+    state: true
+- name: vsink_signal
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 236.0]
+    rotation: 0
+    state: true
+- name: vsink_tx_ch1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 308.0]
+    rotation: 0
+    state: true
+- name: vsink_tx_ch2
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 372.0]
+    rotation: 0
+    state: true
+- name: vsink_tx_ch3
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 436.0]
+    rotation: 0
+    state: true
+- name: vsrc_rx_ch1
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 1236.0]
+    rotation: 0
+    state: true
+- name: vsrc_rx_ch1_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 564.0]
+    rotation: 0
+    state: true
+- name: vsrc_rx_ch2
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 1300.0]
+    rotation: 0
+    state: true
+- name: vsrc_rx_ch2_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 652.0]
+    rotation: 0
+    state: true
+- name: vsrc_rx_ch2_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '6'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 740.0]
+    rotation: 0
+    state: true
+- name: vsrc_rx_ch3
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '6'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 1364.0]
+    rotation: 0
+    state: true
+- name: vsrc_signal
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 236.0]
+    rotation: 0
+    state: true
+- name: vsrc_tx_ch1
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 580.0]
+    rotation: 0
+    state: true
+- name: vsrc_tx_ch2
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 668.0]
+    rotation: 0
+    state: true
+- name: vsrc_tx_ch3
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 756.0]
+    rotation: 0
+    state: true
+
+connections:
+- [HIER_AddGaussianNoise_0, '0', vsink_rx_ch1, '0']
+- [HIER_AddGaussianNoise_0, '1', qtgui_number_sink_2, '0']
+- [HIER_AddGaussianNoise_1, '0', vsink_rx_ch2, '0']
+- [HIER_AddGaussianNoise_1, '1', qtgui_number_sink_2, '1']
+- [HIER_AddGaussianNoise_2, '0', vsink_rx_ch3, '0']
+- [HIER_AddGaussianNoise_2, '1', qtgui_number_sink_2, '2']
+- [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '0', qtgui_number_sink_3, '0']
+- [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '1', qtgui_number_sink_4, '0']
+- [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '2', qtgui_number_sink_4, '1']
+- [HIER_DoA_3D_AmpComp_RMS_0, '0', qtgui_number_sink_0, '0']
+- [HIER_DoA_3D_AmpComp_RMS_0, '0', vsink_doa_rms_azimuth, '0']
+- [HIER_DoA_3D_AmpComp_RMS_0, '1', qtgui_number_sink_1, '0']
+- [HIER_DoA_3D_AmpComp_RMS_0, '1', vsink_doa_rms_pitch, '0']
+- [HIER_RxSim_OrthogonalTripleChannel_0, '0', vsink_tx_ch1, '0']
+- [HIER_RxSim_OrthogonalTripleChannel_0, '1', vsink_tx_ch2, '0']
+- [HIER_RxSim_OrthogonalTripleChannel_0, '2', vsink_tx_ch3, '0']
+- [HIER_complex2float_0, '0', qtgui_time_sink_x_0, '0']
+- [HIER_complex2float_1, '0', qtgui_time_sink_x_0, '1']
+- [HIER_complex2float_2, '0', qtgui_time_sink_x_0, '2']
+- [HIER_complex2float_3, '0', qtgui_time_sink_x_0, '3']
+- [analog_sig_source_x_0, '0', HIER_RxSim_OrthogonalTripleChannel_0, '0']
+- [analog_sig_source_x_0, '0', blocks_throttle_0, '0']
+- [blocks_throttle_0, '0', vsink_signal, '0']
+- [vsrc_rx_ch1, '0', HIER_DoA_3D_AmpComp_RMS_0, '0']
+- [vsrc_rx_ch1_0, '0', HIER_complex2float_1, '0']
+- [vsrc_rx_ch2, '0', HIER_DoA_3D_AmpComp_RMS_0, '1']
+- [vsrc_rx_ch2_0, '0', HIER_complex2float_2, '0']
+- [vsrc_rx_ch2_0_0, '0', HIER_complex2float_3, '0']
+- [vsrc_rx_ch3, '0', HIER_DoA_3D_AmpComp_RMS_0, '2']
+- [vsrc_signal, '0', HIER_complex2float_0, '0']
+- [vsrc_tx_ch1, '0', HIER_AddGaussianNoise_0, '0']
+- [vsrc_tx_ch2, '0', HIER_AddGaussianNoise_1, '0']
+- [vsrc_tx_ch3, '0', HIER_AddGaussianNoise_2, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.4.0
