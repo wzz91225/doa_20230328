@@ -159,7 +159,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 476.0]
+    coordinate: [576, 716.0]
     rotation: 0
     state: enabled
 - name: TH_Factor_Rise
@@ -180,7 +180,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 476.0]
+    coordinate: [576, 604.0]
     rotation: 0
     state: true
 - name: amp_sig_src
@@ -201,7 +201,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 12.0]
+    coordinate: [736, 12.0]
     rotation: 0
     state: true
 - name: fft_size
@@ -234,7 +234,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [632, 12.0]
+    coordinate: [616, 12.0]
     rotation: 0
     state: true
 - name: period_peak_detector
@@ -287,7 +287,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [296, 1008.0]
+    coordinate: [768, 312.0]
     rotation: 0
     state: true
 - name: HIER_PeriodicCenterFreqDetector_1
@@ -307,7 +307,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [296, 1152.0]
+    coordinate: [768, 456.0]
     rotation: 0
     state: true
 - name: HIER_PowerSpectrum_0
@@ -356,7 +356,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 1288.0]
+    coordinate: [1352, 552.0]
     rotation: 0
     state: true
 - name: HIER_atan2_epb_1
@@ -371,7 +371,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [584, 1488.0]
+    coordinate: [1272, 776.0]
     rotation: 0
     state: true
 - name: HIER_sqrt_epb_0
@@ -386,7 +386,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 1284.0]
+    coordinate: [1128, 548.0]
     rotation: 0
     state: true
 - name: HIER_sqrt_epb_1
@@ -401,7 +401,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 1332.0]
+    coordinate: [1128, 596.0]
     rotation: 0
     state: true
 - name: analog_sig_source_x_0
@@ -423,7 +423,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 180.0]
+    coordinate: [40, 180.0]
     rotation: 0
     state: true
 - name: blocks_null_sink_0
@@ -440,7 +440,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1056, 1004.0]
+    coordinate: [1528, 308.0]
     rotation: 0
     state: true
 - name: blocks_null_sink_1
@@ -457,7 +457,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1056, 1148.0]
+    coordinate: [1528, 452.0]
     rotation: 0
     state: true
 - name: blocks_rms_xx_0
@@ -474,7 +474,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 1476.0]
+    coordinate: [992, 764.0]
     rotation: 0
     state: true
 - name: blocks_rms_xx_1
@@ -491,7 +491,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 1556.0]
+    coordinate: [992, 844.0]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -761,7 +761,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [696, 1028.0]
+    coordinate: [1168, 332.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_1_0
@@ -824,7 +824,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 1092.0]
+    coordinate: [1344, 396.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_1_0_0
@@ -887,7 +887,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 1372.0]
+    coordinate: [1344, 636.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_1_0_0_0
@@ -950,7 +950,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [584, 1564.0]
+    coordinate: [1272, 852.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_2
@@ -1013,7 +1013,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1328, 1292.0]
+    coordinate: [1536, 556.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_2_0
@@ -1076,7 +1076,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [848, 1492.0]
+    coordinate: [1536, 780.0]
     rotation: 0
     state: true
 - name: qtgui_sink_x_0
@@ -1105,7 +1105,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 300.0]
+    coordinate: [392, 300.0]
     rotation: 0
     state: true
 - name: qtgui_vector_sink_f_0
@@ -1456,7 +1456,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 172.0]
+    coordinate: [392, 172.0]
     rotation: 0
     state: true
 - name: uhd_usrp_source_0
@@ -1957,7 +1957,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 1044.0]
+    coordinate: [616, 348.0]
     rotation: 0
     state: true
 - name: vsrc_rx0_2
@@ -1970,7 +1970,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 1476.0]
+    coordinate: [776, 764.0]
     rotation: 0
     state: true
 - name: vsrc_rx1
@@ -2009,7 +2009,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 1100.0]
+    coordinate: [616, 404.0]
     rotation: 0
     state: true
 - name: vsrc_rx1_2
@@ -2022,7 +2022,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 1532.0]
+    coordinate: [776, 820.0]
     rotation: 0
     state: true
 

@@ -45,6 +45,91 @@ blocks:
     coordinate: [216, 20.0]
     rotation: 0
     state: enabled
+- name: HIER_PeriodicCenterFreqDetector_0
+  id: HIER_PeriodicCenterFreqDetector
+  parameters:
+    TH_Factor_Fall: TH_Factor_Fall
+    TH_Factor_Rise: TH_Factor_Rise
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: fft_size
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    period_peak_detector: '1'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 336.0]
+    rotation: 0
+    state: true
+- name: HIER_PeriodicCenterFreqDetector_1
+  id: HIER_PeriodicCenterFreqDetector
+  parameters:
+    TH_Factor_Fall: TH_Factor_Fall
+    TH_Factor_Rise: TH_Factor_Rise
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: fft_size
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    period_peak_detector: '1'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 480.0]
+    rotation: 0
+    state: true
+- name: HIER_atan2_epb_0
+  id: HIER_atan2_epb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 608.0]
+    rotation: 0
+    state: true
+- name: HIER_sqrt_epb_0
+  id: HIER_sqrt_epb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 604.0]
+    rotation: 0
+    state: true
+- name: HIER_sqrt_epb_1
+  id: HIER_sqrt_epb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 652.0]
+    rotation: 0
+    state: true
 - name: TH_Factor_Fall
   id: parameter
   parameters:
@@ -164,91 +249,6 @@ blocks:
     coordinate: [1288, 636.0]
     rotation: 0
     state: disabled
-- name: HIER_PeriodicCenterFreqDetector_0
-  id: HIER_PeriodicCenterFreqDetector
-  parameters:
-    TH_Factor_Fall: TH_Factor_Fall
-    TH_Factor_Rise: TH_Factor_Rise
-    affinity: ''
-    alias: ''
-    comment: ''
-    fft_size: fft_size
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    period_peak_detector: '1'
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [256, 336.0]
-    rotation: 0
-    state: true
-- name: HIER_PeriodicCenterFreqDetector_1
-  id: HIER_PeriodicCenterFreqDetector
-  parameters:
-    TH_Factor_Fall: TH_Factor_Fall
-    TH_Factor_Rise: TH_Factor_Rise
-    affinity: ''
-    alias: ''
-    comment: ''
-    fft_size: fft_size
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    period_peak_detector: '1'
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [256, 480.0]
-    rotation: 0
-    state: true
-- name: HIER_atan2_epb_0
-  id: HIER_atan2_epb
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [896, 608.0]
-    rotation: 0
-    state: true
-- name: HIER_sqrt_epb_0
-  id: HIER_sqrt_epb
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [632, 604.0]
-    rotation: 0
-    state: true
-- name: HIER_sqrt_epb_1
-  id: HIER_sqrt_epb
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [632, 652.0]
-    rotation: 0
-    state: true
 - name: pad_sink_0
   id: pad_sink
   parameters:
@@ -397,8 +397,6 @@ blocks:
     state: true
 
 connections:
-- [blocks_and_xx_0, '0', blocks_null_sink_0, '0']
-- [blocks_and_xx_0, '0', pad_sink_0, '0']
 - [HIER_PeriodicCenterFreqDetector_0, '0', blocks_and_xx_0, '0']
 - [HIER_PeriodicCenterFreqDetector_0, '1', blocks_null_sink_1, '0']
 - [HIER_PeriodicCenterFreqDetector_0, '1', pad_sink_1, '0']
@@ -411,6 +409,8 @@ connections:
 - [HIER_atan2_epb_0, '1', pad_sink_3, '0']
 - [HIER_sqrt_epb_0, '0', HIER_atan2_epb_0, '0']
 - [HIER_sqrt_epb_1, '0', HIER_atan2_epb_0, '1']
+- [blocks_and_xx_0, '0', blocks_null_sink_0, '0']
+- [blocks_and_xx_0, '0', pad_sink_0, '0']
 - [pad_source_0, '0', HIER_PeriodicCenterFreqDetector_0, '0']
 - [pad_source_1, '0', HIER_PeriodicCenterFreqDetector_1, '0']
 

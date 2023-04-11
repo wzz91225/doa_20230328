@@ -43,7 +43,7 @@ blocks:
     orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0'
-    step: 1e-2
+    step: 1e-3
     stop: '1'
     value: '0.1'
     widget: counter_slider
@@ -220,7 +220,6 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    samp_rate: samp_rate
   states:
     bus_sink: false
     bus_source: false
@@ -228,8 +227,8 @@ blocks:
     coordinate: [320, 944.0]
     rotation: 0
     state: enabled
-- name: HIER_SignalGenerator_AmpComp_2D_0
-  id: HIER_SignalGenerator_AmpComp_2D
+- name: HIER_RxSim_OrthogonalDualChannel_0
+  id: HIER_RxSim_OrthogonalDualChannel
   parameters:
     affinity: ''
     alias: ''
@@ -256,7 +255,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1400, 220.0]
+    coordinate: [1080, 244.0]
     rotation: 0
     state: true
 - name: HIER_complex2float_1
@@ -271,7 +270,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1400, 284.0]
+    coordinate: [1080, 492.0]
     rotation: 0
     state: true
 - name: HIER_complex2float_2
@@ -286,7 +285,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1400, 348.0]
+    coordinate: [1080, 580.0]
     rotation: 0
     state: true
 - name: analog_const_source_x_0
@@ -407,7 +406,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1488, 628.0]
+    coordinate: [1488, 652.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_1
@@ -470,7 +469,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1488, 724.0]
+    coordinate: [1488, 748.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_2
@@ -882,7 +881,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1664, 224.0]
+    coordinate: [1344, 248.0]
     rotation: 0
     state: enabled
 - name: vsink_doa_pow
@@ -960,7 +959,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 308.0]
+    coordinate: [816, 308.0]
     rotation: 0
     state: true
 - name: vsink_tx_ch2
@@ -973,7 +972,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 372.0]
+    coordinate: [816, 372.0]
     rotation: 0
     state: true
 - name: vsrc_doa_pow
@@ -986,7 +985,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1264, 644.0]
+    coordinate: [1264, 668.0]
     rotation: 0
     state: true
 - name: vsrc_doa_rms
@@ -999,7 +998,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1264, 740.0]
+    coordinate: [1264, 764.0]
     rotation: 0
     state: true
 - name: vsrc_rx_ch1
@@ -1025,7 +1024,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 276.0]
+    coordinate: [904, 484.0]
     rotation: 0
     state: true
 - name: vsrc_rx_ch2
@@ -1051,7 +1050,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 340.0]
+    coordinate: [904, 572.0]
     rotation: 0
     state: true
 - name: vsrc_signal
@@ -1064,7 +1063,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1232, 212.0]
+    coordinate: [912, 236.0]
     rotation: 0
     state: true
 - name: vsrc_tx_ch1
@@ -1106,14 +1105,14 @@ connections:
 - [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '2', qtgui_number_sink_4, '1']
 - [HIER_DoA_2D_AmpComp_PowerSpectrum_0, '3', vsink_doa_pow, '0']
 - [HIER_DoA_2D_AmpComp_RMS_0, '0', vsink_doa_rms, '0']
-- [HIER_SignalGenerator_AmpComp_2D_0, '0', vsink_tx_ch1, '0']
-- [HIER_SignalGenerator_AmpComp_2D_0, '1', vsink_tx_ch2, '0']
+- [HIER_RxSim_OrthogonalDualChannel_0, '0', vsink_tx_ch1, '0']
+- [HIER_RxSim_OrthogonalDualChannel_0, '1', vsink_tx_ch2, '0']
 - [HIER_complex2float_0, '0', qtgui_time_sink_x_0, '0']
 - [HIER_complex2float_1, '0', qtgui_time_sink_x_0, '1']
 - [HIER_complex2float_2, '0', qtgui_time_sink_x_0, '2']
 - [analog_const_source_x_0, '0', HIER_DataError_0, '1']
 - [analog_const_source_x_0, '0', HIER_DataError_1, '1']
-- [analog_sig_source_x_0, '0', HIER_SignalGenerator_AmpComp_2D_0, '0']
+- [analog_sig_source_x_0, '0', HIER_RxSim_OrthogonalDualChannel_0, '0']
 - [analog_sig_source_x_0, '0', blocks_throttle_0, '0']
 - [blocks_throttle_0, '0', vsink_signal, '0']
 - [vsrc_doa_pow, '0', HIER_DataError_0, '0']

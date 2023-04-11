@@ -33,6 +33,21 @@ options:
     state: enabled
 
 blocks:
+- name: HIER_atan2_epb_0
+  id: HIER_atan2_epb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 256.0]
+    rotation: 0
+    state: true
 - name: blocks_null_sink_0
   id: blocks_null_sink
   parameters:
@@ -82,21 +97,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [248, 324.0]
-    rotation: 0
-    state: true
-- name: HIER_atan2_epb_0
-  id: HIER_atan2_epb
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [464, 256.0]
     rotation: 0
     state: true
 - name: pad_sink_0
@@ -157,29 +157,12 @@ blocks:
     coordinate: [48, 324.0]
     rotation: 0
     state: true
-- name: samp_rate
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: none
-    label: ''
-    short_id: ''
-    type: eng_float
-    value: 32e3
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [240, 20.0]
-    rotation: 0
-    state: true
 
 connections:
-- [blocks_rms_xx_0, '0', HIER_atan2_epb_0, '0']
-- [blocks_rms_xx_1, '0', HIER_atan2_epb_0, '1']
 - [HIER_atan2_epb_0, '1', blocks_null_sink_0, '0']
 - [HIER_atan2_epb_0, '1', pad_sink_0, '0']
+- [blocks_rms_xx_0, '0', HIER_atan2_epb_0, '0']
+- [blocks_rms_xx_1, '0', HIER_atan2_epb_0, '1']
 - [pad_source_0, '0', blocks_rms_xx_0, '0']
 - [pad_source_1, '0', blocks_rms_xx_1, '0']
 
