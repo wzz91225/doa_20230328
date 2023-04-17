@@ -161,8 +161,8 @@ blocks:
 connections:
 - [HIER_atan2_epb_0, '1', blocks_null_sink_0, '0']
 - [HIER_atan2_epb_0, '1', pad_sink_0, '0']
-- [blocks_rms_xx_0, '0', HIER_atan2_epb_0, '1']
-- [blocks_rms_xx_1, '0', HIER_atan2_epb_0, '0']
+- [blocks_rms_xx_0, '0', HIER_atan2_epb_0, '0']
+- [blocks_rms_xx_1, '0', HIER_atan2_epb_0, '1']
 - [pad_source_0, '0', blocks_rms_xx_0, '0']
 - [pad_source_1, '0', blocks_rms_xx_1, '0']
 

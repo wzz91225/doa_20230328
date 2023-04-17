@@ -112,7 +112,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [696, 636.0]
+    coordinate: [672, 652.0]
     rotation: 0
     state: true
 - name: HIER_sqrt_epb_1
@@ -127,7 +127,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [696, 604.0]
+    coordinate: [672, 604.0]
     rotation: 0
     state: true
 - name: TH_Factor_Fall
@@ -400,11 +400,11 @@ connections:
 - [HIER_PeriodicCenterFreqDetector_0, '0', blocks_and_xx_0, '0']
 - [HIER_PeriodicCenterFreqDetector_0, '1', blocks_null_sink_1, '0']
 - [HIER_PeriodicCenterFreqDetector_0, '1', pad_sink_1, '0']
-- [HIER_PeriodicCenterFreqDetector_0, '2', HIER_sqrt_epb_0, '0']
+- [HIER_PeriodicCenterFreqDetector_0, '2', HIER_sqrt_epb_1, '0']
 - [HIER_PeriodicCenterFreqDetector_1, '0', blocks_and_xx_0, '1']
 - [HIER_PeriodicCenterFreqDetector_1, '1', blocks_null_sink_2, '0']
 - [HIER_PeriodicCenterFreqDetector_1, '1', pad_sink_2, '0']
-- [HIER_PeriodicCenterFreqDetector_1, '2', HIER_sqrt_epb_1, '0']
+- [HIER_PeriodicCenterFreqDetector_1, '2', HIER_sqrt_epb_0, '0']
 - [HIER_atan2_epb_0, '1', blocks_null_sink_3, '0']
 - [HIER_atan2_epb_0, '1', pad_sink_3, '0']
 - [HIER_sqrt_epb_0, '0', HIER_atan2_epb_0, '1']
