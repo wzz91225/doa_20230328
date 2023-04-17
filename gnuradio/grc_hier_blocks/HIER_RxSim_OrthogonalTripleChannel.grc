@@ -348,7 +348,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1360, 580.0]
+    coordinate: [1360, 692.0]
     rotation: 0
     state: true
 - name: pad_source_0
@@ -402,13 +402,13 @@ connections:
 - [analog_const_source_x_1_0, '0', blocks_float_to_complex_1, '1']
 - [analog_const_source_x_1_0, '0', blocks_float_to_complex_2, '1']
 - [analog_const_source_x_1_0, '0', blocks_float_to_complex_3, '1']
-- [blocks_float_to_complex_0, '0', blocks_multiply_xx_2, '0']
-- [blocks_float_to_complex_1, '0', blocks_multiply_xx_3, '0']
+- [blocks_float_to_complex_0, '0', blocks_multiply_xx_3, '0']
+- [blocks_float_to_complex_1, '0', blocks_multiply_xx_2, '0']
 - [blocks_float_to_complex_2, '0', blocks_multiply_xx_0, '1']
 - [blocks_float_to_complex_3, '0', blocks_multiply_xx_1, '1']
-- [blocks_multiply_xx_0, '0', pad_sink_2, '0']
-- [blocks_multiply_xx_1, '0', blocks_multiply_xx_2, '1']
-- [blocks_multiply_xx_1, '0', blocks_multiply_xx_3, '1']
+- [blocks_multiply_xx_0, '0', blocks_multiply_xx_2, '1']
+- [blocks_multiply_xx_0, '0', blocks_multiply_xx_3, '1']
+- [blocks_multiply_xx_1, '0', pad_sink_2, '0']
 - [blocks_multiply_xx_2, '0', pad_sink_0, '0']
 - [blocks_multiply_xx_3, '0', pad_sink_1, '0']
 - [pad_source_0, '0', blocks_multiply_xx_0, '0']

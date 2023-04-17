@@ -217,7 +217,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [320, 1072.0]
+    coordinate: [320, 968.0]
     rotation: 0
     state: disabled
 - name: HIER_DoA_3D_AmpComp_RMS_0
@@ -232,7 +232,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 1248.0]
+    coordinate: [352, 1144.0]
     rotation: 0
     state: true
 - name: HIER_RxSim_OrthogonalTripleChannel_0
@@ -413,7 +413,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 1380.0]
+    coordinate: [752, 1276.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_1
@@ -476,7 +476,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 1476.0]
+    coordinate: [752, 1372.0]
     rotation: 0
     state: true
 - name: qtgui_number_sink_2
@@ -602,7 +602,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 1044.0]
+    coordinate: [792, 940.0]
     rotation: 0
     state: disabled
 - name: qtgui_number_sink_4
@@ -665,7 +665,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [984, 1092.0]
+    coordinate: [984, 988.0]
     rotation: 0
     state: disabled
 - name: qtgui_time_sink_x_0
@@ -775,7 +775,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 1252.0]
+    coordinate: [824, 1148.0]
     rotation: 0
     state: enabled
 - name: vsink_doa_rms_pitch
@@ -788,7 +788,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 1316.0]
+    coordinate: [824, 1212.0]
     rotation: 0
     state: true
 - name: vsink_rx_ch1
@@ -892,7 +892,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [72, 1236.0]
+    coordinate: [72, 1132.0]
     rotation: 0
     state: true
 - name: vsrc_rx_ch1_0
@@ -918,7 +918,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [72, 1300.0]
+    coordinate: [72, 1196.0]
     rotation: 0
     state: true
 - name: vsrc_rx_ch2_0
@@ -957,7 +957,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [72, 1364.0]
+    coordinate: [72, 1260.0]
     rotation: 0
     state: true
 - name: vsrc_signal

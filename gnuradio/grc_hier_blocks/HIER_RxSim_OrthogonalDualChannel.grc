@@ -45,7 +45,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [328, 452.0]
+    coordinate: [328, 300.0]
     rotation: 0
     state: true
 - name: HIER_sin_angle_epb_0
@@ -60,7 +60,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [328, 300.0]
+    coordinate: [328, 452.0]
     rotation: 0
     state: true
 - name: analog_const_source_x_0
@@ -277,8 +277,8 @@ blocks:
     state: enabled
 
 connections:
-- [HIER_cos_angle_epb_0, '0', blocks_float_to_complex_1, '0']
-- [HIER_sin_angle_epb_0, '0', blocks_float_to_complex_0, '0']
+- [HIER_cos_angle_epb_0, '0', blocks_float_to_complex_0, '0']
+- [HIER_sin_angle_epb_0, '0', blocks_float_to_complex_1, '0']
 - [analog_const_source_x_0, '0', blocks_float_to_complex_0, '1']
 - [analog_const_source_x_1, '0', blocks_float_to_complex_1, '1']
 - [analog_const_source_x_2, '0', HIER_cos_angle_epb_0, '0']
