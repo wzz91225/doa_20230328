@@ -6,7 +6,8 @@ options:
     cmake_opt: ''
     comment: ''
     copyright: ''
-    description: Orthogonal dual channels
+    description: Orthogonal dual channels antennas receive horizontal linearly polarized
+      EMW.
     gen_cmake: 'On'
     gen_linking: dynamic
     generate_options: hb
