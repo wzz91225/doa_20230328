@@ -22,7 +22,7 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: Data Error (%)
+    title: Data Error
     window_size: (1000,1000)
   states:
     bus_sink: false
@@ -47,9 +47,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [384, 428.0]
+    coordinate: [672, 556.0]
     rotation: 0
-    state: disabled
+    state: enabled
+- name: blocks_abs_xx_1
+  id: blocks_abs_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 428.0]
+    rotation: 0
+    state: enabled
 - name: blocks_divide_xx_0
   id: blocks_divide_xx
   parameters:
@@ -65,9 +82,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [576, 432.0]
+    coordinate: [472, 544.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_multiply_const_vxx_0
   id: blocks_multiply_const_vxx
   parameters:
@@ -83,9 +100,43 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 436.0]
+    coordinate: [848, 548.0]
     rotation: 0
-    state: disabled
+    state: enabled
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1248, 428.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_1
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1248, 556.0]
+    rotation: 0
+    state: true
 - name: blocks_sub_xx_0
   id: blocks_sub_xx
   parameters:
@@ -101,9 +152,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [192, 416.0]
+    coordinate: [256, 416.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: epy_block_0
   id: epy_block
   parameters:
@@ -122,8 +173,8 @@ blocks:
       \ is registered (properties work, too).\n\n    def work(self, input_items, output_items):\n\
       \        \"\"\"example: multiply with constant\"\"\"\n        if input_items[1]\
       \ != 0:\n            output_items[0][:] = np.abs(input_items[0] - input_items[1])\
-      \ / input_items[1] * 100\n        else:\n            output_items[0][:] = np.inf\n\
-      \        return len(output_items[0])\n"
+      \ / input_items[1] * 100\n        else:\n            output_items[0][:] = np.abs(input_items[0])\
+      \ / np.inf\n        return len(output_items[0])\n"
     affinity: ''
     alias: ''
     comment: ''
@@ -138,14 +189,14 @@ blocks:
     bus_structure: null
     coordinate: [272, 224.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: pad_sink_0
   id: pad_sink
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    label: err
+    label: abs
     num_streams: '1'
     optional: 'False'
     type: float
@@ -154,9 +205,27 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 228.0]
+    coordinate: [1120, 420.0]
     rotation: 0
     state: true
+- name: pad_sink_1
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: (%)
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1120, 548.0]
+    rotation: 0
+    state: enabled
 - name: pad_source_0
   id: pad_source
   parameters:
@@ -174,7 +243,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [72, 212.0]
+    coordinate: [48, 404.0]
     rotation: 0
     state: true
 - name: pad_source_1
@@ -194,16 +263,24 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [72, 284.0]
+    coordinate: [48, 564.0]
     rotation: 0
     state: enabled
 
 connections:
-- [blocks_abs_xx_0, '0', blocks_divide_xx_0, '0']
-- [blocks_divide_xx_0, '0', blocks_multiply_const_vxx_0, '0']
-- [blocks_sub_xx_0, '0', blocks_abs_xx_0, '0']
+- [blocks_abs_xx_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_abs_xx_1, '0', blocks_null_sink_0, '0']
+- [blocks_abs_xx_1, '0', pad_sink_0, '0']
+- [blocks_divide_xx_0, '0', blocks_abs_xx_0, '0']
+- [blocks_multiply_const_vxx_0, '0', blocks_null_sink_1, '0']
+- [blocks_multiply_const_vxx_0, '0', pad_sink_1, '0']
+- [blocks_sub_xx_0, '0', blocks_abs_xx_1, '0']
+- [blocks_sub_xx_0, '0', blocks_divide_xx_0, '0']
 - [epy_block_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', blocks_sub_xx_0, '0']
 - [pad_source_0, '0', epy_block_0, '0']
+- [pad_source_1, '0', blocks_divide_xx_0, '1']
+- [pad_source_1, '0', blocks_sub_xx_0, '1']
 - [pad_source_1, '0', epy_block_0, '1']
 
 metadata:
