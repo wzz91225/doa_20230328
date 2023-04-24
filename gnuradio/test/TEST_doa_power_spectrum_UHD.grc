@@ -11,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: TEST_doa_power_spectrum
+    id: TEST_doa_power_spectrum_UHD
     max_nouts: '0'
     output_language: python
     placement: (0,0)
