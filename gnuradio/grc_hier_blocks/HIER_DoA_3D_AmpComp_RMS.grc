@@ -136,9 +136,11 @@ blocks:
       \ parameter is found,\n        # a callback is registered (properties work,\
       \ too).\n\n    def work(self, input_items, output_items):\n        \"\"\"example:\
       \ multiply with constant\"\"\"\n        output_items[0][:] = np.rad2deg(np.arctan2(input_items[1],\
-      \ input_items[0]))\n        output_items[1][:] = np.rad2deg(np.arctan2(input_items[2],\
-      \ \\\n                                                   np.sqrt(np.square(input_items[0])\
-      \ + np.square(input_items[1]))))\n        return len(output_items[0])\n"
+      \ input_items[0]))\n        # output_items[1][:] = np.rad2deg(np.arctan2(input_items[2],\
+      \ \\\n        #                                            np.sqrt(np.square(input_items[0])\
+      \ + np.square(input_items[1]))))\n        output_items[1][:] = np.rad2deg(np.arctan2(np.sqrt(np.square(input_items[0])\
+      \ + np.square(input_items[1])), \\\n                                       \
+      \            input_items[2]))\n        return len(output_items[0])\n"
     affinity: ''
     alias: ''
     comment: ''
@@ -265,4 +267,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.4.0
+  grc_version: 3.10.6.0
