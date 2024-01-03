@@ -42,16 +42,16 @@ blocks:
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
-    start: 1e-2
-    step: 1e-2
+    start: 1e-6
+    step: 1e-6
     stop: c/frequency/velocity_t
-    value: c/frequency/2/velocity_t
+    value: c/frequency/2/velocity_t/1e3
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [928, 132.0]
+    coordinate: [936, 132.0]
     rotation: 0
     state: true
 - name: amplitude
@@ -72,7 +72,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [136, 132.0]
+    coordinate: [144, 132.0]
     rotation: 0
     state: true
 - name: amplitude_noise
@@ -93,7 +93,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 132.0]
+    coordinate: [400, 132.0]
     rotation: 0
     state: true
 - name: c
@@ -120,13 +120,13 @@ blocks:
     start: '0'
     step: c/frequency
     stop: 1e5*c/frequency
-    value: 2e4*c/frequency
+    value: 2e1*c/frequency
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 132.0]
+    coordinate: [544, 132.0]
     rotation: 0
     state: true
 - name: frequency
@@ -141,7 +141,7 @@ blocks:
     start: '0'
     step: '1'
     stop: int(samp_rate / 2)
-    value: 32e3
+    value: samp_rate / 1e2
     widget: counter_slider
   states:
     bus_sink: false
@@ -180,14 +180,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 132.0]
+    coordinate: [680, 132.0]
     rotation: 0
     state: true
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: 32e6
+    value: 3.2e7
   states:
     bus_sink: false
     bus_source: false
@@ -213,7 +213,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 132.0]
+    coordinate: [280, 132.0]
     rotation: 0
     state: true
 - name: velocity_t
@@ -234,7 +234,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 132.0]
+    coordinate: [824, 132.0]
     rotation: 0
     state: true
 - name: HIER_AddGaussianNoise_0
@@ -268,7 +268,7 @@ blocks:
     bus_structure: null
     coordinate: [1488, 552.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: analog_const_source_x_0_0
   id: analog_const_source_x
   parameters:
@@ -285,7 +285,7 @@ blocks:
     bus_structure: null
     coordinate: [1224, 580.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
@@ -325,7 +325,7 @@ blocks:
     bus_structure: null
     coordinate: [1176, 312.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: band_pass_filter_0
   id: band_pass_filter
   parameters:
@@ -350,7 +350,7 @@ blocks:
     bus_structure: null
     coordinate: [936, 252.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: band_pass_filter_0_0
   id: band_pass_filter
   parameters:
@@ -375,7 +375,7 @@ blocks:
     bus_structure: null
     coordinate: [936, 428.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_delay_0
   id: blocks_delay
   parameters:
@@ -450,7 +450,7 @@ blocks:
     bus_structure: null
     coordinate: [1672, 312.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_var_to_msg_1_0
   id: blocks_var_to_msg
   parameters:
@@ -646,7 +646,70 @@ blocks:
     bus_structure: null
     coordinate: [1440, 292.0]
     rotation: 0
-    state: disabled
+    state: enabled
+- name: qtgui_number_sink_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '""'
+    nconnections: '3'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1632.0, 88]
+    rotation: 90
+    state: true
 - name: qtgui_number_sink_0_0
   id: qtgui_number_sink
   parameters:
@@ -709,7 +772,7 @@ blocks:
     bus_structure: null
     coordinate: [1440, 460.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: qtgui_number_sink_1_0
   id: qtgui_number_sink
   parameters:
@@ -772,7 +835,7 @@ blocks:
     bus_structure: null
     coordinate: [1640, 540.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: qtgui_number_sink_2
   id: qtgui_number_sink
   parameters:
@@ -945,7 +1008,7 @@ blocks:
     bus_structure: null
     coordinate: [1672, 340.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: virtual_source_0
   id: virtual_source
   parameters:
@@ -958,7 +1021,7 @@ blocks:
     bus_structure: null
     coordinate: [1208, 484.0]
     rotation: 0
-    state: disabled
+    state: enabled
 
 connections:
 - [HIER_AddGaussianNoise_0, '0', blocks_delay_0, '0']
@@ -970,6 +1033,7 @@ connections:
 - [analog_sig_source_x_0, '0', blocks_multiply_const_xx_0, '0']
 - [analog_sig_source_x_0, '0', qtgui_time_sink_x_0, '0']
 - [aoa_calc_phase_diff_0, '0', epy_block_0_0, '0']
+- [aoa_calc_phase_diff_0, '0', qtgui_number_sink_0, '0']
 - [band_pass_filter_0, '0', aoa_calc_phase_diff_0, '0']
 - [band_pass_filter_0_0, '0', aoa_calc_phase_diff_0, '1']
 - [blocks_delay_0, '0', band_pass_filter_0, '0']
@@ -985,6 +1049,8 @@ connections:
 - [epy_block_0, delay_A, blocks_delay_0, dly]
 - [epy_block_0, delay_B, blocks_delay_0_0, dly]
 - [epy_block_0_0, '0', blocks_null_sink_0, '0']
+- [epy_block_0_0, '0', qtgui_number_sink_0, '1']
+- [epy_block_0_0, '1', qtgui_number_sink_0, '2']
 - [epy_block_0_0, '1', virtual_sink_0, '0']
 - [virtual_source_0, '0', HIER_DataError_0_0, '0']
 - [virtual_source_0, '0', qtgui_number_sink_0_0, '0']
