@@ -599,7 +599,7 @@ blocks:
       \            delay_A = int(distance_A / self.c * self.samp_rate)\n         \
       \   delay_B = int(distance_B / self.c * self.samp_rate)\n\n            self.message_port_pub(pmt.intern(\"\
       delay_A\"), pmt.from_long(delay_A))\n            self.message_port_pub(pmt.intern(\"\
-      delay_B\"), pmt.from_long(delay_B))\n            print(distance_A, distance_A)\n\
+      delay_B\"), pmt.from_long(delay_B))\n            print(distance_A, distance_B)\n\
       \            print(delay_A, delay_B)\n\n\n    # def work(self, input_items,\
       \ output_items):\n    #     \"\"\"\"\"\"\n    #     return len(output_items[0])\n"
     affinity: ''

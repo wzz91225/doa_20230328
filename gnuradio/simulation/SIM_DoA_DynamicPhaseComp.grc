@@ -581,7 +581,7 @@ blocks:
       \ / self.c) * self.samp_rate)\n            delay_B = int((distance_B / self.c\
       \ + self.delta_t) * self.samp_rate)\n\n            self.message_port_pub(pmt.intern(\"\
       delay_A\"), pmt.from_long(delay_A))\n            self.message_port_pub(pmt.intern(\"\
-      delay_B\"), pmt.from_long(delay_B))\n            print(distance_A, distance_A)\n\
+      delay_B\"), pmt.from_long(delay_B))\n            print(distance_A, distance_B)\n\
       \            print(delay_A, delay_B)\n\n\n    # def work(self, input_items,\
       \ output_items):\n    #     \"\"\"\"\"\"\n    #     return len(output_items[0])\n"
     affinity: ''
@@ -629,10 +629,10 @@ blocks:
       \ = delta_t\n\n    def work(self, input_items, output_items):\n        \"\"\"\
       example: multiply with constant\"\"\"\n        # alpha = np.arccos((input_items[0]\
       \ / 2 / self.pi / self.frequency / self.delta_t - 1) * self.c / self.v_t)\n\
-      \        actual_delta_phi = (input_items[0] - 2 * self.pi * self.frequency *\
-      \ self.delta_t) % (self.pi * 2) - self.pi\n        alpha = np.arccos(actual_delta_phi\
-      \ * (self.c / 2 / self.pi / self.frequency / self.v_t / self.delta_t))\n   \
-      \     output_items[0][:] = alpha\n        output_items[1][:] = np.rad2deg(alpha)\n\
+      \        actual_delta_phi = input_items[0] - 2 * self.pi * self.frequency *\
+      \ self.delta_t\n        alpha = np.arccos((actual_delta_phi * (self.c / 2 /\
+      \ self.pi / self.frequency / self.v_t / self.delta_t)) % (self.pi * 2) - self.pi)\n\
+      \        output_items[0][:] = alpha\n        output_items[1][:] = np.rad2deg(alpha)\n\
       \        return len(output_items[0])\n"
     affinity: ''
     alias: ''
