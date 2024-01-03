@@ -45,7 +45,7 @@ blocks:
     start: 1e-6
     step: 1e-6
     stop: c/frequency/velocity_t
-    value: c/frequency/2/velocity_t/1e3
+    value: c/frequency/2/velocity_t
     widget: counter_slider
   states:
     bus_sink: false
@@ -72,7 +72,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [144, 132.0]
+    coordinate: [136, 132.0]
     rotation: 0
     state: true
 - name: amplitude_noise
@@ -93,7 +93,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 132.0]
+    coordinate: [392, 132.0]
     rotation: 0
     state: true
 - name: c
@@ -126,7 +126,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [544, 132.0]
+    coordinate: [536, 132.0]
     rotation: 0
     state: true
 - name: frequency
@@ -141,7 +141,7 @@ blocks:
     start: '0'
     step: '1'
     stop: int(samp_rate / 2)
-    value: samp_rate / 1e2
+    value: samp_rate / 2e1
     widget: counter_slider
   states:
     bus_sink: false
@@ -180,14 +180,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 132.0]
+    coordinate: [672, 132.0]
     rotation: 0
     state: true
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: 3.2e7
+    value: 64e4
   states:
     bus_sink: false
     bus_source: false
@@ -213,7 +213,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 132.0]
+    coordinate: [272, 132.0]
     rotation: 0
     state: true
 - name: velocity_t
@@ -227,14 +227,14 @@ blocks:
     rangeType: float
     start: 1e3
     step: '1'
-    stop: 10e3
-    value: 8e3
+    stop: 10e5
+    value: 20e4
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 132.0]
+    coordinate: [816, 132.0]
     rotation: 0
     state: true
 - name: HIER_AddGaussianNoise_0
@@ -570,15 +570,20 @@ blocks:
       \ key == \"delta_t\":\n                self.delta_t = value\n\n            #\
       \ compute\n            alpha_sin = np.sin(self.DoA * self.pi / 180)\n      \
       \      alpha_cos = np.cos(self.DoA * self.pi / 180)\n            dis_at = self.v_t\
-      \ * self.delta_t\n            distance_A = np.sqrt((self.dis_r * alpha_cos -\
-      \ dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n            distance_B = np.sqrt((self.dis_r\
-      \ * alpha_cos + dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n            delay_A\
-      \ = int((distance_A / self.c - self.delta_t) * self.samp_rate)\n           \
-      \ delay_B = int(distance_B / self.c * self.samp_rate)\n\n            self.message_port_pub(pmt.intern(\"\
-      delay_A\"), pmt.from_long(delay_A))\n            self.message_port_pub(pmt.intern(\"\
-      delay_B\"), pmt.from_long(delay_B))\n            print(distance_A, distance_A)\n\
-      \            print(delay_A, delay_B)\n\n\n    # def work(self, input_items,\
-      \ output_items):\n    #     \"\"\"\"\"\"\n    #     return len(output_items[0])\n"
+      \ * self.delta_t\n            # distance_A = np.sqrt((self.dis_r * alpha_cos\
+      \ - dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n            # distance_B =\
+      \ np.sqrt((self.dis_r * alpha_cos + dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n\
+      \            # delay_A = int((distance_A / self.c - self.delta_t) * self.samp_rate)\n\
+      \            # delay_B = int(distance_B / self.c * self.samp_rate)\n       \
+      \     distance_A = np.sqrt((self.dis_r * alpha_cos)**2 + (self.dis_r * alpha_sin)**2)\n\
+      \            distance_B = np.sqrt((self.dis_r * alpha_cos + dis_at)**2 + (self.dis_r\
+      \ * alpha_sin)**2)\n            delay_A = int((distance_A / self.c) * self.samp_rate)\n\
+      \            delay_B = int((distance_B / self.c + self.delta_t) * self.samp_rate)\n\
+      \n            self.message_port_pub(pmt.intern(\"delay_A\"), pmt.from_long(delay_A))\n\
+      \            self.message_port_pub(pmt.intern(\"delay_B\"), pmt.from_long(delay_B))\n\
+      \            print(distance_A, distance_A)\n            print(delay_A, delay_B)\n\
+      \n\n    # def work(self, input_items, output_items):\n    #     \"\"\"\"\"\"\
+      \n    #     return len(output_items[0])\n"
     affinity: ''
     alias: ''
     c: c
