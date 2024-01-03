@@ -120,7 +120,7 @@ blocks:
     start: '0'
     step: c/frequency
     stop: 100*c/frequency
-    value: 10*c/frequency
+    value: 1e1*c/frequency
     widget: counter_slider
   states:
     bus_sink: false
@@ -358,6 +358,23 @@ blocks:
     coordinate: [24, 268.0]
     rotation: 0
     state: true
+- name: aoa_calc_phase_diff_0
+  id: aoa_calc_phase_diff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    node_idx: '2'
+    norm_spacing: '0.5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1192, 792.0]
+    rotation: 0
+    state: enabled
 - name: band_pass_filter_0
   id: band_pass_filter
   parameters:
@@ -733,6 +750,69 @@ blocks:
     bus_structure: null
     coordinate: [1456, 580.0]
     rotation: 0
+    state: true
+- name: qtgui_number_sink_0_1
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '""'
+    nconnections: '3'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1440.0, 872]
+    rotation: 270
     state: true
 - name: qtgui_number_sink_1
   id: qtgui_number_sink
@@ -1128,16 +1208,21 @@ connections:
 - [HIER_DataError_0_0, '1', qtgui_number_sink_1_0, '1']
 - [HIER_DoA_PhaseComp_0, '1', HIER_DataError_0, '0']
 - [HIER_DoA_PhaseComp_0, '1', qtgui_number_sink_0, '0']
+- [HIER_DoA_PhaseComp_0_0, '0', qtgui_number_sink_0_1, '1']
 - [HIER_DoA_PhaseComp_0_0, '1', HIER_DataError_0_0, '0']
 - [HIER_DoA_PhaseComp_0_0, '1', qtgui_number_sink_0_0, '0']
+- [HIER_DoA_PhaseComp_0_0, '1', qtgui_number_sink_0_1, '2']
 - [analog_const_source_x_0, '0', HIER_DataError_0, '1']
 - [analog_const_source_x_0_0, '0', HIER_DataError_0_0, '1']
 - [analog_sig_source_x_0, '0', blocks_multiply_const_xx_0, '0']
 - [analog_sig_source_x_0, '0', qtgui_time_sink_x_0, '0']
 - [analog_sig_source_x_0, '0', qtgui_time_sink_x_0_0, '0']
+- [aoa_calc_phase_diff_0, '0', qtgui_number_sink_0_1, '0']
 - [band_pass_filter_0, '0', HIER_DoA_PhaseComp_0_0, '0']
+- [band_pass_filter_0, '0', aoa_calc_phase_diff_0, '0']
 - [band_pass_filter_0, '0', qtgui_time_sink_x_0_0, '1']
 - [band_pass_filter_0_0, '0', HIER_DoA_PhaseComp_0_0, '1']
+- [band_pass_filter_0_0, '0', aoa_calc_phase_diff_0, '1']
 - [band_pass_filter_0_0, '0', qtgui_time_sink_x_0_0, '2']
 - [blocks_delay_0, '0', HIER_DoA_PhaseComp_0, '0']
 - [blocks_delay_0, '0', band_pass_filter_0, '0']
