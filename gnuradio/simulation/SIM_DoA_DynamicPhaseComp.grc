@@ -570,16 +570,11 @@ blocks:
       \ key == \"delta_t\":\n                self.delta_t = value\n\n            #\
       \ compute\n            alpha_sin = np.sin(self.DoA * self.pi / 180)\n      \
       \      alpha_cos = np.cos(self.DoA * self.pi / 180)\n            dis_at = self.v_t\
-      \ * self.delta_t\n            # distance_A = np.sqrt((self.dis_r * alpha_cos\
-      \ - dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n            # distance_B =\
-      \ np.sqrt((self.dis_r * alpha_cos + dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n\
-      \            # delay_A = int((distance_A / self.c - self.delta_t) * self.samp_rate)\n\
-      \            # delay_B = int(distance_B / self.c * self.samp_rate)\n       \
-      \     distance_A = np.sqrt((self.dis_r * alpha_cos - dis_at/2)**2 + (self.dis_r\
-      \ * alpha_sin)**2)\n            distance_B = np.sqrt((self.dis_r * alpha_cos\
-      \ + dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n            delay_A = int((distance_A\
-      \ / self.c) * self.samp_rate)\n            delay_B = int((distance_B / self.c\
-      \ + self.delta_t) * self.samp_rate)\n\n            self.message_port_pub(pmt.intern(\"\
+      \ * self.delta_t\n            distance_A = np.sqrt((self.dis_r * alpha_cos -\
+      \ dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n            distance_B = np.sqrt((self.dis_r\
+      \ * alpha_cos + dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n            delay_A\
+      \ = int((distance_A / self.c) * self.samp_rate)\n            delay_B = int((distance_B\
+      \ / self.c + self.delta_t) * self.samp_rate)\n\n            self.message_port_pub(pmt.intern(\"\
       delay_A\"), pmt.from_long(delay_A))\n            self.message_port_pub(pmt.intern(\"\
       delay_B\"), pmt.from_long(delay_B))\n            print(distance_A, distance_B)\n\
       \            print(delay_A, delay_B)\n\n\n    # def work(self, input_items,\
