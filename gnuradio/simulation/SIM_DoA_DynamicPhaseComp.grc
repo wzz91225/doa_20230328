@@ -45,7 +45,7 @@ blocks:
     start: 1e-6
     step: 1e-6
     stop: c/frequency/velocity_t
-    value: c/frequency/2/velocity_t
+    value: c/frequency/2/velocity_t / 2
     widget: counter
   states:
     bus_sink: false
@@ -120,7 +120,7 @@ blocks:
     start: '0'
     step: c/frequency
     stop: 1e5*c/frequency
-    value: 2e1*c/frequency
+    value: 10*c/frequency
     widget: counter
   states:
     bus_sink: false
@@ -141,7 +141,7 @@ blocks:
     start: '0'
     step: '1'
     stop: int(samp_rate / 2)
-    value: samp_rate / 2e1
+    value: 32e3
     widget: counter
   states:
     bus_sink: false
@@ -180,14 +180,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 132.0]
+    coordinate: [680, 132.0]
     rotation: 0
     state: true
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: 64e4
+    value: frequency*18
   states:
     bus_sink: false
     bus_source: false
@@ -227,14 +227,14 @@ blocks:
     rangeType: float
     start: 1e3
     step: '1'
-    stop: 10e5
-    value: 20e4
+    stop: 1000e3
+    value: 90e3
     widget: counter
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 132.0]
+    coordinate: [824, 132.0]
     rotation: 0
     state: true
 - name: HIER_AddGaussianNoise_0
@@ -692,7 +692,7 @@ blocks:
     max: '1'
     min: '-1'
     name: '""'
-    nconnections: '4'
+    nconnections: '3'
     type: float
     unit1: ''
     unit10: ''
@@ -711,7 +711,7 @@ blocks:
     bus_structure: null
     coordinate: [1488.0, 40]
     rotation: 90
-    state: disabled
+    state: enabled
 - name: qtgui_number_sink_0_0
   id: qtgui_number_sink
   parameters:
