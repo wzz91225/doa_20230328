@@ -45,7 +45,7 @@ blocks:
     start: 1e-6
     step: 1e-6
     stop: c/frequency/velocity_t
-    value: c/frequency/2/velocity_t / 2
+    value: c/frequency/2/velocity_t / 1
     widget: counter
   states:
     bus_sink: false
@@ -187,7 +187,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: frequency*18
+    value: frequency*100
   states:
     bus_sink: false
     bus_source: false
@@ -228,7 +228,7 @@ blocks:
     start: 1e3
     step: '1'
     stop: 1000e3
-    value: 90e3
+    value: 1000e3
     widget: counter
   states:
     bus_sink: false
@@ -711,7 +711,7 @@ blocks:
     bus_structure: null
     coordinate: [1488.0, 40]
     rotation: 90
-    state: enabled
+    state: disabled
 - name: qtgui_number_sink_0_0
   id: qtgui_number_sink
   parameters:
