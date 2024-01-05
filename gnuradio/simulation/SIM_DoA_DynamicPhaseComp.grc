@@ -266,7 +266,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1488, 552.0]
+    coordinate: [1488, 568.0]
     rotation: 0
     state: enabled
 - name: analog_const_source_x_0_0
@@ -283,7 +283,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 580.0]
+    coordinate: [1224, 596.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -448,7 +448,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1688, 296.0]
+    coordinate: [1688, 312.0]
     rotation: 0
     state: enabled
 - name: blocks_var_to_msg_1_0
@@ -617,18 +617,17 @@ blocks:
       \        \"\"\"arguments to this function show up as parameters in GRC\"\"\"\
       \n        gr.sync_block.__init__(\n            self,\n            name='Embedded\
       \ Python Block',   # will show up in GRC\n            in_sig=[np.float32],\n\
-      \            out_sig=[np.float32, np.float32, np.float32]\n        )\n     \
-      \   # if an attribute with the same name as a parameter is found,\n        #\
-      \ a callback is registered (properties work, too).\n        self.pi = pi\n \
-      \       self.c = c\n        self.frequency = frequency\n        self.v_t = v_t\n\
-      \        self.delta_t = delta_t\n\n    def work(self, input_items, output_items):\n\
-      \        \"\"\"example: multiply with constant\"\"\"\n        actual_delta_phi\
-      \ = input_items[0] - 2 * self.pi * self.frequency * self.delta_t\n        actual_delta_phi\
-      \ = (actual_delta_phi + self.pi) % (2 * self.pi) - self.pi\n        alpha =\
-      \ np.arccos(actual_delta_phi * self.c / self.frequency / 2 / self.pi / self.v_t\
-      \ / self.delta_t)\n        output_items[0][:] = alpha\n        output_items[1][:]\
-      \ = np.rad2deg(alpha)\n        output_items[2][:] = actual_delta_phi\n     \
-      \   return len(output_items[0])\n"
+      \            out_sig=[np.float32, np.float32]\n        )\n        # if an attribute\
+      \ with the same name as a parameter is found,\n        # a callback is registered\
+      \ (properties work, too).\n        self.pi = pi\n        self.c = c\n      \
+      \  self.frequency = frequency\n        self.v_t = v_t\n        self.delta_t\
+      \ = delta_t\n\n    def work(self, input_items, output_items):\n        \"\"\"\
+      example: multiply with constant\"\"\"\n        actual_delta_phi = input_items[0]\
+      \ - 2 * self.pi * self.frequency * self.delta_t\n        actual_delta_phi =\
+      \ (actual_delta_phi + self.pi) % (2 * self.pi) - self.pi\n        alpha = np.arccos(actual_delta_phi\
+      \ * self.c / self.frequency / 2 / self.pi / self.v_t / self.delta_t)\n     \
+      \   output_items[0][:] = alpha\n        output_items[1][:] = np.rad2deg(alpha)\n\
+      \        # output_items[2][:] = actual_delta_phi\n        return len(output_items[0])\n"
     affinity: ''
     alias: ''
     c: c
@@ -642,9 +641,8 @@ blocks:
   states:
     _io_cache: ('Embedded Python Block', 'blk', [('pi', '3.141592653589793'), ('c',
       '299792458'), ('frequency', '0'), ('v_t', '0'), ('delta_t', '0')], [('0', 'float',
-      1)], [('0', 'float', 1), ('1', 'float', 1), ('2', 'float', 1)], 'Embedded Python
-      Block example - a simple multiply const', ['c', 'delta_t', 'frequency', 'pi',
-      'v_t'])
+      1)], [('0', 'float', 1), ('1', 'float', 1)], 'Embedded Python Block example
+      - a simple multiply const', ['c', 'delta_t', 'frequency', 'pi', 'v_t'])
     bus_sink: false
     bus_source: false
     bus_structure: null
@@ -713,7 +711,7 @@ blocks:
     bus_structure: null
     coordinate: [1488.0, 40]
     rotation: 90
-    state: true
+    state: disabled
 - name: qtgui_number_sink_0_0
   id: qtgui_number_sink
   parameters:
@@ -756,7 +754,7 @@ blocks:
     label9: ''
     max: '180'
     min: '0'
-    name: '""'
+    name: '"DoA Result"'
     nconnections: '1'
     type: float
     unit1: ''
@@ -774,7 +772,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1440, 460.0]
+    coordinate: [1440, 452.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_1_0
@@ -819,7 +817,7 @@ blocks:
     label9: ''
     max: '100'
     min: '0'
-    name: '""'
+    name: '"Result Error"'
     nconnections: '2'
     type: float
     unit1: ''
@@ -837,7 +835,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1640, 540.0]
+    coordinate: [1640, 548.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_2
@@ -900,7 +898,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [644.0, 552]
+    coordinate: [652.0, 632]
     rotation: 270
     state: true
 - name: qtgui_time_sink_x_0
@@ -997,7 +995,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752.0, 552]
+    coordinate: [760.0, 632]
     rotation: 270
     state: true
 - name: virtual_sink_0
@@ -1010,7 +1008,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1688, 324.0]
+    coordinate: [1688, 340.0]
     rotation: 0
     state: enabled
 - name: virtual_source_0
@@ -1056,7 +1054,6 @@ connections:
 - [epy_block_0_0, '0', qtgui_number_sink_0, '1']
 - [epy_block_0_0, '1', qtgui_number_sink_0, '2']
 - [epy_block_0_0, '1', virtual_sink_0, '0']
-- [epy_block_0_0, '2', qtgui_number_sink_0, '3']
 - [virtual_source_0, '0', HIER_DataError_0_0, '0']
 - [virtual_source_0, '0', qtgui_number_sink_0_0, '0']
 

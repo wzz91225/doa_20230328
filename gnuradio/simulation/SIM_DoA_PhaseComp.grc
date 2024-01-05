@@ -374,7 +374,7 @@ blocks:
     bus_structure: null
     coordinate: [1192, 792.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: band_pass_filter_0
   id: band_pass_filter
   parameters:
@@ -813,7 +813,7 @@ blocks:
     bus_structure: null
     coordinate: [1440.0, 872]
     rotation: 270
-    state: true
+    state: disabled
 - name: qtgui_number_sink_1
   id: qtgui_number_sink
   parameters:
@@ -1000,7 +1000,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [644.0, 544]
+    coordinate: [644.0, 848]
     rotation: 270
     state: true
 - name: qtgui_time_sink_x_0
@@ -1097,7 +1097,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616.0, 848]
+    coordinate: [776.0, 848]
     rotation: 270
     state: true
 - name: qtgui_time_sink_x_0_0
@@ -1194,7 +1194,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736.0, 848]
+    coordinate: [1104.0, 848]
     rotation: 270
     state: true
 
