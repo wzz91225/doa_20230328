@@ -96,6 +96,18 @@ blocks:
     coordinate: [392, 132.0]
     rotation: 0
     state: true
+- name: average_time
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1112, 132.0]
+    rotation: 0
+    state: true
 - name: c
   id: variable
   parameters:
@@ -266,7 +278,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1488, 568.0]
+    coordinate: [1480, 600.0]
     rotation: 0
     state: enabled
 - name: analog_const_source_x_0_0
@@ -283,7 +295,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 596.0]
+    coordinate: [1224, 628.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -712,7 +724,70 @@ blocks:
     coordinate: [1488.0, 40]
     rotation: 90
     state: disabled
-- name: qtgui_number_sink_0_0
+- name: qtgui_number_sink_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '1'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '"SNR (Average)"'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: average_time
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [652.0, 632]
+    rotation: 270
+    state: true
+- name: qtgui_number_sink_1
   id: qtgui_number_sink
   parameters:
     affinity: ''
@@ -754,7 +829,7 @@ blocks:
     label9: ''
     max: '180'
     min: '0'
-    name: '"DoA Result"'
+    name: '"DoA Result (Realtime)"'
     nconnections: '1'
     type: float
     unit1: ''
@@ -775,13 +850,76 @@ blocks:
     coordinate: [1440, 452.0]
     rotation: 0
     state: enabled
-- name: qtgui_number_sink_1_0
+- name: qtgui_number_sink_2
   id: qtgui_number_sink
   parameters:
     affinity: ''
     alias: ''
     autoscale: 'False'
-    avg: '0'
+    avg: '1'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '180'
+    min: '0'
+    name: '"DoA Result (Average )"'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: average_time
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1632, 452.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_3
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '1'
     color1: ("black", "black")
     color10: ("black", "black")
     color2: ("black", "black")
@@ -817,7 +955,7 @@ blocks:
     label9: ''
     max: '100'
     min: '0'
-    name: '"Result Error"'
+    name: '"Result Error (Average)"'
     nconnections: '2'
     type: float
     unit1: ''
@@ -830,77 +968,14 @@ blocks:
     unit7: ''
     unit8: ''
     unit9: ''
-    update_time: '0.25'
+    update_time: average_time
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1640, 548.0]
+    coordinate: [1632, 580.0]
     rotation: 0
     state: enabled
-- name: qtgui_number_sink_2
-  id: qtgui_number_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    autoscale: 'False'
-    avg: '0'
-    color1: ("black", "black")
-    color10: ("black", "black")
-    color2: ("black", "black")
-    color3: ("black", "black")
-    color4: ("black", "black")
-    color5: ("black", "black")
-    color6: ("black", "black")
-    color7: ("black", "black")
-    color8: ("black", "black")
-    color9: ("black", "black")
-    comment: ''
-    factor1: '1'
-    factor10: '1'
-    factor2: '1'
-    factor3: '1'
-    factor4: '1'
-    factor5: '1'
-    factor6: '1'
-    factor7: '1'
-    factor8: '1'
-    factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_NONE
-    gui_hint: ''
-    label1: ''
-    label10: ''
-    label2: ''
-    label3: ''
-    label4: ''
-    label5: ''
-    label6: ''
-    label7: ''
-    label8: ''
-    label9: ''
-    max: '1'
-    min: '-1'
-    name: '"SNR"'
-    nconnections: '1'
-    type: float
-    unit1: ''
-    unit10: ''
-    unit2: ''
-    unit3: ''
-    unit4: ''
-    unit5: ''
-    unit6: ''
-    unit7: ''
-    unit8: ''
-    unit9: ''
-    update_time: '0.10'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [652.0, 632]
-    rotation: 270
-    state: true
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -1028,14 +1103,13 @@ blocks:
 connections:
 - [HIER_AddGaussianNoise_0, '0', blocks_delay_0, '0']
 - [HIER_AddGaussianNoise_0, '0', blocks_delay_0_0, '0']
-- [HIER_AddGaussianNoise_0, '1', qtgui_number_sink_2, '0']
-- [HIER_DataError_0_0, '0', qtgui_number_sink_1_0, '0']
-- [HIER_DataError_0_0, '1', qtgui_number_sink_1_0, '1']
+- [HIER_AddGaussianNoise_0, '1', qtgui_number_sink_0, '0']
+- [HIER_DataError_0_0, '0', qtgui_number_sink_3, '0']
+- [HIER_DataError_0_0, '1', qtgui_number_sink_3, '1']
 - [analog_const_source_x_0_0, '0', HIER_DataError_0_0, '1']
 - [analog_sig_source_x_0, '0', blocks_multiply_const_xx_0, '0']
 - [analog_sig_source_x_0, '0', qtgui_time_sink_x_0, '0']
 - [aoa_calc_phase_diff_0, '0', epy_block_0_0, '0']
-- [aoa_calc_phase_diff_0, '0', qtgui_number_sink_0, '0']
 - [band_pass_filter_0, '0', aoa_calc_phase_diff_0, '0']
 - [band_pass_filter_0_0, '0', aoa_calc_phase_diff_0, '1']
 - [blocks_delay_0, '0', band_pass_filter_0, '0']
@@ -1051,11 +1125,10 @@ connections:
 - [epy_block_0, delay_A, blocks_delay_0, dly]
 - [epy_block_0, delay_B, blocks_delay_0_0, dly]
 - [epy_block_0_0, '0', blocks_null_sink_0, '0']
-- [epy_block_0_0, '0', qtgui_number_sink_0, '1']
-- [epy_block_0_0, '1', qtgui_number_sink_0, '2']
 - [epy_block_0_0, '1', virtual_sink_0, '0']
 - [virtual_source_0, '0', HIER_DataError_0_0, '0']
-- [virtual_source_0, '0', qtgui_number_sink_0_0, '0']
+- [virtual_source_0, '0', qtgui_number_sink_1, '0']
+- [virtual_source_0, '0', qtgui_number_sink_2, '0']
 
 metadata:
   file_format: 1
