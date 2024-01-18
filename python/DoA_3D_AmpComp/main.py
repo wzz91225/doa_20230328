@@ -37,7 +37,7 @@ print(f"实际俯仰角 = {real_pitch_angle:.2f}°")
 
 
 # 高斯噪声参数
-noise_amplitude = 0.1    # 噪声幅值
+noise_amplitude = 0.5    # 噪声幅值
 # 添加高斯噪声
 signal_ch1, snr_ch1 = add_gaussian_noise(signal_ch1, noise_amplitude)
 signal_ch2, snr_ch2 = add_gaussian_noise(signal_ch2, noise_amplitude)
@@ -85,9 +85,9 @@ print(f"测量俯仰角 = {pitch_angle:.2f}°")
 
 
 # 绘制相关信号
-plt.figure(figsize=(16, 8))
+plt.figure(figsize=(8, 16))
 # 时域
-plt.subplot(1, 2, 1)
+plt.subplot(2, 1, 1)
 plt.plot(t, signal_ch1, label='ch1')
 plt.plot(t, signal_ch2, label='ch2')
 plt.plot(t, signal_ch3, label='ch3')
@@ -97,7 +97,7 @@ plt.xlabel("Time (seconds)")
 plt.ylabel("Amplitude")
 plt.grid(True)
 # 功率谱
-plt.subplot(1, 2, 2)
+plt.subplot(2, 1, 2)
 plt.plot(freq, pspectrum_ch1, label='ch1')
 plt.plot(freq, pspectrum_ch2, label='ch2')
 plt.plot(freq, pspectrum_ch3, label='ch3')
