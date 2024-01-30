@@ -10,6 +10,9 @@ c = 299792458;      % 光速
 sim_duration = 1;                   % 仿真时长(s)
 t = 0 : 1/samp_rate : sim_duration; % 时间向量
 
+% 绘图参数
+subplot_N = 5;      % figure 1 子图数量
+
 
 
 % 正弦基带信号定义
@@ -19,7 +22,7 @@ amplitude = 1;      % 振幅
 signal = amplitude * sin(2*pi*frequency*t);
 
 % 噪声参数定义
-snr_value = -10;      % 信噪比SNR(dB)
+snr_value = 0;      % 信噪比SNR(dB)
 % 计算信号功率
 signal_power = bandpower(signal);
 % 计算噪声功率
@@ -31,7 +34,7 @@ signal_noisy = signal + noise;
 
 % 绘制信号
 figure(1);
-subplot(3, 1, 1);
+subplot(subplot_N, 1, 1);
 % 绘制基带信号
 plot(t, signal);
 hold on;
@@ -49,11 +52,11 @@ grid on;
 
 
 % 仿真相关参数定义
-distance_relative = 10*c/frequency;     % 相对距离
+distance_relative = 20*c/frequency;     % 相对距离
 relative_DoA = 66                       % 相对角度
-velocity_t = 1e6;                       % 卫星运动速度
+velocity_t = 1e4;                       % 卫星运动速度
 Delta_t = c/frequency/2/velocity_t;     % 比相时间间隔
-sampling_points_retain = samp_rate/frequency * 100;     % 比相保留采样点数
+sampling_points_retain = samp_rate/frequency * 10;     % 比相保留采样点数
 
 % 计算采样点延迟数量
 alpha_sin = sin(relative_DoA * pi / 180);
@@ -71,30 +74,38 @@ t_rxB = t(delay_B : delay_B+sampling_points_retain);
 
 % 绘制两次接收截取的信号
 figure(1);
-subplot(3, 1, 2);
-plot(signal_rxA);
-hold on;
-plot(signal_rxB);
-hold off;
-legend('Rx A', 'Rx B');
-xlabel('采样点');
+% 接收信号截取A
+subplot(subplot_N, 1, 2);
+plot(t_rxA, signal_rxA);
+xlabel('时间（秒）');
 ylabel('幅度');
-title('接收信号截取');
-ylim([-2 2]);
+title('接收信号截取A');
+xlim([t_rxA(1) t_rxA(end)]);
+ylim([-5 5]);
+grid on;
+% 接收信号截取B
+subplot(subplot_N, 1, 3);
+plot(t_rxB, signal_rxB);
+xlabel('时间（秒）');
+ylabel('幅度');
+title('接收信号截取B');
+xlim([t_rxB(1) t_rxB(end)]);
+ylim([-5 5]);
 grid on;
 
 
 
 % 滤波器参数定义
-filter_f1 = 100;            % 低截止频率 (Hz)
-filter_f2 = 300;            % 高截止频率 (Hz)
-filter_n = 50;              % 滤波器阶数
+filter_f1 = frequency * 0.9;        % 低截止频率 (Hz)
+filter_f2 = frequency * 1.1;        % 高截止频率 (Hz)
+filter_n =  samp_rate/frequency*2;  % 滤波器阶数
 % 计算归一化截止频率
 filter_w1 = filter_f1 / (samp_rate / 2);
 filter_w2 = filter_f2 / (samp_rate / 2);
 % 设计带通滤波器系数
 filter_b = fir1(filter_n, [filter_w1, filter_w2], 'bandpass', hamming(filter_n+1));
-% 查看滤波器的频率响应
+% % 查看滤波器的频率响应
+% figure(2)
 % freqz(filter_b, 1, 1024, samp_rate);
 
 % 滤波
@@ -103,18 +114,24 @@ sigB_filtered = filter(filter_b, 1, signal_rxB);
 
 % 绘制滤波后的信号
 figure(1);
-subplot(3, 1, 3);
-plot(sigA_filtered);
-hold on;
-plot(sigB_filtered);
-hold off;
-legend('Rx A', 'Rx B');
-xlabel('采样点');
+% 接收信号截取A
+subplot(subplot_N, 1, 4);
+plot(t_rxA, sigA_filtered);
+xlabel('时间（秒）');
 ylabel('幅度');
-title('滤波后的接收信号');
+title('接收信号截取A');
+xlim([t_rxA(1) t_rxA(end)]);
 ylim([-2 2]);
 grid on;
-
+% 接收信号截取B
+subplot(subplot_N, 1, 5);
+plot(t_rxB, sigB_filtered);
+xlabel('时间（秒）');
+ylabel('幅度');
+title('接收信号截取B');
+xlim([t_rxB(1) t_rxB(end)]);
+ylim([-2 2]);
+grid on;
 
 
 % 计算相位差
