@@ -19,16 +19,19 @@ amplitude = 1;      % 振幅
 signal = amplitude * sin(2*pi*frequency*t);
 
 % 噪声参数定义
-noise_amp = 1.0;    % 噪声幅值
+snr_value = -10;      % 信噪比SNR(dB)
+% 计算信号功率
+signal_power = bandpower(signal);
+% 计算噪声功率
+noise_power = signal_power / (10^(snr_value/10));
 % 生成高斯噪声
-noise = noise_amp * randn(size(t));  % 高斯噪声
+noise = sqrt(noise_power) * randn(size(signal));
+% 添加噪声到信号
 signal_noisy = signal + noise;
-% 计算信噪比
-snr_value = snr(signal, noise)
 
 % 绘制信号
 figure(1);
-subplot(2,1,1);
+subplot(3, 1, 1);
 % 绘制基带信号
 plot(t, signal);
 hold on;
@@ -40,7 +43,7 @@ xlabel('时间 (秒)');
 ylabel('幅度');
 title(['基带信号（SNR = ' num2str(snr_value) ' dB）']);
 xlim([0 10/frequency]);
-ylim([-2 2]);
+ylim([-5 5]);
 grid on;
 
 
@@ -50,7 +53,7 @@ distance_relative = 10*c/frequency;     % 相对距离
 relative_DoA = 66                       % 相对角度
 velocity_t = 1e6;                       % 卫星运动速度
 Delta_t = c/frequency/2/velocity_t;     % 比相时间间隔
-sampling_points_retain = samp_rate/frequency * 10;     % 比相保留采样点数
+sampling_points_retain = samp_rate/frequency * 100;     % 比相保留采样点数
 
 % 计算采样点延迟数量
 alpha_sin = sin(relative_DoA * pi / 180);
@@ -68,7 +71,7 @@ t_rxB = t(delay_B : delay_B+sampling_points_retain);
 
 % 绘制两次接收截取的信号
 figure(1);
-subplot(2,1,2);
+subplot(3, 1, 2);
 plot(signal_rxA);
 hold on;
 plot(signal_rxB);
@@ -77,6 +80,38 @@ legend('Rx A', 'Rx B');
 xlabel('采样点');
 ylabel('幅度');
 title('接收信号截取');
+ylim([-2 2]);
+grid on;
+
+
+
+% 滤波器参数定义
+filter_f1 = 100;            % 低截止频率 (Hz)
+filter_f2 = 300;            % 高截止频率 (Hz)
+filter_n = 50;              % 滤波器阶数
+% 计算归一化截止频率
+filter_w1 = filter_f1 / (samp_rate / 2);
+filter_w2 = filter_f2 / (samp_rate / 2);
+% 设计带通滤波器系数
+filter_b = fir1(filter_n, [filter_w1, filter_w2], 'bandpass', hamming(filter_n+1));
+% 查看滤波器的频率响应
+% freqz(filter_b, 1, 1024, samp_rate);
+
+% 滤波
+sigA_filtered = filter(filter_b, 1, signal_rxA);
+sigB_filtered = filter(filter_b, 1, signal_rxB);
+
+% 绘制滤波后的信号
+figure(1);
+subplot(3, 1, 3);
+plot(sigA_filtered);
+hold on;
+plot(sigB_filtered);
+hold off;
+legend('Rx A', 'Rx B');
+xlabel('采样点');
+ylabel('幅度');
+title('滤波后的接收信号');
 ylim([-2 2]);
 grid on;
 
