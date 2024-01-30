@@ -45,7 +45,7 @@ legend('原始信号', '加噪信号');
 xlabel('时间 (秒)');
 ylabel('幅度');
 title(['基带信号（SNR = ' num2str(snr_value) ' dB）']);
-xlim([0 10/frequency]);
+xlim([0 100/frequency]);
 ylim([-5 5]);
 grid on;
 
@@ -56,7 +56,7 @@ distance_relative = 20*c/frequency;     % 相对距离
 relative_DoA = 66                       % 相对角度
 velocity_t = 1e4;                       % 卫星运动速度
 Delta_t = c/frequency/2/velocity_t;     % 比相时间间隔
-sampling_points_retain = samp_rate/frequency * 10;     % 比相保留采样点数
+sampling_points_retain = samp_rate/frequency * 100;     % 比相保留采样点数
 
 % 计算采样点延迟数量
 alpha_sin = sin(relative_DoA * pi / 180);
