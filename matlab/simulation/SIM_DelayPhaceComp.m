@@ -141,11 +141,11 @@ grid on;
 
 % ##########################时延比相测向##########################
 % 计算相位差
-N = length(signal_rxA); % 两个信号长度相同
+N = length(sigA_filtered); % 两个信号长度相同
 halfN = floor(N/2) + 1; % 确保为整数
 % 执行 FFT
-Y1 = fft(signal_rxA);
-Y2 = fft(signal_rxB);
+Y1 = fft(sigA_filtered);
+Y2 = fft(sigB_filtered);
 % 计算单边频谱的幅度
 P1 = abs(Y1/N);
 P2 = abs(Y2/N);
