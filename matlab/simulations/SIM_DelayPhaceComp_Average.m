@@ -2,7 +2,7 @@ clc;
 clear;
 
 snr_value = 0;
-average_num = 10;
+average_num = 1;
 sampling_periods = 100;
 
 i = 0;
@@ -14,4 +14,10 @@ for relative_DoA = 0:1:179
     i = i+1;
     doa_angle(i) = sum / average_num
 end
-% doa_angle
+figure(1);
+plot(doa_angle);
+hold on;
+plot((0:1:179));
+hold off;
+axis([0 180 0 180]);
+grid on;
