@@ -1,4 +1,4 @@
-function [doa_angle] = FUNC_DelayPhaceComp(relative_DoA, snr_value, sampling_periods)
+function [doa_angle] = FUNC_SIM_DelayPhaceComp(relative_DoA, snr_value, sampling_periods)
 %FUNC_DELAYPHACECOMP Summary of this function goes here
 %   Detailed explanation goes here
 
