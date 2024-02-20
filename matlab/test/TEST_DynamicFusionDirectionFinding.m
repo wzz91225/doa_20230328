@@ -72,8 +72,11 @@ d_prime_start = sqrt(d_vertical^2 + ...
 sim_duration = sampling_duration;
 % 信号源传播至接收机首次采样开始时间点
 t_prime_start = d_prime_start / c;
+% 仿真时间间隔 单位s
+sim_time_interval = 1 / samp_rate;
 % 仿真时间向量 单位s
-time_vector = t_prime_start : 1/samp_rate : t_prime_start+sim_duration;
+time_vector = t_prime_start : sim_time_interval : ...
+    t_prime_start+sim_duration;
 
 
 
@@ -84,3 +87,101 @@ d_max = v_rx / samp_rate;
 grid_width = sampling_distance;
 % 仿真网格点数
 num_points_width = ceil(grid_width / d_max);
+
+
+
+% ##########################实时仿真##########################
+% 接收机初始空间坐标
+[x_rx, y_rx] = deal(0, 0);
+
+% 初始化接收到的信号数组
+sig_rx = zeros(1, length(time_vector));
+
+% 模拟接收机在每个时间点接收到的信号
+for i = 1 : length(time_vector)
+    % 计算接收机当前位置（从t=0开始沿X轴移动）
+    x_rx = x_rx + v_rx * sim_time_interval;
+    y_rx = 0;
+    
+    % 计算接收机和信号源的相对距离
+    distance = sqrt((x_rx - x_s)^2 + (y_s - y_rx)^2);
+    % 计算信号传播时间
+    propagation_time = distance / c ;
+    
+    % 接收信号
+    sig_rx(i) = sin(2 * pi * frequency * ...
+        (time_vector(i) - propagation_time));
+end
+
+% 绘图
+figure(1);
+plot(time_vector(1:10000), sig_rx(1:10000));
+xlabel('Time (s)');
+ylabel('Received Signal');
+title('Received Signal vs. Time');
+
+
+
+% ##########################测向算法实现##########################
+% 比相单次采样点数
+single_sampling_points = round( ...
+    single_sampling_duration / sim_time_interval);
+% 比相间隔点数
+interval_points =  round(delta_t / sim_time_interval);
+
+% 截取比相信号A和B
+sigA = sig_rx(1 : single_sampling_points);
+sigB = sig_rx((1 + interval_points) : ...
+    (interval_points + single_sampling_points));
+% 信号A和B分别对应的时间向量
+tv_sigA = time_vector(1 : single_sampling_points);
+tv_sigB = time_vector((1 + interval_points) : ...
+    (interval_points + single_sampling_points));
+
+% 绘图
+figure(2);
+subplot(2, 1, 1);
+plot(tv_sigA, sigA);
+xlabel('Time (s)');
+ylabel('Signal A');
+title('Received Signal A vs. Time');
+subplot(2, 1, 2);
+plot(tv_sigB, sigB);
+xlabel('Time (s)');
+ylabel('Signal B');
+title('Received Signal B vs. Time');
+
+
+% 相干积累信号采样点数
+coherent_integration_points = single_sampling_points / ...
+    coherent_integration_cycles;
+% 初始化相干积累信号数组
+sigA_integration = zeros(1, coherent_integration_points);
+sigB_integration = zeros(1, coherent_integration_points);
+% 相干积累信号对应的时间向量
+tv_sigA_integration = tv_sigA(end-coherent_integration_points+1 : end);
+tv_sigB_integration = tv_sigB(end-coherent_integration_points+1 : end);
+
+% 相干积累
+for i = 1 : coherent_integration_points
+    for j = 1 : coherent_integration_cycles
+        point = coherent_integration_points * (j-1) + i;
+        sigA_integration(i) = sigA_integration(i) + sigA(point);
+        sigB_integration(i) = sigB_integration(i) + sigB(point);
+    end
+    sigA_integration(i) = sigA_integration(i) / coherent_integration_cycles;
+    sigB_integration(i) = sigB_integration(i) / coherent_integration_cycles;
+end
+
+% 绘图
+figure(3);
+subplot(2, 1, 1);
+plot(tv_sigA_integration, sigA_integration);
+xlabel('Time (s)');
+ylabel('Signal Integration A');
+title('Received Signal Integration A vs. Time');
+subplot(2, 1, 2);
+plot(tv_sigB_integration, sigB_integration);
+xlabel('Time (s)');
+ylabel('Signal Integration B');
+title('Received Signal Integration B vs. Time');
