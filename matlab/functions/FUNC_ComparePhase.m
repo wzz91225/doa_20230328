@@ -1,5 +1,5 @@
-function [phase_difference] = FUNC_ComparePhace(signal_cmp, signal_ref)
-%FUNC_PhaceComparing 时延比相测向
+function [phase_difference] = FUNC_ComparePhase(signal_cmp, signal_ref)
+%FUNC_PhaseComparing 时延比相测向
 %   phase_difference 输出范围为[-pi, pi]
 %   signal_cmp 输入比较信号
 %   signal_ref 输入参考信号

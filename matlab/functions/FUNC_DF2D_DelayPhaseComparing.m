@@ -1,5 +1,5 @@
-function [radian, angle] = FUNC_DF2D_DelayPhaceComparing(delta_phi, frequency, delta_t, distance_antenna, c)
-%FUNC_DF2D_DelayPhaceComparing 时延比相二维测向算法
+function [radian, angle] = FUNC_DF2D_DelayPhaseComparing(delta_phi, frequency, delta_t, distance_antenna, c)
+%FUNC_DF2D_DelayPhaseComparing 时延比相二维测向算法
 %   
 
 % 相位修正
