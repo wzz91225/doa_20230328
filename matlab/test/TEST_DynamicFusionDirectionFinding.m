@@ -42,7 +42,7 @@ sampling_duration = delta_t + single_sampling_duration;
 sampling_distance = sampling_duration / v_rx;
 
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
-alpha_angle = 60;
+alpha_angle = 23;
 alpha_radian = deg2rad(alpha_angle);    % 弧度
 alpha_sin = sin(alpha_radian);
 alpha_cos = cos(alpha_radian);
@@ -169,8 +169,10 @@ for i = 1 : coherent_integration_points
         sigA_integration(i) = sigA_integration(i) + sigA(point);
         sigB_integration(i) = sigB_integration(i) + sigB(point);
     end
-    sigA_integration(i) = sigA_integration(i) / coherent_integration_cycles;
-    sigB_integration(i) = sigB_integration(i) / coherent_integration_cycles;
+    sigA_integration(i) = sigA_integration(i) / ...
+        coherent_integration_cycles;
+    sigB_integration(i) = sigB_integration(i) / ...
+        coherent_integration_cycles;
 end
 
 % 绘图
@@ -185,3 +187,9 @@ plot(tv_sigB_integration, sigB_integration);
 xlabel('Time (s)');
 ylabel('Signal Integration B');
 title('Received Signal Integration B vs. Time');
+
+
+% 时延比相测向算法
+[~, doa_angle] = FUNC_DF2D_SignalDelayPhaceComparing( ...
+    sigB_integration, sigA_integration, frequency, ...
+    delta_t, sampling_interval, c)
