@@ -277,4 +277,7 @@ grid on;
 % ##########################时延比相测向##########################
 [~, doa_phase_angle] = FUNC_DF2D_SignalDelayPhaseComparing( ...
     sigB_integration, sigA_integration, frequency, ...
-    delta_t, sampling_interval, c)
+    delta_t, sampling_interval, c);
+
+fprintf('实际角度 = %.2f°\n', alpha_angle);
+fprintf('比相算法角度 = %.2f°\n', doa_phase_angle);
