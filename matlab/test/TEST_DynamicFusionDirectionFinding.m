@@ -113,16 +113,41 @@ for i = 1 : length(time_vector)
         (time_vector(i) - propagation_time));
 end
 
+
+
 % 绘图
 figure(1);
-plot(time_vector(1:10000), sig_rx(1:10000));
-xlabel('Time (s)');
-ylabel('Received Signal');
-title('Received Signal vs. Time');
+subplot(2, 1, 1);
+plot(time_vector(1:1000), sig_rx(1:1000));
+xlabel('时间 (s)');
+ylabel('幅值');
+title('接收信号');
+ylim([-2 2]);
+grid on;
 
 
 
-% ##########################测向算法实现##########################
+% ##########################高斯加噪##########################
+% 噪声参数定义
+snr_value = 10;     % 信噪比SNR(dB)
+% 添加噪声到信号
+[sig_rx_noisy, ~] = FUNC_AddGaussianNoise(sig_rx, snr_value);
+
+
+
+% 绘图
+figure(1);
+subplot(2, 1, 2);
+plot(time_vector(1:1000), sig_rx_noisy(1:1000));
+xlabel('时间 (s)');
+ylabel('幅值');
+title(['高斯加噪信号 (SNR = ' num2str(snr_value) ' dB) ']);
+ylim([-2 2]);
+grid on;
+
+
+
+% ##########################测向信号截取##########################
 % 比相单次采样点数
 single_sampling_points = round( ...
     single_sampling_duration / sim_time_interval);
@@ -130,28 +155,72 @@ single_sampling_points = round( ...
 interval_points =  round(delta_t / sim_time_interval);
 
 % 截取比相信号A和B
-sigA = sig_rx(1 : single_sampling_points);
-sigB = sig_rx((1 + interval_points) : ...
+sigA = sig_rx_noisy(1 : single_sampling_points);
+sigB = sig_rx_noisy((1 + interval_points) : ...
     (interval_points + single_sampling_points));
 % 信号A和B分别对应的时间向量
 tv_sigA = time_vector(1 : single_sampling_points);
 tv_sigB = time_vector((1 + interval_points) : ...
     (interval_points + single_sampling_points));
 
+
+
 % 绘图
 figure(2);
+
 subplot(2, 1, 1);
 plot(tv_sigA, sigA);
-xlabel('Time (s)');
-ylabel('Signal A');
-title('Received Signal A vs. Time');
+xlabel('时间 (s)');
+ylabel('幅值');
+title('截取接收信号A');
+ylim([-2 2]);
+grid on;
+
 subplot(2, 1, 2);
 plot(tv_sigB, sigB);
-xlabel('Time (s)');
-ylabel('Signal B');
-title('Received Signal B vs. Time');
+xlabel('时间 (s)');
+ylabel('幅值');
+title('截取接收信号B');
+ylim([-2 2]);
+grid on;
 
 
+
+% ##########################带通滤波##########################
+% 滤波
+[sigA_filtered, filter_b] = FUNC_BandpassFilter(sigA, frequency, samp_rate);
+[sigB_filtered, ~] = FUNC_BandpassFilter(sigB, frequency, samp_rate);
+
+
+
+% 绘图
+
+% 滤波器频率响应
+figure(3);
+freqz(filter_b, 1, 1024, samp_rate);
+
+% 滤波后的信号
+figure(4);
+
+subplot(2, 1, 1);
+plot(tv_sigA, sigA_filtered);
+xlabel('时间 (s)');
+ylabel('幅值');
+title('带通滤波信号A');
+ylim([-2 2]);
+grid on;
+
+subplot(2, 1, 2);
+plot(tv_sigB, sigB_filtered);
+xlabel('时间 (s)');
+ylabel('幅值');
+title('带通滤波信号B');
+ylim([-2 2]);
+grid on;
+
+
+
+% ##########################相干积累##########################
 % 相干积累信号采样点数
 coherent_integration_points = single_sampling_points / ...
     coherent_integration_cycles;
@@ -166,8 +235,8 @@ tv_sigB_integration = tv_sigB(end-coherent_integration_points+1 : end);
 for i = 1 : coherent_integration_points
     for j = 1 : coherent_integration_cycles
         point = coherent_integration_points * (j-1) + i;
-        sigA_integration(i) = sigA_integration(i) + sigA(point);
-        sigB_integration(i) = sigB_integration(i) + sigB(point);
+        sigA_integration(i) = sigA_integration(i) + sigA_filtered(point);
+        sigB_integration(i) = sigB_integration(i) + sigB_filtered(point);
     end
     sigA_integration(i) = sigA_integration(i) / ...
         coherent_integration_cycles;
@@ -175,21 +244,29 @@ for i = 1 : coherent_integration_points
         coherent_integration_cycles;
 end
 
+
 % 绘图
-figure(3);
+figure(5);
+
 subplot(2, 1, 1);
 plot(tv_sigA_integration, sigA_integration);
-xlabel('Time (s)');
-ylabel('Signal Integration A');
-title('Received Signal Integration A vs. Time');
+xlabel('时间 (s)');
+ylabel('幅值');
+title('相干积累滤波信号A');
+ylim([-2 2]);
+grid on;
+
 subplot(2, 1, 2);
 plot(tv_sigB_integration, sigB_integration);
 xlabel('Time (s)');
-ylabel('Signal Integration B');
-title('Received Signal Integration B vs. Time');
+ylabel('Amplitude');
+title('相干积累滤波信号B');
+ylim([-2 2]);
+grid on;
 
 
-% 时延比相测向算法
+
+% ##########################时延比相测向##########################
 [~, doa_phase_angle] = FUNC_DF2D_SignalDelayPhaseComparing( ...
     sigB_integration, sigA_integration, frequency, ...
     delta_t, sampling_interval, c)
