@@ -42,7 +42,7 @@ sampling_duration = delta_t + single_sampling_duration;
 sampling_distance = sampling_duration / v_rx;
 
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
-alpha_angle = 23;
+alpha_angle = 66;
 alpha_radian = deg2rad(alpha_angle);    % 弧度
 alpha_sin = sin(alpha_radian);
 alpha_cos = cos(alpha_radian);
@@ -122,6 +122,7 @@ plot(time_vector(1:1000), sig_rx(1:1000));
 xlabel('时间 (s)');
 ylabel('幅值');
 title('接收信号');
+xlim([time_vector(1) time_vector(1000)]);
 ylim([-2 2]);
 grid on;
 
@@ -142,6 +143,7 @@ plot(time_vector(1:1000), sig_rx_noisy(1:1000));
 xlabel('时间 (s)');
 ylabel('幅值');
 title(['高斯加噪信号 (SNR = ' num2str(snr_value) ' dB) ']);
+xlim([time_vector(1) time_vector(1000)]);
 ylim([-2 2]);
 grid on;
 
@@ -173,6 +175,7 @@ plot(tv_sigA, sigA);
 xlabel('时间 (s)');
 ylabel('幅值');
 title('截取接收信号A');
+xlim([tv_sigA(1) tv_sigA(end)]);
 ylim([-2 2]);
 grid on;
 
@@ -181,6 +184,7 @@ plot(tv_sigB, sigB);
 xlabel('时间 (s)');
 ylabel('幅值');
 title('截取接收信号B');
+xlim([tv_sigB(1) tv_sigB(end)]);
 ylim([-2 2]);
 grid on;
 
@@ -207,6 +211,7 @@ plot(tv_sigA, sigA_filtered);
 xlabel('时间 (s)');
 ylabel('幅值');
 title('带通滤波信号A');
+xlim([tv_sigA(1) tv_sigA(end)]);
 ylim([-2 2]);
 grid on;
 
@@ -215,6 +220,7 @@ plot(tv_sigB, sigB_filtered);
 xlabel('时间 (s)');
 ylabel('幅值');
 title('带通滤波信号B');
+xlim([tv_sigB(1) tv_sigB(end)]);
 ylim([-2 2]);
 grid on;
 
@@ -253,14 +259,16 @@ plot(tv_sigA_integration, sigA_integration);
 xlabel('时间 (s)');
 ylabel('幅值');
 title('相干积累滤波信号A');
+xlim([tv_sigA_integration(1) tv_sigA_integration(end)]);
 ylim([-2 2]);
 grid on;
 
 subplot(2, 1, 2);
 plot(tv_sigB_integration, sigB_integration);
-xlabel('Time (s)');
-ylabel('Amplitude');
+xlabel('时间 (s)');
+ylabel('幅值');
 title('相干积累滤波信号B');
+xlim([tv_sigB_integration(1) tv_sigB_integration(end)]);
 ylim([-2 2]);
 grid on;
 
