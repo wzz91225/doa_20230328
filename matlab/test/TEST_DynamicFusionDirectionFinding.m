@@ -96,6 +96,8 @@ num_points_width = ceil(grid_width / d_max);
 
 % 初始化接收到的信号数组
 sig_rx = zeros(1, length(time_vector));
+sig_rx_ch1 = zeros(1, length(time_vector));
+sig_rx_ch2 = zeros(1, length(time_vector));
 
 % 模拟接收机在每个时间点接收到的信号
 for i = 1 : length(time_vector)
@@ -111,17 +113,39 @@ for i = 1 : length(time_vector)
     % 接收信号
     sig_rx(i) = sin(2 * pi * frequency * ...
         (time_vector(i) - propagation_time));
+    
+    % 双通道正交天线接收信号
+    sig_rx_ch1(i) = sig_rx(i) * abs(alpha_cos);
+    sig_rx_ch2(i) = sig_rx(i) * alpha_sin;
 end
-
 
 
 % 绘图
 figure(1);
-subplot(2, 1, 1);
+
+subplot(5, 1, 1);
 plot(time_vector(1:1000), sig_rx(1:1000));
 xlabel('时间 (s)');
 ylabel('幅值');
-title('接收信号');
+title('接收信号 截取部分');
+xlim([time_vector(1) time_vector(1000)]);
+ylim([-2 2]);
+grid on;
+
+subplot(5, 1, 2);
+plot(time_vector(1:1000), sig_rx_ch1(1:1000));
+xlabel('时间 (s)');
+ylabel('幅值');
+title('X轴天线原始信号 截取部分');
+xlim([time_vector(1) time_vector(1000)]);
+ylim([-2 2]);
+grid on;
+
+subplot(5, 1, 3);
+plot(time_vector(1:1000), sig_rx_ch2(1:1000));
+xlabel('时间 (s)');
+ylabel('幅值');
+title('Y轴天线原始信号 截取部分');
 xlim([time_vector(1) time_vector(1000)]);
 ylim([-2 2]);
 grid on;
@@ -130,19 +154,40 @@ grid on;
 
 % ##########################高斯加噪##########################
 % 噪声参数定义
-snr_value = 10;     % 信噪比SNR(dB)
+snr_value = -10;     % 信噪比SNR(dB)
 % 添加噪声到信号
-[sig_rx_noisy, ~] = FUNC_AddGaussianNoise(sig_rx, snr_value);
+% [sig_rx_noisy, ~] = FUNC_AddGaussianNoise(sig_rx, snr_value);
+sig_rx_ch1_noisy = FUNC_AddGaussianNoise(sig_rx_ch1, snr_value);
+sig_rx_ch2_noisy = FUNC_AddGaussianNoise(sig_rx_ch2, snr_value);
 
 
 
 % 绘图
 figure(1);
-subplot(2, 1, 2);
-plot(time_vector(1:1000), sig_rx_noisy(1:1000));
+
+% subplot(5, 1, 2);
+% plot(time_vector(1:1000), sig_rx_noisy(1:1000));
+% xlabel('时间 (s)');
+% ylabel('幅值');
+% title(['高斯加噪信号 (SNR = ' num2str(snr_value) ' dB) ']);
+% xlim([time_vector(1) time_vector(1000)]);
+% ylim([-2 2]);
+% grid on;
+
+subplot(5, 1, 4);
+plot(time_vector(1:1000), sig_rx_ch1_noisy(1:1000));
 xlabel('时间 (s)');
 ylabel('幅值');
-title(['高斯加噪信号 (SNR = ' num2str(snr_value) ' dB) ']);
+title(['X轴天线高斯加噪信号 截取部分 (SNR = ' num2str(snr_value) ' dB) ']);
+xlim([time_vector(1) time_vector(1000)]);
+ylim([-2 2]);
+grid on;
+
+subplot(5, 1, 5);
+plot(time_vector(1:1000), sig_rx_ch2_noisy(1:1000));
+xlabel('时间 (s)');
+ylabel('幅值');
+title(['Y轴天线高斯加噪信号 截取部分 (SNR = ' num2str(snr_value) ' dB) ']);
 xlim([time_vector(1) time_vector(1000)]);
 ylim([-2 2]);
 grid on;
@@ -156,34 +201,73 @@ single_sampling_points = round( ...
 % 比相间隔点数
 interval_points =  round(delta_t / sim_time_interval);
 
-% 截取比相信号A和B
-sigA = sig_rx_noisy(1 : single_sampling_points);
-sigB = sig_rx_noisy((1 + interval_points) : ...
-    (interval_points + single_sampling_points));
+% % 截取比相信号A和B
+% sigA = sig_rx_noisy(1 : single_sampling_points);
+% sigB = sig_rx_noisy((1 + interval_points) : ...
+%     (interval_points + single_sampling_points));
+
 % 信号A和B分别对应的时间向量
 tv_sigA = time_vector(1 : single_sampling_points);
 tv_sigB = time_vector((1 + interval_points) : ...
     (interval_points + single_sampling_points));
 
+% 信号截取索引
+idx_A_head = 1;
+idx_A_tail = single_sampling_points;
+idx_B_head = 1 + interval_points;
+idx_B_tail = interval_points + single_sampling_points;
+
+% 截取信号
+sigA_ch1 = sig_rx_ch1_noisy(idx_A_head : idx_A_tail);
+sigA_ch2 = sig_rx_ch2_noisy(idx_A_head : idx_A_tail);
+
+sigB_ch1 = sig_rx_ch1_noisy(idx_B_head : idx_B_tail);
+sigB_ch2 = sig_rx_ch2_noisy(idx_B_head : idx_B_tail);
 
 
 % 绘图
 figure(2);
 
+% subplot(2, 1, 1);
+% plot(tv_sigA, sigA);
+% xlabel('时间 (s)');
+% ylabel('幅值');
+% title('截取接收信号A');
+% xlim([tv_sigA(1) tv_sigA(end)]);
+% ylim([-2 2]);
+% grid on;
+
+% subplot(2, 1, 2);
+% plot(tv_sigB, sigB);
+% xlabel('时间 (s)');
+% ylabel('幅值');
+% title('截取接收信号B');
+% xlim([tv_sigB(1) tv_sigB(end)]);
+% ylim([-2 2]);
+% grid on;
+
 subplot(2, 1, 1);
-plot(tv_sigA, sigA);
+plot(tv_sigA, sigA_ch1, 'DisplayName', 'ch1 - X axis');
+hold on;
+plot(tv_sigA, sigA_ch2, 'DisplayName', 'ch2 - Y axis');
+hold off;
 xlabel('时间 (s)');
 ylabel('幅值');
-title('截取接收信号A');
+legend('show');
+title('双通道天线截取接收信号A');
 xlim([tv_sigA(1) tv_sigA(end)]);
 ylim([-2 2]);
 grid on;
 
 subplot(2, 1, 2);
-plot(tv_sigB, sigB);
+plot(tv_sigB, sigB_ch1, 'DisplayName', 'ch1 - X axis');
+hold on;
+plot(tv_sigB, sigB_ch2, 'DisplayName', 'ch2 - Y axis');
+hold off;
 xlabel('时间 (s)');
 ylabel('幅值');
-title('截取接收信号B');
+legend('show');
+title('双通道天线截取接收信号B');
 xlim([tv_sigB(1) tv_sigB(end)]);
 ylim([-2 2]);
 grid on;
@@ -192,9 +276,17 @@ grid on;
 
 % ##########################带通滤波##########################
 % 滤波
-[sigA_filtered, filter_b] = FUNC_BandpassFilter(sigA, frequency, samp_rate);
-[sigB_filtered, ~] = FUNC_BandpassFilter(sigB, frequency, samp_rate);
+% [sigA_filtered, filter_b] = FUNC_BandpassFilter(sigA, frequency, samp_rate);
+% [sigB_filtered, ~] = FUNC_BandpassFilter(sigB, frequency, samp_rate);
+[sigA_ch1_filtered, filter_b] = FUNC_BandpassFilter( ...
+    sigA_ch1, frequency, samp_rate);
+[sigA_ch2_filtered, ~] = FUNC_BandpassFilter( ...
+    sigA_ch2, frequency, samp_rate);
 
+[sigB_ch1_filtered, ~] = FUNC_BandpassFilter( ...
+    sigB_ch1, frequency, samp_rate);
+[sigB_ch2_filtered, ~] = FUNC_BandpassFilter( ...
+    sigB_ch2, frequency, samp_rate);
 
 
 % 绘图
@@ -206,20 +298,46 @@ freqz(filter_b, 1, 1024, samp_rate);
 % 滤波后的信号
 figure(4);
 
+% subplot(2, 1, 1);
+% plot(tv_sigA, sigA_filtered);
+% xlabel('时间 (s)');
+% ylabel('幅值');
+% title('带通滤波信号A');
+% xlim([tv_sigA(1) tv_sigA(end)]);
+% ylim([-2 2]);
+% grid on;
+
+% subplot(2, 1, 2);
+% plot(tv_sigB, sigB_filtered);
+% xlabel('时间 (s)');
+% ylabel('幅值');
+% title('带通滤波信号B');
+% xlim([tv_sigB(1) tv_sigB(end)]);
+% ylim([-2 2]);
+% grid on;
+
 subplot(2, 1, 1);
-plot(tv_sigA, sigA_filtered);
+plot(tv_sigA, sigA_ch1_filtered, 'DisplayName', 'ch1 - X axis');
+hold on;
+plot(tv_sigA, sigA_ch2_filtered, 'DisplayName', 'ch2 - Y axis');
+hold off;
 xlabel('时间 (s)');
 ylabel('幅值');
-title('带通滤波信号A');
+legend('show');
+title('带通滤波双通道信号A');
 xlim([tv_sigA(1) tv_sigA(end)]);
 ylim([-2 2]);
 grid on;
 
 subplot(2, 1, 2);
-plot(tv_sigB, sigB_filtered);
+plot(tv_sigB, sigB_ch1_filtered, 'DisplayName', 'ch1 - X axis');
+hold on;
+plot(tv_sigB, sigB_ch2_filtered, 'DisplayName', 'ch2 - Y axis');
+hold off;
 xlabel('时间 (s)');
 ylabel('幅值');
-title('带通滤波信号B');
+legend('show');
+title('带通滤波双通道信号B');
 xlim([tv_sigB(1) tv_sigB(end)]);
 ylim([-2 2]);
 grid on;
@@ -231,8 +349,10 @@ grid on;
 coherent_integration_points = single_sampling_points / ...
     coherent_integration_cycles;
 % 初始化相干积累信号数组
-sigA_integration = zeros(1, coherent_integration_points);
-sigB_integration = zeros(1, coherent_integration_points);
+sigA_ch1_integration = zeros(1, coherent_integration_points);
+sigA_ch2_integration = zeros(1, coherent_integration_points);
+sigB_ch1_integration = zeros(1, coherent_integration_points);
+sigB_ch2_integration = zeros(1, coherent_integration_points);
 % 相干积累信号对应的时间向量
 tv_sigA_integration = tv_sigA(end-coherent_integration_points+1 : end);
 tv_sigB_integration = tv_sigB(end-coherent_integration_points+1 : end);
@@ -241,12 +361,25 @@ tv_sigB_integration = tv_sigB(end-coherent_integration_points+1 : end);
 for i = 1 : coherent_integration_points
     for j = 1 : coherent_integration_cycles
         point = coherent_integration_points * (j-1) + i;
-        sigA_integration(i) = sigA_integration(i) + sigA_filtered(point);
-        sigB_integration(i) = sigB_integration(i) + sigB_filtered(point);
+
+        sigA_ch1_integration(i) = sigA_ch1_integration(i) + ...
+            sigA_ch1_filtered(point);
+        sigA_ch2_integration(i) = sigA_ch2_integration(i) + ...
+            sigA_ch2_filtered(point);
+
+        sigB_ch1_integration(i) = sigB_ch1_integration(i) + ...
+            sigB_ch1_filtered(point);
+        sigB_ch2_integration(i) = sigB_ch2_integration(i) + ...
+            sigB_ch2_filtered(point);
     end
-    sigA_integration(i) = sigA_integration(i) / ...
+    sigA_ch1_integration(i) = sigA_ch1_integration(i) / ...
         coherent_integration_cycles;
-    sigB_integration(i) = sigB_integration(i) / ...
+    sigA_ch2_integration(i) = sigA_ch2_integration(i) / ...
+        coherent_integration_cycles;
+    
+    sigB_ch1_integration(i) = sigB_ch1_integration(i) / ...
+        coherent_integration_cycles;
+    sigB_ch2_integration(i) = sigB_ch2_integration(i) / ...
         coherent_integration_cycles;
 end
 
@@ -254,30 +387,72 @@ end
 % 绘图
 figure(5);
 
+% subplot(2, 1, 1);
+% plot(tv_sigA_integration, sigA_integration);
+% xlabel('时间 (s)');
+% ylabel('幅值');
+% title('相干积累滤波信号A');
+% xlim([tv_sigA_integration(1) tv_sigA_integration(end)]);
+% ylim([-2 2]);
+% grid on;
+
+% subplot(2, 1, 2);
+% plot(tv_sigB_integration, sigB_integration);
+% xlabel('时间 (s)');
+% ylabel('幅值');
+% title('相干积累滤波信号B');
+% xlim([tv_sigB_integration(1) tv_sigB_integration(end)]);
+% ylim([-2 2]);
+% grid on;
+
 subplot(2, 1, 1);
-plot(tv_sigA_integration, sigA_integration);
+plot(tv_sigA_integration, sigA_ch1_integration, ...
+    'DisplayName', 'ch1 - X axis');
+hold on;
+plot(tv_sigA_integration, sigA_ch2_integration, ...
+    'DisplayName', 'ch2 - Y axis');
+hold off;
 xlabel('时间 (s)');
 ylabel('幅值');
-title('相干积累滤波信号A');
+legend('show');
+title('相干积累双通道信号A');
 xlim([tv_sigA_integration(1) tv_sigA_integration(end)]);
 ylim([-2 2]);
 grid on;
 
 subplot(2, 1, 2);
-plot(tv_sigB_integration, sigB_integration);
+plot(tv_sigB_integration, sigB_ch1_integration, ...
+    'DisplayName', 'ch1 - X axis');
+hold on;
+plot(tv_sigB_integration, sigB_ch2_integration, ...
+    'DisplayName', 'ch2 - Y axis');
+hold off;
 xlabel('时间 (s)');
 ylabel('幅值');
-title('相干积累滤波信号B');
+legend('show');
+title('相干积累双通道信号B');
 xlim([tv_sigB_integration(1) tv_sigB_integration(end)]);
 ylim([-2 2]);
 grid on;
 
 
 
-% ##########################时延比相测向##########################
+% ##########################测向算法##########################
+% [~, doa_phase_angle] = FUNC_DF2D_SignalDelayPhaseComparing( ...
+%     sigB_integration, sigA_integration, frequency, ...
+%     delta_t, sampling_interval, c);
+
+% 时延比相测向算法
+sigA_integration_sum = sigA_ch1_integration + sigA_ch2_integration;
+sigB_integration_sum = sigB_ch1_integration + sigB_ch2_integration;
 [~, doa_phase_angle] = FUNC_DF2D_SignalDelayPhaseComparing( ...
-    sigB_integration, sigA_integration, frequency, ...
+    sigB_integration_sum, sigA_integration_sum, frequency, ...
     delta_t, sampling_interval, c);
+
+% 比幅测向算法
+[~, doa_amplitude_angle] = FUNC_DF2D_AmplitudeComparing( ...
+    sigB_ch1_integration, sigB_ch2_integration, samp_rate);
 
 fprintf('实际角度 = %.2f°\n', alpha_angle);
 fprintf('比相算法角度 = %.2f°\n', doa_phase_angle);
+fprintf('比幅算法角度 = %.2f°\n', doa_amplitude_angle);
