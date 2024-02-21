@@ -10,6 +10,7 @@ c = 299792458;
 % pi MATLAB中pi为3.141592653589793
 
 
+
 % ##########################信号源&接收机参数设计##########################
 % 信号源频率 单位Hz
 frequency = 3.2e4;
@@ -61,6 +62,7 @@ d_start = sqrt(d_vertical^2 + ...
 % 接收机比相首次采样开始时与信号源的相对距离d'_start 单位m
 d_prime_start = sqrt(d_vertical^2 + ...
     (sampling_distance + d_relative * alpha_cos)^2);
+
 
 
 % ##########################仿真时域参数设计##########################
@@ -134,26 +136,19 @@ end
 % 绘图
 figure(1);
 
-subplot(3, 1, 1);
-plot(time_vector(1:plot_points), sig_rx(1:plot_points));
-xlabel('时间 (s)');
-ylabel('幅值');
-title('接收信号 截取部分');
-xlim([time_vector(1) time_vector(plot_points)]);
-ylim([-2 2]);
-grid on;
-
-subplot(3, 1, 2);
+subplot(2, 1, 1);
 plot(time_vector(1:plot_points), sig_rx_ch1(1:plot_points), ...
     'DisplayName', 'X轴通道1');
 hold on;
 plot(time_vector(1:plot_points), sig_rx_ch2(1:plot_points), ...
     'DisplayName', 'Y轴通道2');
+plot(time_vector(1:plot_points), sig_rx(1:plot_points), ...
+    'DisplayName', '原始信号');
 hold off;
 legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
-title('双通道接收原始信号 截取部分');
+title('原始接收信号');
 xlim([time_vector(1) time_vector(plot_points)]);
 ylim([-2 2]);
 grid on;
@@ -169,7 +164,6 @@ sig_rx_ch1_noisy = FUNC_AddGaussianNoise(sig_rx_ch1, snr_value);
 sig_rx_ch2_noisy = FUNC_AddGaussianNoise(sig_rx_ch2, snr_value);
 
 
-
 % 绘图
 figure(1);
 
@@ -182,7 +176,7 @@ figure(1);
 % ylim([-2 2]);
 % grid on;
 
-subplot(3, 1, 3);
+subplot(2, 1, 2);
 plot(time_vector(1:plot_points), sig_rx_ch1_noisy(1:plot_points), ...
     'DisplayName', 'X轴通道1');
 hold on;
