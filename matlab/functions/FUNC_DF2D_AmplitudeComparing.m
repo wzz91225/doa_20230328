@@ -18,6 +18,12 @@ function [radian, angle] = FUNC_DF2D_AmplitudeComparing( ...
 % 查找功率谱峰及其对应频点
 [~, max_peak_power_ch1] = FUNC_FindMaxPeak(freq, pspectrum_ch1);
 [~, max_peak_power_ch2] = FUNC_FindMaxPeak(freq, pspectrum_ch2);
+if isnan(max_peak_power_ch1)
+    max_peak_power_ch1 = 0;
+end
+if isnan(max_peak_power_ch2)
+    max_peak_power_ch2 = 0;
+end
 
 % 计算方位角和俯仰角
 amplitude_ch1 = sqrt(max_peak_power_ch1);
