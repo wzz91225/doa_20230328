@@ -42,7 +42,7 @@ sampling_duration = delta_t + single_sampling_duration;
 sampling_distance = sampling_duration / v_rx;
 
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
-alpha_angle = 66;
+alpha_angle = 67;
 alpha_radian = deg2rad(alpha_angle);    % 弧度
 alpha_sin = sin(alpha_radian);
 alpha_cos = cos(alpha_radian);
@@ -123,7 +123,7 @@ end
 % 绘图
 figure(1);
 
-subplot(5, 1, 1);
+subplot(3, 1, 1);
 plot(time_vector(1:1000), sig_rx(1:1000));
 xlabel('时间 (s)');
 ylabel('幅值');
@@ -132,20 +132,15 @@ xlim([time_vector(1) time_vector(1000)]);
 ylim([-2 2]);
 grid on;
 
-subplot(5, 1, 2);
-plot(time_vector(1:1000), sig_rx_ch1(1:1000));
+subplot(3, 1, 2);
+plot(time_vector(1:1000), sig_rx_ch1(1:1000), 'DisplayName', 'X轴通道1');
+hold on;
+plot(time_vector(1:1000), sig_rx_ch2(1:1000), 'DisplayName', 'Y轴通道2');
+hold off;
+legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
-title('X轴天线原始信号 截取部分');
-xlim([time_vector(1) time_vector(1000)]);
-ylim([-2 2]);
-grid on;
-
-subplot(5, 1, 3);
-plot(time_vector(1:1000), sig_rx_ch2(1:1000));
-xlabel('时间 (s)');
-ylabel('幅值');
-title('Y轴天线原始信号 截取部分');
+title('双通道接收原始信号 截取部分');
 xlim([time_vector(1) time_vector(1000)]);
 ylim([-2 2]);
 grid on;
@@ -174,20 +169,15 @@ figure(1);
 % ylim([-2 2]);
 % grid on;
 
-subplot(5, 1, 4);
-plot(time_vector(1:1000), sig_rx_ch1_noisy(1:1000));
+subplot(3, 1, 3);
+plot(time_vector(1:1000), sig_rx_ch1_noisy(1:1000), 'DisplayName', 'X轴通道1');
+hold on;
+plot(time_vector(1:1000), sig_rx_ch2_noisy(1:1000), 'DisplayName', 'Y轴通道2');
+hold off;
+legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
-title(['X轴天线高斯加噪信号 截取部分 (SNR = ' num2str(snr_value) ' dB) ']);
-xlim([time_vector(1) time_vector(1000)]);
-ylim([-2 2]);
-grid on;
-
-subplot(5, 1, 5);
-plot(time_vector(1:1000), sig_rx_ch2_noisy(1:1000));
-xlabel('时间 (s)');
-ylabel('幅值');
-title(['Y轴天线高斯加噪信号 截取部分 (SNR = ' num2str(snr_value) ' dB) ']);
+title(['双通道天线高斯加噪信号 (SNR = ' num2str(snr_value) ' dB) ']);
 xlim([time_vector(1) time_vector(1000)]);
 ylim([-2 2]);
 grid on;
@@ -247,26 +237,26 @@ figure(2);
 % grid on;
 
 subplot(2, 1, 1);
-plot(tv_sigA, sigA_ch1, 'DisplayName', 'ch1 - X axis');
+plot(tv_sigA, sigA_ch1, 'DisplayName', 'X轴通道1');
 hold on;
-plot(tv_sigA, sigA_ch2, 'DisplayName', 'ch2 - Y axis');
+plot(tv_sigA, sigA_ch2, 'DisplayName', 'Y轴通道2');
 hold off;
+legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
-legend('show');
 title('双通道天线截取接收信号A');
 xlim([tv_sigA(1) tv_sigA(end)]);
 ylim([-2 2]);
 grid on;
 
 subplot(2, 1, 2);
-plot(tv_sigB, sigB_ch1, 'DisplayName', 'ch1 - X axis');
+plot(tv_sigB, sigB_ch1, 'DisplayName', 'X轴通道1');
 hold on;
-plot(tv_sigB, sigB_ch2, 'DisplayName', 'ch2 - Y axis');
+plot(tv_sigB, sigB_ch2, 'DisplayName', 'Y轴通道2');
 hold off;
+legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
-legend('show');
 title('双通道天线截取接收信号B');
 xlim([tv_sigB(1) tv_sigB(end)]);
 ylim([-2 2]);
@@ -317,26 +307,26 @@ figure(4);
 % grid on;
 
 subplot(2, 1, 1);
-plot(tv_sigA, sigA_ch1_filtered, 'DisplayName', 'ch1 - X axis');
+plot(tv_sigA, sigA_ch1_filtered, 'DisplayName', 'X轴通道1');
 hold on;
-plot(tv_sigA, sigA_ch2_filtered, 'DisplayName', 'ch2 - Y axis');
+plot(tv_sigA, sigA_ch2_filtered, 'DisplayName', 'Y轴通道2');
 hold off;
+legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
-legend('show');
 title('带通滤波双通道信号A');
 xlim([tv_sigA(1) tv_sigA(end)]);
 ylim([-2 2]);
 grid on;
 
 subplot(2, 1, 2);
-plot(tv_sigB, sigB_ch1_filtered, 'DisplayName', 'ch1 - X axis');
+plot(tv_sigB, sigB_ch1_filtered, 'DisplayName', 'X轴通道1');
 hold on;
-plot(tv_sigB, sigB_ch2_filtered, 'DisplayName', 'ch2 - Y axis');
+plot(tv_sigB, sigB_ch2_filtered, 'DisplayName', 'Y轴通道2');
 hold off;
+legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
-legend('show');
 title('带通滤波双通道信号B');
 xlim([tv_sigB(1) tv_sigB(end)]);
 ylim([-2 2]);
@@ -407,14 +397,14 @@ figure(5);
 
 subplot(2, 1, 1);
 plot(tv_sigA_integration, sigA_ch1_integration, ...
-    'DisplayName', 'ch1 - X axis');
+    'DisplayName', 'X轴通道1');
 hold on;
 plot(tv_sigA_integration, sigA_ch2_integration, ...
-    'DisplayName', 'ch2 - Y axis');
+    'DisplayName', 'Y轴通道2');
 hold off;
+legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
-legend('show');
 title('相干积累双通道信号A');
 xlim([tv_sigA_integration(1) tv_sigA_integration(end)]);
 ylim([-2 2]);
@@ -422,14 +412,14 @@ grid on;
 
 subplot(2, 1, 2);
 plot(tv_sigB_integration, sigB_ch1_integration, ...
-    'DisplayName', 'ch1 - X axis');
+    'DisplayName', 'X轴通道1');
 hold on;
 plot(tv_sigB_integration, sigB_ch2_integration, ...
-    'DisplayName', 'ch2 - Y axis');
+    'DisplayName', 'Y轴通道2');
 hold off;
+legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
-legend('show');
 title('相干积累双通道信号B');
 xlim([tv_sigB_integration(1) tv_sigB_integration(end)]);
 ylim([-2 2]);
