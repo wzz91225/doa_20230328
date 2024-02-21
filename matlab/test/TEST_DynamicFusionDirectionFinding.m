@@ -360,7 +360,7 @@ tv_sigB_integration = tv_sigB(end-coherent_integration_points+1 : end);
 
 % 相干积累
 for i = 1 : coherent_integration_points
-    for j = 1 : coherent_integration_cycles
+    for j = 1 : coherent_integration_number
         point = coherent_integration_points * (j-1) + i;
 
         sigA_ch1_integration(i) = sigA_ch1_integration(i) + ...
@@ -374,14 +374,14 @@ for i = 1 : coherent_integration_points
             sigB_ch2_filtered(point);
     end
     sigA_ch1_integration(i) = sigA_ch1_integration(i) / ...
-        coherent_integration_cycles;
+        coherent_integration_number;
     sigA_ch2_integration(i) = sigA_ch2_integration(i) / ...
-        coherent_integration_cycles;
+        coherent_integration_number;
     
     sigB_ch1_integration(i) = sigB_ch1_integration(i) / ...
-        coherent_integration_cycles;
+        coherent_integration_number;
     sigB_ch2_integration(i) = sigB_ch2_integration(i) / ...
-        coherent_integration_cycles;
+        coherent_integration_number;
 end
 
 
