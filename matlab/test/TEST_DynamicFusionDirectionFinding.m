@@ -62,10 +62,6 @@ d_start = sqrt(d_vertical^2 + ...
 d_prime_start = sqrt(d_vertical^2 + ...
     (sampling_distance + d_relative * alpha_cos)^2);
 
-% 信号源坐标
-[x_s, y_s] = deal(d_relative * alpha_cos + sampling_distance, ...
-    d_vertical);
-
 
 % ##########################仿真时域参数设计##########################
 % 仿真时长 单位s
@@ -78,6 +74,15 @@ sim_time_interval = 1 / samp_rate;
 time_vector = t_prime_start : sim_time_interval : ...
     t_prime_start+sim_duration;
 
+% 比相单次采样点数
+single_sampling_points = round( ...
+    single_sampling_duration / sim_time_interval);
+% 比相间隔点数
+interval_points =  round(delta_t / sim_time_interval);
+% 相干积累信号采样点数
+coherent_integration_points = single_sampling_points / ...
+    coherent_integration_cycles;
+
 
 
 % ##########################空间网格设计##########################
@@ -88,11 +93,17 @@ grid_width = sampling_distance;
 % 仿真网格点数
 num_points_width = ceil(grid_width / d_max);
 
+% 接收机初始空间坐标
+[x_rx, y_rx] = deal(0, 0);
+% 信号源坐标
+[x_s, y_s] = deal(d_relative * alpha_cos + sampling_distance, ...
+    d_vertical);
+
 
 
 % ##########################实时仿真##########################
-% 接收机初始空间坐标
-[x_rx, y_rx] = deal(0, 0);
+% 信号绘图统一点数
+plot_points = coherent_integration_points;
 
 % 初始化接收到的信号数组
 sig_rx = zeros(1, length(time_vector));
@@ -124,24 +135,26 @@ end
 figure(1);
 
 subplot(3, 1, 1);
-plot(time_vector(1:1000), sig_rx(1:1000));
+plot(time_vector(1:plot_points), sig_rx(1:plot_points));
 xlabel('时间 (s)');
 ylabel('幅值');
 title('接收信号 截取部分');
-xlim([time_vector(1) time_vector(1000)]);
+xlim([time_vector(1) time_vector(plot_points)]);
 ylim([-2 2]);
 grid on;
 
 subplot(3, 1, 2);
-plot(time_vector(1:1000), sig_rx_ch1(1:1000), 'DisplayName', 'X轴通道1');
+plot(time_vector(1:plot_points), sig_rx_ch1(1:plot_points), ...
+    'DisplayName', 'X轴通道1');
 hold on;
-plot(time_vector(1:1000), sig_rx_ch2(1:1000), 'DisplayName', 'Y轴通道2');
+plot(time_vector(1:plot_points), sig_rx_ch2(1:plot_points), ...
+    'DisplayName', 'Y轴通道2');
 hold off;
 legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
 title('双通道接收原始信号 截取部分');
-xlim([time_vector(1) time_vector(1000)]);
+xlim([time_vector(1) time_vector(plot_points)]);
 ylim([-2 2]);
 grid on;
 
@@ -149,7 +162,7 @@ grid on;
 
 % ##########################高斯加噪##########################
 % 噪声参数定义
-snr_value = -10;     % 信噪比SNR(dB)
+snr_value = -15;     % 信噪比SNR(dB)
 % 添加噪声到信号
 % [sig_rx_noisy, ~] = FUNC_AddGaussianNoise(sig_rx, snr_value);
 sig_rx_ch1_noisy = FUNC_AddGaussianNoise(sig_rx_ch1, snr_value);
@@ -170,27 +183,24 @@ figure(1);
 % grid on;
 
 subplot(3, 1, 3);
-plot(time_vector(1:1000), sig_rx_ch1_noisy(1:1000), 'DisplayName', 'X轴通道1');
+plot(time_vector(1:plot_points), sig_rx_ch1_noisy(1:plot_points), ...
+    'DisplayName', 'X轴通道1');
 hold on;
-plot(time_vector(1:1000), sig_rx_ch2_noisy(1:1000), 'DisplayName', 'Y轴通道2');
+plot(time_vector(1:plot_points), sig_rx_ch2_noisy(1:plot_points), ...
+    'DisplayName', 'Y轴通道2');
 hold off;
 legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
 title(['双通道天线高斯加噪信号 (SNR = ' num2str(snr_value) ' dB) ']);
-xlim([time_vector(1) time_vector(1000)]);
-ylim([-2 2]);
+xlim([time_vector(1) time_vector(plot_points)]);
+ymax = ceil(max(max(abs(sig_rx_ch1_noisy)), max(abs(sig_rx_ch2_noisy))));
+ylim([-ymax ymax]);
 grid on;
 
 
 
 % ##########################测向信号截取##########################
-% 比相单次采样点数
-single_sampling_points = round( ...
-    single_sampling_duration / sim_time_interval);
-% 比相间隔点数
-interval_points =  round(delta_t / sim_time_interval);
-
 % % 截取比相信号A和B
 % sigA = sig_rx_noisy(1 : single_sampling_points);
 % sigB = sig_rx_noisy((1 + interval_points) : ...
@@ -237,29 +247,35 @@ figure(2);
 % grid on;
 
 subplot(2, 1, 1);
-plot(tv_sigA, sigA_ch1, 'DisplayName', 'X轴通道1');
+plot(tv_sigA(1:plot_points), sigA_ch1(1:plot_points), ...
+    'DisplayName', 'X轴通道1');
 hold on;
-plot(tv_sigA, sigA_ch2, 'DisplayName', 'Y轴通道2');
+plot(tv_sigA(1:plot_points), sigA_ch2(1:plot_points), ...
+    'DisplayName', 'Y轴通道2');
 hold off;
 legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
 title('双通道天线截取接收信号A');
-xlim([tv_sigA(1) tv_sigA(end)]);
-ylim([-2 2]);
+xlim([tv_sigA(1) tv_sigA(plot_points)]);
+ymax = ceil(max(max(abs(sigA_ch1)), max(abs(sigA_ch2))));
+ylim([-ymax ymax]);
 grid on;
 
 subplot(2, 1, 2);
-plot(tv_sigB, sigB_ch1, 'DisplayName', 'X轴通道1');
+plot(tv_sigB(1:plot_points), sigB_ch1(1:plot_points), ...
+    'DisplayName', 'X轴通道1');
 hold on;
-plot(tv_sigB, sigB_ch2, 'DisplayName', 'Y轴通道2');
+plot(tv_sigB(1:plot_points), sigB_ch2(1:plot_points), ...
+    'DisplayName', 'Y轴通道2');
 hold off;
 legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
 title('双通道天线截取接收信号B');
-xlim([tv_sigB(1) tv_sigB(end)]);
-ylim([-2 2]);
+xlim([tv_sigB(1) tv_sigB(plot_points)]);
+ymax = ceil(max(max(abs(sigB_ch1)), max(abs(sigB_ch2))));
+ylim([-ymax ymax]);
 grid on;
 
 
@@ -307,37 +323,38 @@ figure(4);
 % grid on;
 
 subplot(2, 1, 1);
-plot(tv_sigA, sigA_ch1_filtered, 'DisplayName', 'X轴通道1');
+plot(tv_sigA(1:plot_points), sigA_ch1_filtered(1:plot_points), ...
+    'DisplayName', 'X轴通道1');
 hold on;
-plot(tv_sigA, sigA_ch2_filtered, 'DisplayName', 'Y轴通道2');
+plot(tv_sigA(1:plot_points), sigA_ch2_filtered(1:plot_points), ...
+    'DisplayName', 'Y轴通道2');
 hold off;
 legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
 title('带通滤波双通道信号A');
-xlim([tv_sigA(1) tv_sigA(end)]);
+xlim([tv_sigA(1) tv_sigA(plot_points)]);
 ylim([-2 2]);
 grid on;
 
 subplot(2, 1, 2);
-plot(tv_sigB, sigB_ch1_filtered, 'DisplayName', 'X轴通道1');
+plot(tv_sigB(1:plot_points), sigB_ch1_filtered(1:plot_points), ...
+    'DisplayName', 'X轴通道1');
 hold on;
-plot(tv_sigB, sigB_ch2_filtered, 'DisplayName', 'Y轴通道2');
+plot(tv_sigB(1:plot_points), sigB_ch2_filtered(1:plot_points), ...
+    'DisplayName', 'Y轴通道2');
 hold off;
 legend('show');
 xlabel('时间 (s)');
 ylabel('幅值');
 title('带通滤波双通道信号B');
-xlim([tv_sigB(1) tv_sigB(end)]);
+xlim([tv_sigB(1) tv_sigB(plot_points)]);
 ylim([-2 2]);
 grid on;
 
 
 
 % ##########################相干积累##########################
-% 相干积累信号采样点数
-coherent_integration_points = single_sampling_points / ...
-    coherent_integration_cycles;
 % 初始化相干积累信号数组
 sigA_ch1_integration = zeros(1, coherent_integration_points);
 sigA_ch2_integration = zeros(1, coherent_integration_points);
