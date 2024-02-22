@@ -109,7 +109,7 @@ hold on; % 保持当前图形
 colors = lines(size(doa_phase_angle, 2)); % 'lines'是MATLAB内置的颜色图之一
 
 % 遍历所有SNR值
-for snr_index = (5:1:9)
+for snr_index = 1 : size(doa_phase_angle, 2)
     % 计算时延比相测向误差的平均值
     meanErrorPhase = mean(abs(doa_phase_angle(:, snr_index, :) - ...
         repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
@@ -130,7 +130,6 @@ for snr_index = (5:1:9)
         'Color', colors(snr_index, :), ...
         'LineWidth', 1, ...
         'HandleVisibility', 'off');
-
 end
 
 hold off;
@@ -138,7 +137,7 @@ title('Mean Absolute Error of DOA Estimation for All SNR Values');
 xlabel('Alpha Angle (degrees)');
 ylabel('Mean Absolute Error (degrees)');
 xlim([0 90]);
-ylim([0 5]);
+ylim([0 10]);
 legend('show');
 grid on;
 
