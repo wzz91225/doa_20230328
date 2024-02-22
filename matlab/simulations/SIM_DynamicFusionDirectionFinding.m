@@ -17,7 +17,7 @@ frequency = 3.2e4;
 samp_rate = 3.2e6;
 
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
-alpha_angle = 89;
+alpha_angle = 67;
 % 信号源与接收机比相时相对距离d_r 单位m
 d_relative = 20 * c / frequency;    % 20倍正弦信号波长
 % 接收机水平移动速度 单位m/s
@@ -101,7 +101,7 @@ single_sampling_points = round( ...
 interval_points =  round(delta_t / sim_time_interval);
 % 相干积累信号采样点数
 coherent_integration_points = single_sampling_points / ...
-    coherent_integration_cycles;
+    coherent_integration_number;
 
 
 
