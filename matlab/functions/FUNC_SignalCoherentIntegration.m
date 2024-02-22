@@ -1,7 +1,7 @@
 function [signal_integration] = ...
     FUNC_SignalCoherentIntegration( ...
     signal, coherent_integration_length, coherent_integration_number)
-% 基于三通道比幅测向算法测量信号方位角和俯仰角
+% 信号相干积累
 % 参数:
 % - signal: 原始信号
 % - coherent_integration_length: 相干积累信号长度
