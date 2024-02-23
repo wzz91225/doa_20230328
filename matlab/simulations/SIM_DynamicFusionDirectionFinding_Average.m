@@ -4,7 +4,8 @@ clear;
 
 % 初始化并行池（如果尚未启动）
 if isempty(gcp('nocreate'))
-    parpool; % 使用默认设置启动并行池
+    % 使用默认设置启动并行池(4 workers)
+    parpool(4);
 end
 
 % 仿真计时开始
@@ -31,13 +32,13 @@ coherent_integration_cycles = 10;
 
 % ##########################变量定义##########################
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
-alpha_angle = (0:1:179);
+alpha_angle = (0:1:90);
 % 高斯加噪信噪比SNR 单位dB
-snr_value = (-40:5:40);
+snr_value = (-25:5:0);
 
 % ##########################仿真##########################
 % 仿真次数
-sim_num = 100;
+sim_num = 1000;
 
 % 测向结果数组初始化
 doa_phase_angle = ...
