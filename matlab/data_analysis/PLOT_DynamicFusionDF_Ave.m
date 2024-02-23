@@ -5,6 +5,11 @@ clear;
 % 计时开始
 tic;
 
+% ##########################可视化选择##########################
+is_plot_angle = 0;
+is_plot_angle_ave = 0;
+is_plot_angle_error = 1;
+
 % ##########################读取数据文件##########################
 % % 指定.mat文件的路径
 % matFilePath = 'matlab/simulation_results/SIMDATA-240222_075811-DynamicFusionDF_Ave.mat';
@@ -31,39 +36,41 @@ if not(exist('doa_phase_angle', 'var') && ...
 end
 
 % ##########################单次角度关系图##########################
-% 绘制时延比相测向角度与角度的关系图
-figure;
-hold on;
-for i = 1:length(snr_value)
-    plot(alpha_angle, doa_phase_angle(:, i), ...
-        'LineWidth', 1, ...
-        'DisplayName', sprintf('%d dB', snr_value(i)));
+if is_plot_angle
+    % 绘制时延比相测向角度与角度的关系图
+    figure;
+    hold on;
+    for i = 1:length(snr_value)
+        plot(alpha_angle, doa_phase_angle(:, i), ...
+            'LineWidth', 1, ...
+            'DisplayName', sprintf('%d dB', snr_value(i)));
+    end
+    hold off;
+    title('Phase DOA vs. Alpha Angle for Different SNR Values');
+    xlabel('Alpha Angle (degrees)');
+    ylabel('Phase DOA Angle Ave. (degrees)');
+    legend('show');
+    grid on;
+    
+    % 绘制比幅测向角度与角度的关系图
+    figure;
+    hold on;
+    for i = 1:length(snr_value)
+        plot(alpha_angle, doa_amplitude_angle(:, i), ...
+            'LineWidth', 1, ...
+            'DisplayName', sprintf('%d dB', snr_value(i)));
+    end
+    hold off;
+    title('Amplitude DOA vs. Alpha Angle for Different SNR Values');
+    xlabel('Alpha Angle (degrees)');
+    ylabel('Amplitude DOA Angle Ave. (degrees)');
+    legend('show');
+    grid on;
 end
-hold off;
-title('Phase DOA vs. Alpha Angle for Different SNR Values');
-xlabel('Alpha Angle (degrees)');
-ylabel('Phase DOA Angle Ave. (degrees)');
-legend('show');
-grid on;
-
-% 绘制比幅测向角度与角度的关系图
-figure;
-hold on;
-for i = 1:length(snr_value)
-    plot(alpha_angle, doa_amplitude_angle(:, i), ...
-        'LineWidth', 1, ...
-        'DisplayName', sprintf('%d dB', snr_value(i)));
-end
-hold off;
-title('Amplitude DOA vs. Alpha Angle for Different SNR Values');
-xlabel('Alpha Angle (degrees)');
-ylabel('Amplitude DOA Angle Ave. (degrees)');
-legend('show');
-grid on;
 
 % ##########################平均角度关系图##########################
 % 仿真次数>1
-if sim_num > 1
+if is_plot_angle_ave && (sim_num > 1)
     % 检查是否含有需要的变量
     if not(exist('doa_phase_angle_ave', 'var') && ...
         exist('doa_amplitude_angle_ave', 'var'))
@@ -102,45 +109,46 @@ if sim_num > 1
 end
 
 % ##########################角度误差图##########################
-figure;
-hold on; % 保持当前图形
-
-% 预定义颜色数组或使用MATLAB颜色图
-colors = lines(size(doa_phase_angle, 2)); % 'lines'是MATLAB内置的颜色图之一
-
-% 遍历所有SNR值
-for snr_index = 1 : size(doa_phase_angle, 2)
-    % 计算时延比相测向误差的平均值
-    meanErrorPhase = mean(abs(doa_phase_angle(:, snr_index, :) - ...
-        repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
-        [1, 1, size(doa_phase_angle, 3)])), 3);
-    % 绘制时延比相测向误差曲线
-    plot(alpha_angle, meanErrorPhase, ...
-        'Color', colors(snr_index, :), ...
-        'LineWidth', 1, ...
-        'DisplayName', sprintf('%d dB', snr_value(snr_index)));
+if is_plot_angle_error
+    figure;
+    hold on; % 保持当前图形
     
-    % 计算比幅测向误差的平均值，只考虑[0, 90]度的角度范围
-    meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:90, snr_index, :) - ...
-        repmat(reshape(alpha_angle(1:90), [90, 1, 1]), ...
-        [1, 1, size(doa_amplitude_angle, 3)])), 3);
-    % 绘制比幅测向误差曲线
-    plot(alpha_angle(1:90), meanErrorAmplitude, ...
-        '--', ...
-        'Color', colors(snr_index, :), ...
-        'LineWidth', 1, ...
-        'HandleVisibility', 'off');
+    % 预定义颜色数组或使用MATLAB颜色图
+    colors = lines(size(doa_phase_angle, 2)); % 'lines'是MATLAB内置的颜色图之一
+    
+    % 遍历所有SNR值
+    for snr_index = 1 : size(doa_phase_angle, 2)
+        % 计算时延比相测向误差的平均值
+        meanErrorPhase = mean(abs(doa_phase_angle(:, snr_index, :) - ...
+            repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
+            [1, 1, size(doa_phase_angle, 3)])), 3);
+        % 绘制时延比相测向误差曲线
+        plot(alpha_angle, meanErrorPhase, ...
+            'Color', colors(snr_index, :), ...
+            'LineWidth', 1, ...
+            'DisplayName', sprintf('%d dB', snr_value(snr_index)));
+        
+        % 计算比幅测向误差的平均值，只考虑[0, 90]度的角度范围
+        meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:90, snr_index, :) - ...
+            repmat(reshape(alpha_angle(1:90), [90, 1, 1]), ...
+            [1, 1, size(doa_amplitude_angle, 3)])), 3);
+        % 绘制比幅测向误差曲线
+        plot(alpha_angle(1:90), meanErrorAmplitude, ...
+            '--', ...
+            'Color', colors(snr_index, :), ...
+            'LineWidth', 1, ...
+            'HandleVisibility', 'off');
+    end
+    
+    hold off;
+    title('Mean Absolute Error of DOA Estimation for All SNR Values');
+    xlabel('Alpha Angle (degrees)');
+    ylabel('Mean Absolute Error (degrees)');
+    xlim([0 90]);
+    ylim([0 10]);
+    legend('show');
+    grid on;
 end
-
-hold off;
-title('Mean Absolute Error of DOA Estimation for All SNR Values');
-xlabel('Alpha Angle (degrees)');
-ylabel('Mean Absolute Error (degrees)');
-xlim([0 90]);
-ylim([0 10]);
-legend('show');
-grid on;
-
 
 
 % 计时结束
