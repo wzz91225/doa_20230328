@@ -14,7 +14,7 @@ c = 299792458;
 % 信号源频率 单位Hz
 frequency = 3.2e4;
 % 接收机信号采样率 单位Hz
-samp_rate = 3.2e6;
+samp_rate = 6.4e6;
 
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
 alpha_angle = 67;
@@ -30,6 +30,9 @@ snr_value = -15;     % 信噪比SNR(dB)
 coherent_integration_number = 10;
 % 接收机比相相干积累正弦信号序列周期数
 coherent_integration_cycles = 10;
+
+% % 滤波器阶数
+% filter_n = 200;
 
 % 是否输出结果
 is_fprintf = 1;
