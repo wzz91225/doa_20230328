@@ -83,7 +83,7 @@ single_sampling_points = round( ...
 interval_points =  round(delta_t / sim_time_interval);
 % 相干积累信号采样点数
 coherent_integration_points = single_sampling_points / ...
-    coherent_integration_cycles;
+    coherent_integration_number;
 
 
 
