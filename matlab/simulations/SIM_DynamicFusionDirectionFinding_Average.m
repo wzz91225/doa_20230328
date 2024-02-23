@@ -30,6 +30,9 @@ coherent_integration_number = 10;
 % 接收机比相相干积累正弦信号序列周期数
 coherent_integration_cycles = 10;
 
+% 滤波器阶数
+filter_n = 200;
+
 % ##########################变量定义##########################
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
 alpha_angle = (0:1:90);
@@ -38,7 +41,7 @@ snr_value = (-25:5:0);
 
 % ##########################仿真##########################
 % 仿真次数
-sim_num = 1000;
+sim_num = 1;
 
 % 测向结果数组初始化
 doa_phase_angle = ...
@@ -63,7 +66,8 @@ parfor i = 1 : len_alpha_angle
                 FUNC_SIM_DynamicFusionDirectionFinding( ...
                 c, frequency, samp_rate, alpha_angle(i), ...
                 d_relative, v_rx, snr_value(j), ...
-                coherent_integration_number, coherent_integration_cycles);
+                coherent_integration_number, coherent_integration_cycles, ...
+                filter_n);
             
             doa_phase_angle(i, j, k) = tmp1;
             doa_amplitude_angle(i, j, k) = tmp2;
@@ -99,5 +103,6 @@ if 1
         'doa_phase_angle_ave', 'doa_amplitude_angle_ave', ...
         'c', 'frequency', 'samp_rate', 'alpha_angle', ...
         'd_relative', 'v_rx', 'snr_value', ...
-        'coherent_integration_number', 'coherent_integration_cycles');
+        'coherent_integration_number', 'coherent_integration_cycles', ...
+        'filter_n');
 end
