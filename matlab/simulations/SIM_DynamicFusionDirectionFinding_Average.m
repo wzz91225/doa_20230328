@@ -18,7 +18,7 @@ c = 299792458;
 % 信号源频率 单位Hz
 frequency = 3.2e4;
 % 接收机信号采样率 单位Hz
-samp_rate = 3.2e6;
+samp_rate = 6.4e6;
 
 % 信号源与接收机比相时相对距离d_r 单位m
 d_relative = 20 * c / frequency;    % 20倍正弦信号波长
@@ -41,7 +41,7 @@ snr_value = (-25:5:0);
 
 % ##########################仿真##########################
 % 仿真次数
-sim_num = 1;
+sim_num = 10;
 
 % 测向结果数组初始化
 doa_phase_angle = ...
@@ -56,6 +56,7 @@ doa_amplitude_angle_ave = ...
 % 并行循环仿真
 len_alpha_angle = length(alpha_angle);
 len_snr_value = length(snr_value);
+% for i = 1 : len_alpha_angle
 parfor i = 1 : len_alpha_angle
     for j = 1 : len_snr_value
         tmp_doa_phase_angle = 0;
