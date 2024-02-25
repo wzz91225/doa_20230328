@@ -35,13 +35,13 @@ coherent_integration_cycles = 10;
 
 % ##########################变量定义##########################
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
-alpha_angle = (91:1:179);
+alpha_angle = (1:1:179);
 % 高斯加噪信噪比SNR 单位dB
 snr_value = (-30:5:0);
 
 % ##########################仿真##########################
 % 仿真次数
-sim_num = 1000;
+sim_num = 10;
 
 % 测向结果数组初始化
 doa_phase_angle = ...
@@ -61,12 +61,13 @@ parfor i = 1 : len_alpha_angle
     for j = 1 : len_snr_value
         tmp_doa_phase_angle = 0;
         tmp_doa_amplitude_angle = 0;
+        tmp_snr_value = snr_value(j);
         
         for k = 1 : sim_num
             [tmp1, tmp2] = ...
                 FUNC_SIM_DynamicFusionDirectionFinding( ...
                 c, frequency, samp_rate, alpha_angle(i), ...
-                d_relative, v_rx, snr_value(j), ...
+                d_relative, v_rx, tmp_snr_value, ...
                 coherent_integration_number, coherent_integration_cycles);
             
             doa_phase_angle(i, j, k) = tmp1;
