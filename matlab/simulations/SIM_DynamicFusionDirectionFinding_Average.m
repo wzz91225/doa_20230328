@@ -4,8 +4,8 @@ clear;
 
 % 初始化并行池（如果尚未启动）
 if isempty(gcp('nocreate'))
-    % 使用默认设置启动并行池(4 workers)
-    parpool(4);
+    % 使用默认设置启动并行池
+    parpool;
 end
 
 % 仿真计时开始
