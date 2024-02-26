@@ -32,7 +32,8 @@ if not(exist('doa_phase_angle', 'var') && ...
     exist('alpha_angle', 'var') && ...
     exist('sim_num', 'var') && ...
     exist('snr_value', 'var') && ...
-    exist('coherent_integration_number', 'var'))
+    exist('coherent_integration_number', 'var') && ...
+    exist('samp_rate', 'var'))
     error('Missing required variables.');
 end
 
@@ -45,6 +46,10 @@ elseif length(coherent_integration_number) > 1
     var_list = coherent_integration_number;
     var_displayname = 'N_{CI} = %d';
     var_titlename = '相干积累数';
+elseif length(samp_rate) > 1
+    var_list = samp_rate;
+    var_displayname = '%d Hz';
+    var_titlename = '采样率';
 end
 
 % ##########################单次角度关系图##########################
