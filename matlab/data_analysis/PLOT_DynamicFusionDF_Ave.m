@@ -47,8 +47,8 @@ elseif length(coherent_integration_number) > 1
     var_displayname = 'N_{CI} = %d';
     var_titlename = '相干积累数';
 elseif length(samp_rate) > 1
-    var_list = samp_rate;
-    var_displayname = '%d Hz';
+    var_list = samp_rate./1e6;
+    var_displayname = '%0.1f MHz';
     var_titlename = '采样率';
 end
 
