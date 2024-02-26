@@ -30,9 +30,21 @@ load(matFilePath);
 if not(exist('doa_phase_angle', 'var') && ...
     exist('doa_amplitude_angle', 'var') && ...
     exist('alpha_angle', 'var') && ...
+    exist('sim_num', 'var') && ...
     exist('snr_value', 'var') && ...
-    exist('sim_num', 'var'))
+    exist('coherent_integration_number', 'var'))
     error('Missing required variables.');
+end
+
+% ##########################确定二维变量##########################
+if length(snr_value) > 1
+    var_list = snr_value;
+    var_displayname = '%d dB';
+    var_titlename = '信噪比';
+elseif length(coherent_integration_number) > 1
+    var_list = coherent_integration_number;
+    var_displayname = 'N_{CI} = %d';
+    var_titlename = '相干积累数';
 end
 
 % ##########################单次角度关系图##########################
@@ -40,30 +52,30 @@ if is_plot_angle
     % 绘制时延比相测向角度与角度的关系图
     figure;
     hold on;
-    for i = 1:length(snr_value)
+    for i = 1:length(var_list)
         plot(alpha_angle, doa_phase_angle(:, i), ...
             'LineWidth', 1, ...
-            'DisplayName', sprintf('%d dB', snr_value(i)));
+            'DisplayName', sprintf(var_displayname, var_list(i)));
     end
     hold off;
-    title('Phase DOA vs. Alpha Angle for Different SNR Values');
-    xlabel('Alpha Angle (degrees)');
-    ylabel('Phase DOA Angle Ave. (degrees)');
+    title(['不同' var_titlename '下动态比相测向结果与实际角度的关系']);
+    xlabel('实际角度（°）');
+    ylabel('动态比相测向结果（°）');
     legend('show');
     grid on;
     
     % 绘制比幅测向角度与角度的关系图
     figure;
     hold on;
-    for i = 1:length(snr_value)
+    for i = 1:length(var_list)
         plot(alpha_angle, doa_amplitude_angle(:, i), ...
             'LineWidth', 1, ...
-            'DisplayName', sprintf('%d dB', snr_value(i)));
+            'DisplayName', sprintf(var_displayname, var_list(i)));
     end
     hold off;
-    title('Amplitude DOA vs. Alpha Angle for Different SNR Values');
-    xlabel('Alpha Angle (degrees)');
-    ylabel('Amplitude DOA Angle Ave. (degrees)');
+    title(['不同' var_titlename '下比幅测向结果与实际角度的关系']);
+    xlabel('实际角度（°）');
+    ylabel('比幅测向结果（°）');
     legend('show');
     grid on;
 end
@@ -80,30 +92,30 @@ if is_plot_angle_ave && (sim_num > 1)
     % 绘制时延比相测向平均角度与角度的关系图
     figure;
     hold on;
-    for i = 1:length(snr_value)
+    for i = 1:length(var_list)
         plot(alpha_angle, doa_phase_angle_ave(:, i), ...
             'LineWidth', 1, ...
-            'DisplayName', sprintf('%d dB', snr_value(i)));
+            'DisplayName', sprintf(var_displayname, var_list(i)));
     end
     hold off;
-    title('Phase DOA vs. Alpha Angle Ave. for Different SNR Values');
-    xlabel('Alpha Angle (degrees)');
-    ylabel('Phase DOA Angle Ave. (degrees)');
+    title(['不同' var_titlename '下动态比相平均测向结果与实际角度的关系']);
+    xlabel('实际角度（°）');
+    ylabel('动态比相平均测向结果（°）');
     legend('show');
     grid on;
 
     % 绘制比幅测向平均角度与角度的关系图
     figure;
     hold on;
-    for i = 1:length(snr_value)
+    for i = 1:length(var_list)
         plot(alpha_angle, doa_amplitude_angle_ave(:, i), ...
             'LineWidth', 1, ...
-            'DisplayName', sprintf('%d dB', snr_value(i)));
+            'DisplayName', sprintf(var_displayname, var_list(i)));
     end
     hold off;
-    title('Amplitude DOA vs. Alpha Angle Ave. for Different SNR Values');
-    xlabel('Alpha Angle (degrees)');
-    ylabel('Amplitude DOA Angle Ave. (degrees)');
+    title(['不同' var_titlename '下比幅平均测向结果与实际角度的关系']);
+    xlabel('实际角度（°）');
+    ylabel('比幅平均测向结果（°）');
     legend('show');
     grid on;
 end
@@ -117,46 +129,46 @@ if is_plot_angle_error
     colors = lines(size(doa_phase_angle, 2)); % 'lines'是MATLAB内置的颜色图之一
     
     % 遍历所有SNR值
-    for snr_index = 1 : size(doa_phase_angle, 2)
+    for var_index = 1 : size(doa_phase_angle, 2)
         % 计算时延比相测向误差的平均值
-        meanErrorPhase = mean(abs(doa_phase_angle(:, snr_index, :) - ...
+        meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
             repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
             [1, 1, size(doa_phase_angle, 3)])), 3);
         % 绘制时延比相测向误差曲线
         plot(alpha_angle, meanErrorPhase, ...
-            'Color', colors(snr_index, :), ...
+            'Color', colors(var_index, :), ...
             'LineWidth', 1, ...
-            'DisplayName', sprintf('%d dB', snr_value(snr_index)));
+            'DisplayName', sprintf(var_displayname, var_list(var_index)));
         
         if isequal(alpha_angle, (1:179))
             % 计算比幅测向误差的平均值，只考虑[0, 90]度的角度范围
-            meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:90, snr_index, :) - ...
+            meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:90, var_index, :) - ...
                 repmat(reshape(alpha_angle(1:90), [90, 1, 1]), ...
                 [1, 1, size(doa_amplitude_angle, 3)])), 3);
             % 绘制比幅测向误差曲线
             plot(alpha_angle(1:90), meanErrorAmplitude, ...
                 '--', ...
-                'Color', colors(snr_index, :), ...
+                'Color', colors(var_index, :), ...
                 'LineWidth', 1, ...
                 'HandleVisibility', 'off');
         else
             % 计算比幅测向误差的平均值，考虑全部范围
-            meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, snr_index, :) - ...
+            meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, var_index, :) - ...
                 repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
                 [1, 1, size(doa_amplitude_angle, 3)])), 3);
             % 绘制比幅测向误差曲线
             plot(alpha_angle, meanErrorAmplitude, ...
                 '--', ...
-                'Color', colors(snr_index, :), ...
+                'Color', colors(var_index, :), ...
                 'LineWidth', 1, ...
                 'HandleVisibility', 'off');
         end
     end
     
     hold off;
-    title('Mean Absolute Error of DOA Estimation for All SNR Values');
-    xlabel('Alpha Angle (degrees)');
-    ylabel('Mean Absolute Error (degrees)');
+    title(['不同' var_titlename '下测向结果的平均绝对误差']);
+    xlabel('实际角度（°）');
+    ylabel('平均绝对误差（°）');
     if isequal(alpha_angle, (1:179))
         xlim([0 90]);
     else
