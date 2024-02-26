@@ -39,11 +39,11 @@ snr_value = -15;
 alpha_angle = (1:1:90);
 
 % 接收机信号采样率 单位Hz
-samp_rate = [1.6e6 3.2e6 6.4e6 12.8e6 25.6e6];
+samp_rate = [0.8e6 1.6e6 3.2e6 6.4e6 12.8e6 25.6e6];
 
 % ##########################仿真##########################
 % 仿真次数
-sim_num = 10;
+sim_num = 100;
 
 % 测向结果数组初始化
 doa_phase_angle = ...
@@ -68,8 +68,8 @@ parfor i = 1 : len_alpha_angle
         for k = 1 : sim_num
             [tmp1, tmp2] = ...
                 FUNC_SIM_DynamicFusionDirectionFinding( ...
-                c, frequency, samp_rate, alpha_angle(i), ...
-                d_relative, v_rx, tmp_samp_rate, ...
+                c, frequency, tmp_samp_rate, alpha_angle(i), ...
+                d_relative, v_rx, snr_value, ...
                 coherent_integration_number, coherent_integration_cycles);
             
             doa_phase_angle(i, j, k) = tmp1;
