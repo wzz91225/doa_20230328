@@ -7,6 +7,20 @@ tic;
 
 
 
+% ##########################仿真过程控制##########################
+
+% 是否输出结果
+is_fprintf = 1;
+% 是否绘图
+is_figure = 0;
+
+% 是否使用滤波器
+is_filter = 1;
+% 是否使用相干积累器
+is_coherent_integration = 1;
+
+
+
 % ##########################主要仿真参数定义##########################
 % 光速 单位m/s
 c = 299792458;
@@ -17,14 +31,14 @@ frequency = 3.2e4;
 samp_rate = 6.4e6;
 
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
-alpha_angle = 67;
+alpha_angle = 0;
 % 信号源与接收机比相时相对距离d_r 单位m
 d_relative = 20 * c / frequency;    % 20倍正弦信号波长
 % 接收机水平移动速度 单位m/s
 v_rx = 10e3;
 
 % 高斯噪声参数定义
-snr_value = -15;     % 信噪比SNR(dB)
+snr_value = -25;     % 信噪比SNR(dB)
 
 % 接收机比相相干积累序列数
 coherent_integration_number = 10;
@@ -33,11 +47,6 @@ coherent_integration_cycles = 10;
 
 % % 滤波器阶数
 % filter_n = 200;
-
-% 是否输出结果
-is_fprintf = 1;
-% 是否绘图
-is_figure = 0;
 
 
 
@@ -174,38 +183,114 @@ sigB_ch2 = sig_rx_ch2_noisy(idx_B_head : idx_B_tail);
 
 
 
-% ##########################带通滤波##########################
-% 滤波
-[sigA_ch1_filtered, filter_b] = FUNC_BandpassFilter( ...
-    sigA_ch1, frequency, samp_rate);
-[sigA_ch2_filtered, ~] = FUNC_BandpassFilter( ...
-    sigA_ch2, frequency, samp_rate);
+% ##########################频率检测##########################
+% 双通道信号相加
+sigA_sum = sigA_ch1 + sigA_ch2;
+sigB_sum = sigB_ch1 + sigB_ch2;
 
-[sigB_ch1_filtered, ~] = FUNC_BandpassFilter( ...
-    sigB_ch1, frequency, samp_rate);
-[sigB_ch2_filtered, ~] = FUNC_BandpassFilter( ...
-    sigB_ch2, frequency, samp_rate);
+% 计算信号功率谱及其对应频率向量
+[fv_sigA, pspectrum_sigA] = FUNC_TransForm2PowerSpectrum( ...
+    sigA_sum, samp_rate);
+[fv_sigB, pspectrum_sigB] = FUNC_TransForm2PowerSpectrum( ...
+    sigB_sum, samp_rate);
+
+% 查找功率谱峰及其对应频点
+[freq_sigA, ppower_sigA] = FUNC_FindMaxPeak(fv_sigA, pspectrum_sigA);
+[freq_sigB, ppower_sigB] = FUNC_FindMaxPeak(fv_sigB, pspectrum_sigB);
+if isnan(freq_sigA)
+    freq_sigA = freq_sigB;
+    ppower_sigA = 0;
+end
+if isnan(freq_sigB)
+    freq_sigB = freq_sigA;
+    ppower_sigB = 0;
+end
+% if abs(freq_sigA - freq_sigB) > 10
+%     if ppower_sigA >= ppower_sigB
+%         % 以sigA的频率为准
+%         freq_sigB = freq_sigA;
+%         % 查找最接近指定频点的索引
+%         [~, idx] = min(abs(fv_sigB - freq_sigB));
+%         % 获取指定频点对应的功率大小
+%         ppower_sigB = pspectrum_sigB(idx);
+%     else
+%         % 以sigB的频率为准
+%         freq_sigA = freq_sigB;
+%         % 查找最接近指定频点的索引
+%         [~, idx] = min(abs(fv_sigA - freq_sigA));
+%         % 获取指定频点对应的功率大小
+%         ppower_sigA = pspectrum_sigA(idx);
+%     end
+% end
+
+    
+% 双通道截取信号A和B频谱
+figure;
+
+subplot(2, 1, 1);
+plot(fv_sigA, pspectrum_sigA);
+xlabel('频率 (Hz)');
+ylabel('幅值');
+title('双通道天线截取接收信号A频谱');
+grid on;
+
+subplot(2, 1, 2);
+plot(fv_sigB, pspectrum_sigB);
+xlabel('频率 (Hz)');
+ylabel('幅值');
+title('双通道天线截取接收信号B频谱');
+grid on;
+
+
+
+% ##########################带通滤波##########################
+if is_filter
+    % 滤波
+    [sigA_ch1_filtered, filter_b] = FUNC_BandpassFilter( ...
+        sigA_ch1, frequency, samp_rate);
+    [sigA_ch2_filtered, ~] = FUNC_BandpassFilter( ...
+        sigA_ch2, frequency, samp_rate);
+    
+    [sigB_ch1_filtered, ~] = FUNC_BandpassFilter( ...
+        sigB_ch1, frequency, samp_rate);
+    [sigB_ch2_filtered, ~] = FUNC_BandpassFilter( ...
+        sigB_ch2, frequency, samp_rate);
+else
+    sigA_ch1_filtered = sigA_ch1;
+    sigA_ch2_filtered = sigA_ch2;
+    sigB_ch1_filtered = sigB_ch1;
+    sigB_ch2_filtered = sigB_ch2;
+end
 
 
 
 % ##########################相干积累##########################
-% 相干积累信号对应的时间向量
-tv_sigA_integration = tv_sigA(end-coherent_integration_points+1 : end);
-tv_sigB_integration = tv_sigB(end-coherent_integration_points+1 : end);
+if is_coherent_integration
+    % 相干积累信号对应的时间向量
+    tv_sigA_integration = tv_sigA(end-coherent_integration_points+1 : end);
+    tv_sigB_integration = tv_sigB(end-coherent_integration_points+1 : end);
+    
+    % 相干积累
+    sigA_ch1_integration = FUNC_SignalCoherentIntegration( ...
+        sigA_ch1_filtered, coherent_integration_points, coherent_integration_number);
+    
+    sigA_ch2_integration = FUNC_SignalCoherentIntegration( ...
+        sigA_ch2_filtered, coherent_integration_points, coherent_integration_number);
+    
+    sigB_ch1_integration = FUNC_SignalCoherentIntegration( ...
+        sigB_ch1_filtered, coherent_integration_points, coherent_integration_number);
+    
+    sigB_ch2_integration = FUNC_SignalCoherentIntegration( ...
+        sigB_ch2_filtered, coherent_integration_points, coherent_integration_number);
+else
+    tv_sigA_integration = tv_sigA;
+    tv_sigB_integration = tv_sigB;
 
-% 相干积累
-sigA_ch1_integration = FUNC_SignalCoherentIntegration( ...
-    sigA_ch1_filtered, coherent_integration_points, coherent_integration_number);
-
-sigA_ch2_integration = FUNC_SignalCoherentIntegration( ...
-    sigA_ch2_filtered, coherent_integration_points, coherent_integration_number);
-
-sigB_ch1_integration = FUNC_SignalCoherentIntegration( ...
-    sigB_ch1_filtered, coherent_integration_points, coherent_integration_number);
-
-sigB_ch2_integration = FUNC_SignalCoherentIntegration( ...
-    sigB_ch2_filtered, coherent_integration_points, coherent_integration_number);
-
+    sigA_ch1_integration = sigA_ch1_filtered;
+    sigA_ch2_integration = sigA_ch2_filtered;
+    sigB_ch1_integration = sigB_ch1_filtered;
+    sigB_ch2_integration = sigB_ch2_filtered;
+end
 
 
 % ##########################测向算法##########################
@@ -224,6 +309,8 @@ sigB_integration_sum = sigB_ch1_integration + sigB_ch2_integration;
 
 % ##########################输出结果##########################
 if is_fprintf
+    fprintf('频率检测A = %.2fHz\n', freq_sigA);
+    fprintf('频率检测B = %.2fHz\n', freq_sigB);
     fprintf('实际角度[0, 180) = %.2f°\n', alpha_angle);
     fprintf('比相算法角度[0, 180) = %.2f°\n', doa_phase_angle);
     fprintf('比幅算法角度[0, 90] = %.2f°\n', doa_amplitude_angle);
@@ -233,13 +320,13 @@ end
 
 % ##########################绘图##########################
 if is_figure
-    close all;
+    % close all;
     % 信号绘图统一点数
     plot_points = coherent_integration_points;
 
 
     % 原始信号和加噪信号
-    figure(1);
+    figure;
 
     subplot(2, 1, 1);
     plot(time_vector(1:plot_points), sig_rx_ch1(1:plot_points), ...
@@ -276,7 +363,7 @@ if is_figure
 
 
     % 双通道截取信号A和B
-    figure(2);
+    figure;
 
     subplot(2, 1, 1);
     plot(tv_sigA(1:plot_points), sigA_ch1(1:plot_points), ...
@@ -310,14 +397,32 @@ if is_figure
     ylim([-ymax ymax]);
     grid on;
 
+    
+    % 双通道截取信号A和B频谱
+    figure;
+
+    subplot(2, 1, 1);
+    plot(fv_sigA, pspectrum_sigA);
+    xlabel('频率 (Hz)');
+    ylabel('幅值');
+    title('双通道天线截取接收信号A频谱');
+    grid on;
+
+    subplot(2, 1, 2);
+    plot(fv_sigB, pspectrum_sigB);
+    xlabel('频率 (Hz)');
+    ylabel('幅值');
+    title('双通道天线截取接收信号B频谱');
+    grid on;
+
 
     % 滤波器频率响应和相位相应
-    figure(3);
+    figure;
     freqz(filter_b, 1, 1024, samp_rate);
 
 
     % 带通滤波信号A和B
-    figure(4);
+    figure;
 
     subplot(2, 1, 1);
     plot(tv_sigA(1:plot_points), sigA_ch1_filtered(1:plot_points), ...
@@ -351,7 +456,7 @@ if is_figure
 
 
     % 相干积累信号A和B
-    figure(5);
+    figure;
 
     subplot(2, 1, 1);
     plot(tv_sigA_integration, sigA_ch1_integration, ...
