@@ -2,7 +2,7 @@ function [doa_phase_angle, doa_amplitude_angle] = ...
     FUNC_SIM_DynamicFusionDirectionFinding( ...
     c, frequency, samp_rate, alpha_angle, d_relative, v_rx, snr_value, ...
     coherent_integration_number, coherent_integration_cycles, ...
-    filter_n)
+    is_bandpassfilter, filter_n)
 %FUNC_SIM_DynamicFusionDirectionFinding Summary....
 % 参数:
 % - c: 光速 单位m/s
@@ -14,7 +14,8 @@ function [doa_phase_angle, doa_amplitude_angle] = ...
 % - snr_value: 高斯加噪信噪比SNR 单位dB
 % - coherent_integration_number: 接收机比相相干积累序列数
 % - coherent_integration_cycles: 接收机比相相干积累正弦信号序列周期数
-% - (option) filter_n: 带通滤波器阶数
+% - (option) is_bandpassfilter: 是否使用带通滤波器（无输入则使用）
+% - (option) filter_n: 带通滤波器阶数（无输入或≤0则自动配置）
 % 返回值:
 % - doa_phase_angle: 时延比相测向角度 范围[0, 180)
 % - doa_amplitude_angle: 比幅测向角度 范围[0, 90]
@@ -182,36 +183,42 @@ sigB_ch2 = sig_rx_ch2_noisy(idx_B_head : idx_B_tail);
 
 
 % ##########################带通滤波##########################
-% 检查是否提供滤波器阶数
-if nargin < 10
-    is_filter_n = 0 ;
+if nargin < 10 || is_bandpassfilter
+    % 检查是否提供滤波器阶数
+    if nargin < 11 || filter_n <= 0
+        is_filter_n = 0 ;
+    else
+        is_filter_n = 1;
+    end
+
+    % 滤波
+    if is_filter_n
+        [sigA_ch1_filtered, ~] = FUNC_BandpassFilter( ...
+            sigA_ch1, frequency, samp_rate, filter_n);
+        [sigA_ch2_filtered, ~] = FUNC_BandpassFilter( ...
+            sigA_ch2, frequency, samp_rate, filter_n);
+
+        [sigB_ch1_filtered, ~] = FUNC_BandpassFilter( ...
+            sigB_ch1, frequency, samp_rate, filter_n);
+        [sigB_ch2_filtered, ~] = FUNC_BandpassFilter( ...
+            sigB_ch2, frequency, samp_rate, filter_n);
+    else
+        [sigA_ch1_filtered, ~] = FUNC_BandpassFilter( ...
+            sigA_ch1, frequency, samp_rate);
+        [sigA_ch2_filtered, ~] = FUNC_BandpassFilter( ...
+            sigA_ch2, frequency, samp_rate);
+
+        [sigB_ch1_filtered, ~] = FUNC_BandpassFilter( ...
+            sigB_ch1, frequency, samp_rate);
+        [sigB_ch2_filtered, ~] = FUNC_BandpassFilter( ...
+            sigB_ch2, frequency, samp_rate);
+    end
 else
-    is_filter_n = 1;
+    sigA_ch1_filtered = sigA_ch1;
+    sigA_ch2_filtered = sigA_ch2;
+    sigB_ch1_filtered = sigB_ch1;
+    sigB_ch2_filtered = sigB_ch2;
 end
-
-% 滤波
-if is_filter_n
-    [sigA_ch1_filtered, ~] = FUNC_BandpassFilter( ...
-        sigA_ch1, frequency, samp_rate, filter_n);
-    [sigA_ch2_filtered, ~] = FUNC_BandpassFilter( ...
-        sigA_ch2, frequency, samp_rate, filter_n);
-
-    [sigB_ch1_filtered, ~] = FUNC_BandpassFilter( ...
-        sigB_ch1, frequency, samp_rate, filter_n);
-    [sigB_ch2_filtered, ~] = FUNC_BandpassFilter( ...
-        sigB_ch2, frequency, samp_rate, filter_n);
-else
-    [sigA_ch1_filtered, ~] = FUNC_BandpassFilter( ...
-        sigA_ch1, frequency, samp_rate);
-    [sigA_ch2_filtered, ~] = FUNC_BandpassFilter( ...
-        sigA_ch2, frequency, samp_rate);
-
-    [sigB_ch1_filtered, ~] = FUNC_BandpassFilter( ...
-        sigB_ch1, frequency, samp_rate);
-    [sigB_ch2_filtered, ~] = FUNC_BandpassFilter( ...
-        sigB_ch2, frequency, samp_rate);
-end
-
 
 
 % ##########################相干积累##########################

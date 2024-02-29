@@ -18,7 +18,7 @@ c = 299792458;
 % 信号源频率 单位Hz
 frequency = 3.2e4;
 % 接收机信号采样率 单位Hz
-samp_rate = 25.6e6;
+samp_rate = 6.4e6;
 
 % 信号源与接收机比相时相对距离d_r 单位m
 d_relative = 20 * c / frequency;    % 20倍正弦信号波长
@@ -26,22 +26,24 @@ d_relative = 20 * c / frequency;    % 20倍正弦信号波长
 v_rx = 10e3;
 
 % 接收机比相相干积累序列数
-coherent_integration_number = 10;
-% 接收机比相相干积累正弦信号序列周期数
-coherent_integration_cycles = 10;
+coherent_integration_number = 1;
+% 接收机比相相干积累每序列包含正弦信号序列周期数
+coherent_integration_cycles = 1000;
 
-% % (可选)滤波器阶数
+% (option) 是否使用带通滤波器（无输入则使用）
+is_bandpassfilter = 0;
+% % (option) 带通滤波器阶数（无输入或≤0则自动配置）
 % filter_n = 200;
 
 % ##########################变量定义##########################
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
 alpha_angle = (0:1:179);
 % 高斯加噪信噪比SNR 单位dB
-snr_value = (-30:5:0);
+snr_value = (-20:10:20);
 
 % ##########################仿真##########################
 % 仿真次数
-sim_num = 1000;
+sim_num = 10;
 
 % 测向结果数组初始化
 doa_phase_angle = ...
@@ -68,7 +70,8 @@ parfor i = 1 : len_alpha_angle
                 FUNC_SIM_DynamicFusionDirectionFinding( ...
                 c, frequency, samp_rate, alpha_angle(i), ...
                 d_relative, v_rx, tmp_snr_value, ...
-                coherent_integration_number, coherent_integration_cycles);
+                coherent_integration_number, coherent_integration_cycles, ...
+                is_bandpassfilter);
             
             doa_phase_angle(i, j, k) = tmp1;
             doa_amplitude_angle(i, j, k) = tmp2;
@@ -104,5 +107,6 @@ if 1
         'doa_phase_angle_ave', 'doa_amplitude_angle_ave', ...
         'c', 'frequency', 'samp_rate', 'alpha_angle', ...
         'd_relative', 'v_rx', 'snr_value', ...
-        'coherent_integration_number', 'coherent_integration_cycles');
+        'coherent_integration_number', 'coherent_integration_cycles', ...
+        'is_bandpassfilter');
 end
