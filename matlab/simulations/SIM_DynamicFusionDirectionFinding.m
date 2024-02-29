@@ -14,9 +14,7 @@ is_fprintf = 1;
 is_figure = 0;
 
 % 是否使用滤波器
-is_filter = 1;
-% 是否使用相干积累器
-is_coherent_integration = 1;
+is_filter = 0;
 
 
 
