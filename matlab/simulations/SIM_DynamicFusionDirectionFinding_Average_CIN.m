@@ -31,7 +31,9 @@ coherent_integration_cycles = 10;
 % 高斯加噪信噪比SNR 单位dB
 snr_value = -15;
 
-% % (可选)滤波器阶数
+% (option) 是否使用带通滤波器（无输入则使用）
+is_bandpassfilter = 0;
+% % (option) 带通滤波器阶数（无输入或≤0则自动配置）
 % filter_n = 200;
 
 % ##########################变量定义##########################
@@ -105,5 +107,6 @@ if 1
         'doa_phase_angle_ave', 'doa_amplitude_angle_ave', ...
         'c', 'frequency', 'samp_rate', 'alpha_angle', ...
         'd_relative', 'v_rx', 'snr_value', ...
-        'coherent_integration_number', 'coherent_integration_cycles');
+        'coherent_integration_number', 'coherent_integration_cycles', ...
+        'is_bandpassfilter');
 end
