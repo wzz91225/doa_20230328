@@ -24,9 +24,9 @@ d_relative = 20 * c / frequency;    % 20倍正弦信号波长
 v_rx = 10e3;
 
 % 接收机比相相干积累序列数
-coherent_integration_number = 10;
+coherent_integration_number = 1;
 % 接收机比相相干积累正弦信号序列周期数
-coherent_integration_cycles = 10;
+coherent_integration_cycles = 100;
 
 % 高斯加噪信噪比SNR 单位dB
 snr_value = -15;
@@ -45,7 +45,7 @@ samp_rate = [0.8e6 1.6e6 3.2e6 6.4e6 12.8e6 25.6e6];
 
 % ##########################仿真##########################
 % 仿真次数
-sim_num = 10;
+sim_num = 100;
 
 % 测向结果数组初始化
 doa_phase_angle = ...
