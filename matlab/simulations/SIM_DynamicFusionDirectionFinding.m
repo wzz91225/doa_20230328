@@ -8,7 +8,6 @@ tic;
 
 
 % ##########################仿真过程控制##########################
-
 % 是否输出结果
 is_fprintf = 1;
 % 是否绘图
@@ -38,7 +37,7 @@ d_relative = 20 * c / frequency;    % 20倍正弦信号波长
 v_rx = 10e3;
 
 % 高斯噪声参数定义
-snr_value = -25;     % 信噪比SNR(dB)
+snr_value = 0;     % 信噪比SNR(dB)
 
 % 接收机比相相干积累序列数
 coherent_integration_number = 10;
@@ -205,41 +204,6 @@ if isnan(freq_sigB)
     freq_sigB = freq_sigA;
     ppower_sigB = 0;
 end
-% if abs(freq_sigA - freq_sigB) > 10
-%     if ppower_sigA >= ppower_sigB
-%         % 以sigA的频率为准
-%         freq_sigB = freq_sigA;
-%         % 查找最接近指定频点的索引
-%         [~, idx] = min(abs(fv_sigB - freq_sigB));
-%         % 获取指定频点对应的功率大小
-%         ppower_sigB = pspectrum_sigB(idx);
-%     else
-%         % 以sigB的频率为准
-%         freq_sigA = freq_sigB;
-%         % 查找最接近指定频点的索引
-%         [~, idx] = min(abs(fv_sigA - freq_sigA));
-%         % 获取指定频点对应的功率大小
-%         ppower_sigA = pspectrum_sigA(idx);
-%     end
-% end
-
-    
-% 双通道截取信号A和B频谱
-figure;
-
-subplot(2, 1, 1);
-plot(fv_sigA, pspectrum_sigA);
-xlabel('频率 (Hz)');
-ylabel('幅值');
-title('双通道天线截取接收信号A频谱');
-grid on;
-
-subplot(2, 1, 2);
-plot(fv_sigB, pspectrum_sigB);
-xlabel('频率 (Hz)');
-ylabel('幅值');
-title('双通道天线截取接收信号B频谱');
-grid on;
 
 
 
