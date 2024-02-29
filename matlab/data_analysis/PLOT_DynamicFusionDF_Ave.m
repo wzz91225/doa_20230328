@@ -133,7 +133,21 @@ if is_plot_angle_error
     % 预定义颜色数组或使用MATLAB颜色图
     colors = lines(size(doa_phase_angle, 2)); % 'lines'是MATLAB内置的颜色图之一
     
-    % 遍历所有SNR值
+    % 测向误差计算角度数量（比幅法仅计算90度及以下部分角度）
+    % meanErrorPhase_N = length(alpha_angle);
+    meanErrorAmplitude_N = 0;
+    for i = 1 : length(alpha_angle)
+        if alpha_angle(i) > 90
+            break;
+        end
+        meanErrorAmplitude_N = meanErrorAmplitude_N + 1;
+    end
+
+    % 总平均误差
+    meanmeanErrorPhase = zeros(size(doa_phase_angle, 2), 1);
+    meanmeanErrorAmplitude = zeros( size(doa_phase_angle, 2), 1);
+    
+    % 遍历第二维（如SNR或CIN或SR值）
     for var_index = 1 : size(doa_phase_angle, 2)
         % 计算时延比相测向误差的平均值
         meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
@@ -145,29 +159,32 @@ if is_plot_angle_error
             'LineWidth', 1, ...
             'DisplayName', sprintf(var_displayname, var_list(var_index)));
         
-        if isequal(alpha_angle, (1:179))
-            % 计算比幅测向误差的平均值，只考虑[0, 90]度的角度范围
-            meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:90, var_index, :) - ...
-                repmat(reshape(alpha_angle(1:90), [90, 1, 1]), ...
-                [1, 1, size(doa_amplitude_angle, 3)])), 3);
-            % 绘制比幅测向误差曲线
-            plot(alpha_angle(1:90), meanErrorAmplitude, ...
-                '--', ...
-                'Color', colors(var_index, :), ...
-                'LineWidth', 1, ...
-                'HandleVisibility', 'off');
-        else
-            % 计算比幅测向误差的平均值，考虑全部范围
-            meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, var_index, :) - ...
-                repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
-                [1, 1, size(doa_amplitude_angle, 3)])), 3);
-            % 绘制比幅测向误差曲线
-            plot(alpha_angle, meanErrorAmplitude, ...
-                '--', ...
-                'Color', colors(var_index, :), ...
-                'LineWidth', 1, ...
-                'HandleVisibility', 'off');
-        end
+        % % 计算比幅测向误差的平均值，考虑全部范围
+        % meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, var_index, :) - ...
+        %     repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
+        %     [1, 1, size(doa_amplitude_angle, 3)])), 3);
+        % % 绘制比幅测向误差曲线
+        % plot(alpha_angle, meanErrorAmplitude, ...
+        %     '--', ...
+        %     'Color', colors(var_index, :), ...
+        %     'LineWidth', 1, ...
+        %     'HandleVisibility', 'off');
+
+        % 计算比幅测向误差的平均值，只考虑≤90度范围
+        tmp = meanErrorAmplitude_N;
+        meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:tmp, var_index, :) - ...
+            repmat(reshape(alpha_angle(1:tmp), [tmp, 1, 1]), ...
+            [1, 1, size(doa_amplitude_angle, 3)])), 3);
+        % 绘制比幅测向误差曲线
+        plot(alpha_angle(1:tmp), meanErrorAmplitude, ...
+            '--', ...
+            'Color', colors(var_index, :), ...
+            'LineWidth', 1, ...
+            'HandleVisibility', 'off');
+
+        % 记录总平均误差
+        meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
+        meanmeanErrorAmplitude(var_index) = mean(meanErrorAmplitude);
     end
     
     hold off;
@@ -182,6 +199,10 @@ if is_plot_angle_error
     ylim([0 10]);
     legend('show');
     grid on;
+    
+    % 打印总平均误差
+    fprintf(['    ' var_titlename '   比相误差' '   比幅误差\n']);
+    disp([var_list.' meanmeanErrorPhase meanmeanErrorAmplitude]);
 end
 
 
