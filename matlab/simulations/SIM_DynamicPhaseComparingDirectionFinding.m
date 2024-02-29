@@ -11,8 +11,10 @@ tic;
 % 是否输出结果
 is_fprintf = 1;
 % 是否绘图
-is_figure = 1;
+is_figure = 0;
 
+% 是否加噪
+is_addnoise = 0;
 % 是否使用滤波器
 is_bandpassfilter = 0;
 
@@ -28,7 +30,7 @@ frequency = 3.2e4;
 samp_rate = 6.4e6;
 
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
-alpha_angle = 67;
+alpha_angle = 6;
 % 信号源与接收机比相时相对距离d_r 单位m
 d_relative = 20 * c / frequency;    % 20倍正弦信号波长
 % 接收机水平移动速度 单位m/s
@@ -151,8 +153,12 @@ end
 
 
 % ##########################高斯加噪##########################
-% 添加噪声到信号
-sig_rx_ch1_noisy = FUNC_AddGaussianNoise(sig_rx_ch1, snr_value);
+if is_addnoise
+    % 添加噪声到信号
+    sig_rx_ch1_noisy = FUNC_AddGaussianNoise(sig_rx_ch1, snr_value);
+else
+    sig_rx_ch1_noisy = sig_rx_ch1;
+end
 
 
 
