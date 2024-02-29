@@ -28,7 +28,7 @@ v_rx = 10e3;
 % 接收机比相相干积累序列数
 coherent_integration_number = 1;
 % 接收机比相相干积累每序列包含正弦信号序列周期数
-coherent_integration_cycles = 1000;
+coherent_integration_cycles = 100;
 
 % (option) 是否使用带通滤波器（无输入则使用）
 is_bandpassfilter = 0;
@@ -39,11 +39,11 @@ is_bandpassfilter = 0;
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
 alpha_angle = (0:1:179);
 % 高斯加噪信噪比SNR 单位dB
-snr_value = (-20:10:20);
+snr_value = (-30:5:30);
 
 % ##########################仿真##########################
 % 仿真次数
-sim_num = 10;
+sim_num = 100;
 
 % 测向结果数组初始化
 doa_phase_angle = ...
