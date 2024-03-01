@@ -43,7 +43,7 @@ is_bandpassfilter = 0;
 alpha_angle = (0:1:179);
 
 % 接收机比相相干积累每序列包含正弦信号序列周期数
-coherent_integration_cycles = [1 5 10 50 100 500 1000];
+coherent_integration_cycles = [1 5 10 50 100 500 1000 5000 10000];
 
 % ##########################仿真##########################
 % 仿真次数
