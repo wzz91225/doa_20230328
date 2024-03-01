@@ -131,12 +131,8 @@ if is_plot_angle_error
     title(['不同' var_titlename '下测向结果的平均绝对误差']);
     xlabel('实际角度（°）');
     ylabel('平均绝对误差（°）');
-    if isequal(alpha_angle, (1:179))
-        xlim([0 90]);
-    else
-        xlim([alpha_angle(1) alpha_angle(end)]);
-    end
-    ylim([0 10]);
+    xlim([alpha_angle(1) alpha_angle(end)]);
+    ylim('auto');
     legend('show');
     grid on;
     
