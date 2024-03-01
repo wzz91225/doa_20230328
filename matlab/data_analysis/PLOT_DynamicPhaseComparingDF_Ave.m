@@ -31,7 +31,7 @@ if not(exist('doa_phase_angle', 'var') && ...
     exist('alpha_angle', 'var') && ...
     exist('sim_num', 'var') && ...
     exist('snr_value', 'var') && ...
-    exist('coherent_integration_number', 'var') && ...
+    exist('coherent_integration_cycles', 'var') && ...
     exist('samp_rate', 'var'))
     error('Missing required variables.');
 end
@@ -41,10 +41,10 @@ if length(snr_value) > 1
     var_list = snr_value;
     var_displayname = '%d dB';
     var_titlename = '信噪比';
-elseif length(coherent_integration_number) > 1
-    var_list = coherent_integration_number;
-    var_displayname = 'N_{CI} = %d';
-    var_titlename = '相干积累数';
+elseif length(coherent_integration_cycles) > 1
+    var_list = coherent_integration_cycles;
+    var_displayname = 'N_{Cyc} = %d';
+    var_titlename = '信号周期数';
 elseif length(samp_rate) > 1
     var_list = samp_rate./1e6;
     var_displayname = '%0.1f MHz';
