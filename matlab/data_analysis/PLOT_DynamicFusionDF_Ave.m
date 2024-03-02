@@ -5,12 +5,12 @@ clear;
 % 计时开始
 tic;
 
-% ##########################可视化选择##########################
+%% ##########################可视化选择##########################
 is_plot_angle = 0;
-is_plot_angle_ave = 0;
+is_plot_angle_ave = 1;
 is_plot_angle_error = 1;
 
-% ##########################读取数据文件##########################
+%% ##########################读取数据文件##########################
 % % 指定.mat文件的路径
 % matFilePath = 'matlab/simulation_results/SIMDATA-240222_075811-DynamicFusionDF_Ave.mat';
 
@@ -37,7 +37,7 @@ if not(exist('doa_phase_angle', 'var') && ...
     error('Missing required variables.');
 end
 
-% ##########################确定二维变量##########################
+%% ##########################确定二维变量##########################
 if length(snr_value) > 1
     var_list = snr_value;
     var_displayname = '%d dB';
@@ -52,9 +52,31 @@ elseif length(samp_rate) > 1
     var_titlename = '采样率';
 end
 
-% ##########################单次角度关系图##########################
+
+
+%% ##########################测向融合##########################
+if not(exist('doa_fusion_angle', 'var'))
+    doa_fusion_angle = ...
+        zeros(length(alpha_angle), length(var_list), sim_num);
+    
+    for i = 1 : length(alpha_angle)
+        for j = 1 : length(var_list)
+            for k = 1 : sim_num
+                angle_amp = doa_amplitude_angle(i, j, k);
+                angle_dyp = doa_phase_angle(i, j, k);
+                doa_fusion_angle(i, j, k) = ...
+                    FUNC_DF2D_DirectionFindingFusionModel(angle_amp, angle_dyp);
+            end
+        end
+    end
+    doa_fusion_angle_ave = mean(doa_fusion_angle, 3);
+end
+
+
+
+%% ##########################单次角度关系图##########################
 if is_plot_angle
-    % 绘制时延比相测向角度与角度的关系图
+    % 绘制时延比相测向结果与预期角度的关系图
     figure;
     hold on;
     for i = 1:length(var_list)
@@ -63,13 +85,13 @@ if is_plot_angle
             'DisplayName', sprintf(var_displayname, var_list(i)));
     end
     hold off;
-    title(['不同' var_titlename '下动态比相测向结果与实际角度的关系']);
-    xlabel('实际角度（°）');
+    title(['不同' var_titlename '下动态比相测向结果与预期角度的关系']);
+    xlabel('预期角度（°）');
     ylabel('动态比相测向结果（°）');
     legend('show');
     grid on;
     
-    % 绘制比幅测向角度与角度的关系图
+    % 绘制比幅测向结果与预期角度的关系图
     figure;
     hold on;
     for i = 1:length(var_list)
@@ -78,14 +100,29 @@ if is_plot_angle
             'DisplayName', sprintf(var_displayname, var_list(i)));
     end
     hold off;
-    title(['不同' var_titlename '下比幅测向结果与实际角度的关系']);
-    xlabel('实际角度（°）');
+    title(['不同' var_titlename '下比幅测向结果与预期角度的关系']);
+    xlabel('预期角度（°）');
     ylabel('比幅测向结果（°）');
+    legend('show');
+    grid on;
+    
+    % 绘制动态融合测向结果与预期角度的关系图
+    figure;
+    hold on;
+    for i = 1:length(var_list)
+        plot(alpha_angle, doa_fusion_angle(:, i), ...
+            'LineWidth', 1, ...
+            'DisplayName', sprintf(var_displayname, var_list(i)));
+    end
+    hold off;
+    title(['不同' var_titlename '下动态融合测向结果与预期角度的关系']);
+    xlabel('预期角度（°）');
+    ylabel('动态融合测向结果（°）');
     legend('show');
     grid on;
 end
 
-% ##########################平均角度关系图##########################
+%% ##########################平均角度关系图##########################
 % 仿真次数>1
 if is_plot_angle_ave && (sim_num > 1)
     % 检查是否含有需要的变量
@@ -94,7 +131,7 @@ if is_plot_angle_ave && (sim_num > 1)
         error('Missing doa_phase_angle_ave or doa_amplitude_angle_ave.');
     end
 
-    % 绘制时延比相测向平均角度与角度的关系图
+    % 绘制时延比相测向平均结果与预期角度的关系图
     figure;
     hold on;
     for i = 1:length(var_list)
@@ -103,13 +140,13 @@ if is_plot_angle_ave && (sim_num > 1)
             'DisplayName', sprintf(var_displayname, var_list(i)));
     end
     hold off;
-    title(['不同' var_titlename '下动态比相平均测向结果与实际角度的关系']);
-    xlabel('实际角度（°）');
+    title(['不同' var_titlename '下动态比相平均测向结果与预期角度的关系']);
+    xlabel('预期角度（°）');
     ylabel('动态比相平均测向结果（°）');
     legend('show');
     grid on;
 
-    % 绘制比幅测向平均角度与角度的关系图
+    % 绘制比幅测向平均结果与预期角度的关系图
     figure;
     hold on;
     for i = 1:length(var_list)
@@ -118,14 +155,29 @@ if is_plot_angle_ave && (sim_num > 1)
             'DisplayName', sprintf(var_displayname, var_list(i)));
     end
     hold off;
-    title(['不同' var_titlename '下比幅平均测向结果与实际角度的关系']);
-    xlabel('实际角度（°）');
+    title(['不同' var_titlename '下比幅平均测向结果与预期角度的关系']);
+    xlabel('预期角度（°）');
     ylabel('比幅平均测向结果（°）');
+    legend('show');
+    grid on;
+
+    % 绘制动态融合测向平均结果与预期角度的关系图
+    figure;
+    hold on;
+    for i = 1:length(var_list)
+        plot(alpha_angle, doa_fusion_angle_ave(:, i), ...
+            'LineWidth', 1, ...
+            'DisplayName', sprintf(var_displayname, var_list(i)));
+    end
+    hold off;
+    title(['不同' var_titlename '下比动态融合测向结果与预期角度的关系']);
+    xlabel('预期角度（°）');
+    ylabel('动态融合测向结果（°）');
     legend('show');
     grid on;
 end
 
-% ##########################角度误差图##########################
+%% ##########################角度误差图##########################
 if is_plot_angle_error
     figure;
     hold on; % 保持当前图形
@@ -146,6 +198,7 @@ if is_plot_angle_error
     % 总平均误差
     meanmeanErrorPhase = zeros(size(doa_phase_angle, 2), 1);
     meanmeanErrorAmplitude = zeros( size(doa_phase_angle, 2), 1);
+    meanmeanErrorFusion = zeros( size(doa_phase_angle, 2), 1);
     
     % 遍历第二维（如SNR或CIN或SR值）
     for var_index = 1 : size(doa_phase_angle, 2)
@@ -155,9 +208,10 @@ if is_plot_angle_error
             [1, 1, size(doa_phase_angle, 3)])), 3);
         % 绘制时延比相测向误差曲线
         plot(alpha_angle, meanErrorPhase, ...
+            ':', ...
             'Color', colors(var_index, :), ...
             'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(var_index)));
+            'HandleVisibility', 'off');
         
         % % 计算比幅测向误差的平均值，考虑全部范围
         % meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, var_index, :) - ...
@@ -182,14 +236,25 @@ if is_plot_angle_error
             'LineWidth', 1, ...
             'HandleVisibility', 'off');
 
+        % 计算动态融合测向误差的平均值
+        meanErrorFusion = mean(abs(doa_fusion_angle(:, var_index, :) - ...
+            repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
+            [1, 1, size(doa_fusion_angle, 3)])), 3);
+        % 绘制动态融合测向误差曲线
+        plot(alpha_angle, meanErrorFusion, ...
+            'Color', colors(var_index, :), ...
+            'LineWidth', 1, ...
+            'DisplayName', sprintf(var_displayname, var_list(var_index)));
+
         % 记录总平均误差
         meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
         meanmeanErrorAmplitude(var_index) = mean(meanErrorAmplitude);
+        meanmeanErrorFusion(var_index) = mean(meanErrorFusion);
     end
     
     hold off;
     title(['不同' var_titlename '下测向结果的平均绝对误差']);
-    xlabel('实际角度（°）');
+    xlabel('预期角度（°）');
     ylabel('平均绝对误差（°）');
     if isequal(alpha_angle, (1:179))
         xlim([0 90]);
@@ -201,8 +266,8 @@ if is_plot_angle_error
     grid on;
     
     % 打印总平均误差
-    fprintf(['    ' var_titlename '   比相误差' '   比幅误差\n']);
-    disp([var_list.' meanmeanErrorPhase meanmeanErrorAmplitude]);
+    fprintf(['    ' var_titlename '   比相误差' '   比幅误差' '   融合误差\n']);
+    disp([var_list.' meanmeanErrorPhase meanmeanErrorAmplitude meanmeanErrorFusion]);
 end
 
 
