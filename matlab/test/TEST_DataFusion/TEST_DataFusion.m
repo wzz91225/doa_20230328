@@ -19,29 +19,36 @@ if ~isequal(alpha_angle, (0:1:179))
     error('Variable alpha_angle is not equal (1:1:179).');
 end
 
-var_index = 1;
+% 计算时延比相测向和比幅测向的平均值
+meanPhase = zeros(180, 1);
+meanAmplitude = zeros(180, 1);
+for var_index = 1 : size(doa_phase_angle, 2)
+    meanPhase = meanPhase + mean(doa_phase_angle(:, var_index, :), 3);
+    meanAmplitude = meanAmplitude + mean(doa_amplitude_angle(:, var_index, :), 3);
+end
 % 计算时延比相测向的平均值
-meanPhase = mean(doa_phase_angle(:, var_index, :), 3);
-% 计算比幅测向误差的平均值
-alpha_angle_amp = [(0:1:90) (89:-1:1)];
-meanAmplitude = mean(doa_amplitude_angle(:, var_index, :), 3);
-
+meanPhase = meanPhase / size(doa_phase_angle, 2);
+% 计算比幅测向的平均值
+meanAmplitude = meanAmplitude / size(doa_phase_angle, 2);
 % 对折
-meanPhase = meanPhase.';
-meanAmplitude = meanAmplitude.';
 for i = (1:89)
     meanPhase(i) = (meanPhase(i) + 180-meanPhase(180-i)) / 2;
     meanAmplitude(i) = (meanAmplitude(i) + meanAmplitude(180-i)) / 2;
 end
+meanPhase = meanPhase.';
+meanAmplitude = meanAmplitude.';
 
 
 
 %% ##########################数据提取##########################
 % algorithm1Results 和 algorithm2Results 分别是两组算法的测向结果
-algorithm1Results = meanAmplitude(1:90);
-algorithm2Results =meanPhase(1:90);
 % trueDirections 是真实测向数据
-trueDirections = alpha_angle(1:90);
+% algorithm1Results = meanAmplitude(30:37);
+% algorithm2Results =meanPhase(30:37);
+% trueDirections = alpha_angle(30:37);
+algorithm1Results = meanAmplitude(47:87);
+algorithm2Results =meanPhase(47:87);
+trueDirections = alpha_angle(47:87);
 
 
 
@@ -53,6 +60,7 @@ initialParams = 0.5; % 假设最初等权重融合
 options = optimset('Display', 'iter');
 [optimalParam, minMSE] = fminsearch(@(params) calculateMSE(params, algorithm1Results, algorithm2Results, trueDirections), initialParams, options);
 
+fprintf('%.100f\n', optimalParam);
 
 
 %% ##########################应用最优融合模型##########################
@@ -72,3 +80,4 @@ plot(algorithm2Results, 'r--');
 plot(finalFusedResult, 'g', 'LineWidth', 1);
 legend('True Directions', 'Algorithm 1', 'Algorithm 2', 'Fused Result');
 title(sprintf('Fusion Result Comparison, Final MSE: %.4f', finalMSE));
+
