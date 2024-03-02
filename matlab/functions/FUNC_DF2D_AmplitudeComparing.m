@@ -1,7 +1,7 @@
 function [radian, angle, frequency_ch1, frequency_ch2] = ...
     FUNC_DF2D_AmplitudeComparing( ...
     signal_ch1, signal_ch2, samp_rate)
-% 基于双通道比幅测向算法测量信号方位角和俯仰角
+% 基于双通道比幅测向算法测量信号方位角
 % 参数:
 % - signal_ch1: X轴天线通道信号
 % - signal_ch2: Y轴天线通道信号
@@ -32,7 +32,7 @@ if isnan(max_peak_power_ch2)
     frequency_ch2 = frequency_ch1;
 end
 
-% 计算方位角和俯仰角
+% 计算方位角
 amplitude_ch1 = sqrt(max_peak_power_ch1);
 amplitude_ch2 = sqrt(max_peak_power_ch2);
 radian = atan2(amplitude_ch2, amplitude_ch1);
