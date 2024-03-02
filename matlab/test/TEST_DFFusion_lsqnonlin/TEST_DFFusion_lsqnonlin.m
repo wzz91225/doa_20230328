@@ -2,17 +2,17 @@ clear;
 
 % ##########################读取数据文件##########################
 % % 指定.mat文件的路径
-% matFilePath = 'matlab/simulation_results/SIMDATA-240222_075811-DynamicFusionDF_Ave.mat';
+matFilePath = 'C:\projects\doa_20230328\matlab\simulation_results\SIMDATA-240225_220537-DynamicFusionDF_Ave_180x7x1000x2e2_merged.mat';
 
-% 弹出文件选择对话框让用户选择.mat文件
-[fileName, filePath] = uigetfile('matlab/simulation_results/*.mat', ...
-    'Select the MATLAB Data File');
-% 完整的文件路径
-matFilePath = fullfile(filePath, fileName);
-% 检查用户是否取消了文件选择
-if isequal(fileName, 0) || isequal(filePath, 0)
-    error('User canceled file selection.');
-end
+% % 弹出文件选择对话框让用户选择.mat文件
+% [fileName, filePath] = uigetfile('matlab/simulation_results/*.mat', ...
+%     'Select the MATLAB Data File');
+% % 完整的文件路径
+% matFilePath = fullfile(filePath, fileName);
+% % 检查用户是否取消了文件选择
+% if isequal(fileName, 0) || isequal(filePath, 0)
+%     error('User canceled file selection.');
+% end
 
 % 从.mat文件中加载数据
 load(matFilePath);
@@ -32,27 +32,39 @@ var_index = 1;
 meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
     repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
     [1, 1, size(doa_phase_angle, 3)])), 3);
-% 计算比幅测向误差的平均值，考虑全部范围
+% 计算比幅测向误差的平均值
 alpha_angle_amp = [(0:1:90) (89:-1:1)];
 meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, var_index, :) - ...
     repmat(reshape(alpha_angle_amp, [length(alpha_angle_amp), 1, 1]), ...
     [1, 1, size(doa_amplitude_angle, 3)])), 3);
 
+% 对折
+meanErrorPhase = meanErrorPhase.';
+meanErrorAmplitude = meanErrorAmplitude.';
+for i = (1:89)
+    meanErrorPhase(i) = (meanErrorPhase(i) + meanErrorPhase(180-i)) / 2;
+    meanErrorAmplitude(i) = (meanErrorAmplitude(i) + meanErrorAmplitude(180-i)) / 2;
+end
+
 % xData和yData
-xData = alpha_angle; % 测向角度数据
-yData1 = meanErrorPhase.'; % 第一个算法的MAE数据
-yData2 = meanErrorAmplitude.'; % 第二个算法的MAE数据
+xData = alpha_angle(1:90); % 测向角度数据
+yData1 = meanErrorPhase(1:90); % 第一个算法的MAE数据
+yData2 = meanErrorAmplitude(1:90); % 第二个算法的MAE数据
 
 
 % ##########################读取数据文件##########################
 % 初始参数估计
-initialParams = [1, 1, 1]; % 根据实际情况进行调整
+initialParams = [1, 1, 1, 1, 1, 1]; % 根据实际情况进行调整
 
 % 定义匿名函数，以适配lsqnonlin的输入格式
 errorFunc = @(params) errorFunction(params, xData, yData1, yData2);
 
 % 调用lsqnonlin
-options = optimoptions('lsqnonlin', 'Display', 'iter');
+options = optimoptions('lsqnonlin', ...
+    'Display', 'iter');
+% options = optimoptions('lsqnonlin', ...
+%     'Algorithm', 'interior-point', ...
+%     'Display', 'iter');
 [paramsOptimized,~,residuals,~,output] = lsqnonlin(errorFunc, initialParams, [], [], options);
 
 % 使用优化后的参数来计算模型预测值
