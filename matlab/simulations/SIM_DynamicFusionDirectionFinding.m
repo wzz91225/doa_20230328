@@ -267,6 +267,9 @@ sigB_integration_sum = sigB_ch1_integration + sigB_ch2_integration;
 [~, doa_amplitude_angle] = FUNC_DF2D_AmplitudeComparing( ...
     sigB_ch1_integration, sigB_ch2_integration, samp_rate);
 
+% 融合测向
+[~, doa_fusion_angle] = FUNC_DF2D_DirectionFindingFusionModel( ...
+    doa_amplitude_angle, doa_phase_angle);
 
 
 % ##########################输出结果##########################
@@ -274,8 +277,9 @@ if is_fprintf
     fprintf('频率检测A = %.2fHz\n', freq_sigA);
     fprintf('频率检测B = %.2fHz\n', freq_sigB);
     fprintf('实际角度[0, 180) = %.2f°\n', alpha_angle);
-    fprintf('比相算法角度[0, 180) = %.2f°\n', doa_phase_angle);
     fprintf('比幅算法角度[0, 90] = %.2f°\n', doa_amplitude_angle);
+    fprintf('比相算法角度[0, 180) = %.2f°\n', doa_phase_angle);
+    fprintf('融合算法角度[0, 180) = %.2f°\n', doa_fusion_angle);
 end
 
 

@@ -1,4 +1,4 @@
-function [doa_phase_angle, doa_amplitude_angle] = ...
+function [doa_phase_angle, doa_amplitude_angle, doa_fusion_angle] = ...
     FUNC_SIM_DynamicFusionDirectionFinding( ...
     c, frequency, samp_rate, alpha_angle, d_relative, v_rx, snr_value, ...
     coherent_integration_number, coherent_integration_cycles, ...
@@ -19,6 +19,7 @@ function [doa_phase_angle, doa_amplitude_angle] = ...
 % 返回值:
 % - doa_phase_angle: 时延比相测向角度 范围[0, 180)
 % - doa_amplitude_angle: 比幅测向角度 范围[0, 90]
+% - doa_fusion_angle: 融合测向角度 范围[0, 180)
 
 
 
@@ -182,6 +183,31 @@ sigB_ch2 = sig_rx_ch2_noisy(idx_B_head : idx_B_tail);
 
 
 
+% % ##########################频率检测##########################
+% % 双通道信号相加
+% sigA_sum = sigA_ch1 + sigA_ch2;
+% sigB_sum = sigB_ch1 + sigB_ch2;
+
+% % 计算信号功率谱及其对应频率向量
+% [fv_sigA, pspectrum_sigA] = FUNC_TransForm2PowerSpectrum( ...
+%     sigA_sum, samp_rate);
+% [fv_sigB, pspectrum_sigB] = FUNC_TransForm2PowerSpectrum( ...
+%     sigB_sum, samp_rate);
+
+% % 查找功率谱峰及其对应频点
+% [freq_sigA, ppower_sigA] = FUNC_FindMaxPeak(fv_sigA, pspectrum_sigA);
+% [freq_sigB, ppower_sigB] = FUNC_FindMaxPeak(fv_sigB, pspectrum_sigB);
+% if isnan(freq_sigA)
+%     freq_sigA = freq_sigB;
+%     ppower_sigA = 0;
+% end
+% if isnan(freq_sigB)
+%     freq_sigB = freq_sigA;
+%     ppower_sigB = 0;
+% end
+
+
+
 % ##########################带通滤波##########################
 if nargin < 10 || is_bandpassfilter
     % 检查是否提供滤波器阶数
@@ -252,5 +278,9 @@ sigB_integration_sum = sigB_ch1_integration + sigB_ch2_integration;
 % 比幅测向算法
 [~, doa_amplitude_angle] = FUNC_DF2D_AmplitudeComparing( ...
     sigB_ch1_integration, sigB_ch2_integration, samp_rate);
+
+% 融合测向
+[~, doa_fusion_angle] = FUNC_DF2D_DirectionFindingFusionModel( ...
+    doa_amplitude_angle, doa_phase_angle);
 
 end
