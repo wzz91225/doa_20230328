@@ -29,13 +29,15 @@ snr_value = data1.snr_value;
 coherent_integration_number = data1.coherent_integration_number;
 coherent_integration_cycles = data1.coherent_integration_cycles;
 
-% 计算新的sim_num和sim_timing
-sim_num = data1.sim_num + data2.sim_num;
+% 计算新的sim_timing
 sim_timing = data1.sim_timing + data2.sim_timing;
 
 if isequal(data1.alpha_angle, data2.alpha_angle)
     % alpha_angle角度数组一致
     alpha_angle = data1.alpha_angle;
+
+    % 计算新的sim_num
+    sim_num = data1.sim_num + data2.sim_num;
 
     % 合并doa_phase_angle和doa_amplitude_angle变量
     doa_phase_angle = cat(3, data1.doa_phase_angle, data2.doa_phase_angle);
@@ -43,6 +45,13 @@ if isequal(data1.alpha_angle, data2.alpha_angle)
 else
     % alpha_angle角度数组不同（假定小在前大在后），则合并alpha_angle
     alpha_angle = [data1.alpha_angle, data2.alpha_angle];
+
+    % 如何仿真次数不同
+    if data1.sim_num ~= data2.sim_num
+        error('data1.sim_num ~= data2.sim_num');
+    else
+        sim_num = data1.sim_num;
+    end
 
     % 根据新的alpha_angle长度更新doa_phase_angle和doa_amplitude_angle
     % 由于第一维（alpha_angle的长度）不同，我们需要在这一维进行合并
