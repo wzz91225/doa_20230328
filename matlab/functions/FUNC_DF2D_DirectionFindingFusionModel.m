@@ -8,7 +8,7 @@ function [doa_angle] = FUNC_DF2D_DirectionFindingFusionModel( ...
     % - doa_angle: 融合方位角度
 
 % 融合系数
-alpha = 1.021679687500001;
+alpha = 0.5;
 
 result1 = angle_AmplitudeComp;
 if angle_DynamicPhaseComp > 90
@@ -17,9 +17,13 @@ else
     result2 = angle_DynamicPhaseComp;
 end
 
-fusedResult = alpha * result1 + (1 - alpha) * result2;
+if result1 < 80
+    fusedResult = alpha * result1 + (1 - alpha) * result2;
+else
+    fusedResult = result1;
+end
 
-if angle_DynamicPhaseComp > 90
+if 90 < angle_DynamicPhaseComp
     doa_angle = 180 - fusedResult;
 else
     doa_angle = fusedResult;
