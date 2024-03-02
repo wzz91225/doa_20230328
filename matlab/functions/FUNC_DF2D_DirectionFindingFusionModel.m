@@ -17,7 +17,9 @@ else
     result2 = angle_DynamicPhaseComp;
 end
 
-if result1 < 80
+if result1 < 37
+    fusedResult = result1;
+elseif result1 < 80
     fusedResult = alpha * result1 + (1 - alpha) * result2;
 else
     fusedResult = result1;
