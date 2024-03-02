@@ -6,9 +6,16 @@ clear;
 tic;
 
 %% ##########################可视化选择##########################
+is_plot_phase = 1;
+is_plot_amplitude = 0;
+is_plot_fusion = 1;
+
 is_plot_angle = 0;
 is_plot_angle_ave = 0;
 is_plot_angle_error = 1;
+
+% 比幅法是否只计算90度以下误差
+is_amplitude_errorlessthan90 = 1;
 
 %% ##########################读取数据文件##########################
 % % 指定.mat文件的路径
@@ -76,50 +83,56 @@ end
 
 %% ##########################单次角度关系图##########################
 if is_plot_angle
-    % 绘制时延比相测向结果与预期角度的关系图
-    figure;
-    hold on;
-    for i = 1:length(var_list)
-        plot(alpha_angle, doa_phase_angle(:, i), ...
-            'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(i)));
+    if is_plot_phase
+        % 绘制时延比相测向结果与预期角度的关系图
+        figure;
+        hold on;
+        for i = 1:length(var_list)
+            plot(alpha_angle, doa_phase_angle(:, i), ...
+                'LineWidth', 1, ...
+                'DisplayName', sprintf(var_displayname, var_list(i)));
+        end
+        hold off;
+        title(['不同' var_titlename '下动态比相测向结果与预期角度的关系']);
+        xlabel('预期角度（°）');
+        ylabel('动态比相测向结果（°）');
+        legend('show');
+        grid on;
     end
-    hold off;
-    title(['不同' var_titlename '下动态比相测向结果与预期角度的关系']);
-    xlabel('预期角度（°）');
-    ylabel('动态比相测向结果（°）');
-    legend('show');
-    grid on;
     
-    % 绘制比幅测向结果与预期角度的关系图
-    figure;
-    hold on;
-    for i = 1:length(var_list)
-        plot(alpha_angle, doa_amplitude_angle(:, i), ...
-            'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(i)));
+    if is_plot_amplitude
+        % 绘制比幅测向结果与预期角度的关系图
+        figure;
+        hold on;
+        for i = 1:length(var_list)
+            plot(alpha_angle, doa_amplitude_angle(:, i), ...
+                'LineWidth', 1, ...
+                'DisplayName', sprintf(var_displayname, var_list(i)));
+        end
+        hold off;
+        title(['不同' var_titlename '下比幅测向结果与预期角度的关系']);
+        xlabel('预期角度（°）');
+        ylabel('比幅测向结果（°）');
+        legend('show');
+        grid on;
     end
-    hold off;
-    title(['不同' var_titlename '下比幅测向结果与预期角度的关系']);
-    xlabel('预期角度（°）');
-    ylabel('比幅测向结果（°）');
-    legend('show');
-    grid on;
     
-    % 绘制动态融合测向结果与预期角度的关系图
-    figure;
-    hold on;
-    for i = 1:length(var_list)
-        plot(alpha_angle, doa_fusion_angle(:, i), ...
-            'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(i)));
+    if is_plot_fusion
+        % 绘制动态融合测向结果与预期角度的关系图
+        figure;
+        hold on;
+        for i = 1:length(var_list)
+            plot(alpha_angle, doa_fusion_angle(:, i), ...
+                'LineWidth', 1, ...
+                'DisplayName', sprintf(var_displayname, var_list(i)));
+        end
+        hold off;
+        title(['不同' var_titlename '下动态融合测向结果与预期角度的关系']);
+        xlabel('预期角度（°）');
+        ylabel('动态融合测向结果（°）');
+        legend('show');
+        grid on;
     end
-    hold off;
-    title(['不同' var_titlename '下动态融合测向结果与预期角度的关系']);
-    xlabel('预期角度（°）');
-    ylabel('动态融合测向结果（°）');
-    legend('show');
-    grid on;
 end
 
 %% ##########################平均角度关系图##########################
@@ -131,50 +144,56 @@ if is_plot_angle_ave && (sim_num > 1)
         error('Missing doa_phase_angle_ave or doa_amplitude_angle_ave.');
     end
 
-    % 绘制时延比相测向平均结果与预期角度的关系图
-    figure;
-    hold on;
-    for i = 1:length(var_list)
-        plot(alpha_angle, doa_phase_angle_ave(:, i), ...
-            'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(i)));
+    if is_plot_phase
+        % 绘制时延比相测向平均结果与预期角度的关系图
+        figure;
+        hold on;
+        for i = 1:length(var_list)
+            plot(alpha_angle, doa_phase_angle_ave(:, i), ...
+                'LineWidth', 1, ...
+                'DisplayName', sprintf(var_displayname, var_list(i)));
+        end
+        hold off;
+        title(['不同' var_titlename '下动态比相平均测向结果与预期角度的关系']);
+        xlabel('预期角度（°）');
+        ylabel('动态比相平均测向结果（°）');
+        legend('show');
+        grid on;
     end
-    hold off;
-    title(['不同' var_titlename '下动态比相平均测向结果与预期角度的关系']);
-    xlabel('预期角度（°）');
-    ylabel('动态比相平均测向结果（°）');
-    legend('show');
-    grid on;
 
-    % 绘制比幅测向平均结果与预期角度的关系图
-    figure;
-    hold on;
-    for i = 1:length(var_list)
-        plot(alpha_angle, doa_amplitude_angle_ave(:, i), ...
-            'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(i)));
+    if is_plot_amplitude
+        % 绘制比幅测向平均结果与预期角度的关系图
+        figure;
+        hold on;
+        for i = 1:length(var_list)
+            plot(alpha_angle, doa_amplitude_angle_ave(:, i), ...
+                'LineWidth', 1, ...
+                'DisplayName', sprintf(var_displayname, var_list(i)));
+        end
+        hold off;
+        title(['不同' var_titlename '下比幅平均测向结果与预期角度的关系']);
+        xlabel('预期角度（°）');
+        ylabel('比幅平均测向结果（°）');
+        legend('show');
+        grid on;
     end
-    hold off;
-    title(['不同' var_titlename '下比幅平均测向结果与预期角度的关系']);
-    xlabel('预期角度（°）');
-    ylabel('比幅平均测向结果（°）');
-    legend('show');
-    grid on;
 
-    % 绘制动态融合测向平均结果与预期角度的关系图
-    figure;
-    hold on;
-    for i = 1:length(var_list)
-        plot(alpha_angle, doa_fusion_angle_ave(:, i), ...
-            'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(i)));
+    if is_plot_fusion
+        % 绘制动态融合测向平均结果与预期角度的关系图
+        figure;
+        hold on;
+        for i = 1:length(var_list)
+            plot(alpha_angle, doa_fusion_angle_ave(:, i), ...
+                'LineWidth', 1, ...
+                'DisplayName', sprintf(var_displayname, var_list(i)));
+        end
+        hold off;
+        title(['不同' var_titlename '下比动态融合测向结果与预期角度的关系']);
+        xlabel('预期角度（°）');
+        ylabel('动态融合测向结果（°）');
+        legend('show');
+        grid on;
     end
-    hold off;
-    title(['不同' var_titlename '下比动态融合测向结果与预期角度的关系']);
-    xlabel('预期角度（°）');
-    ylabel('动态融合测向结果（°）');
-    legend('show');
-    grid on;
 end
 
 %% ##########################角度误差图##########################
@@ -202,49 +221,60 @@ if is_plot_angle_error
     
     % 遍历第二维（如SNR或CIN或SR值）
     for var_index = 1 : size(doa_phase_angle, 2)
+
         % 计算时延比相测向误差的平均值
         meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
             repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
             [1, 1, size(doa_phase_angle, 3)])), 3);
-        % 绘制时延比相测向误差曲线
-        plot(alpha_angle, meanErrorPhase, ...
-            ':', ...
-            'Color', colors(var_index, :), ...
-            'LineWidth', 1, ...
-            'HandleVisibility', 'off');
+        if is_plot_phase
+            % 绘制时延比相测向误差曲线
+                plot(alpha_angle, meanErrorPhase, ...
+                    ':', ...
+                    'Color', colors(var_index, :), ...
+                    'LineWidth', 1, ...
+                    'HandleVisibility', 'off');
+        end
         
-        % 计算比幅测向误差的平均值，考虑全部范围
-        meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, var_index, :) - ...
-            repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
-            [1, 1, size(doa_amplitude_angle, 3)])), 3);
-        % 绘制比幅测向误差曲线
-        plot(alpha_angle, meanErrorAmplitude, ...
-            '--', ...
-            'Color', colors(var_index, :), ...
-            'LineWidth', 1, ...
-            'HandleVisibility', 'off');
-
-        % % 计算比幅测向误差的平均值，只考虑≤90度范围
-        % tmp = meanErrorAmplitude_N;
-        % meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:tmp, var_index, :) - ...
-        %     repmat(reshape(alpha_angle(1:tmp), [tmp, 1, 1]), ...
-        %     [1, 1, size(doa_amplitude_angle, 3)])), 3);
-        % % 绘制比幅测向误差曲线
-        % plot(alpha_angle(1:tmp), meanErrorAmplitude, ...
-        %     '--', ...
-        %     'Color', colors(var_index, :), ...
-        %     'LineWidth', 1, ...
-        %     'HandleVisibility', 'off');
+        if is_amplitude_errorlessthan90
+            % 计算比幅测向误差的平均值，只考虑≤90度范围
+            tmp = meanErrorAmplitude_N;
+            meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:tmp, var_index, :) - ...
+                repmat(reshape(alpha_angle(1:tmp), [tmp, 1, 1]), ...
+                [1, 1, size(doa_amplitude_angle, 3)])), 3);
+            if is_plot_amplitude
+                % 绘制比幅测向误差曲线
+                plot(alpha_angle(1:tmp), meanErrorAmplitude, ...
+                    '--', ...
+                    'Color', colors(var_index, :), ...
+                    'LineWidth', 1, ...
+                    'HandleVisibility', 'off');
+            end
+        else
+            % 计算比幅测向误差的平均值，考虑全部范围
+            meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, var_index, :) - ...
+                repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
+                [1, 1, size(doa_amplitude_angle, 3)])), 3);
+            if is_plot_amplitude
+                % 绘制比幅测向误差曲线
+                plot(alpha_angle, meanErrorAmplitude, ...
+                    '--', ...
+                    'Color', colors(var_index, :), ...
+                    'LineWidth', 1, ...
+                    'HandleVisibility', 'off');
+            end
+        end
 
         % 计算动态融合测向误差的平均值
         meanErrorFusion = mean(abs(doa_fusion_angle(:, var_index, :) - ...
             repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
             [1, 1, size(doa_fusion_angle, 3)])), 3);
-        % 绘制动态融合测向误差曲线
-        plot(alpha_angle, meanErrorFusion, ...
-            'Color', colors(var_index, :), ...
-            'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(var_index)));
+        if is_plot_fusion
+            % 绘制动态融合测向误差曲线
+            plot(alpha_angle, meanErrorFusion, ...
+                'Color', colors(var_index, :), ...
+                'LineWidth', 1, ...
+                'DisplayName', sprintf(var_displayname, var_list(var_index)));
+        end
 
         % 记录总平均误差
         meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
