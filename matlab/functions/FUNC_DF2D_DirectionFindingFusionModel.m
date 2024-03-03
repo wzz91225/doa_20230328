@@ -17,13 +17,23 @@ else
     result2 = angle_DynamicPhaseComp;
 end
 
-if result1 < 37
+if result1 < 30
     fusedResult = result1;
 elseif result1 < 80
     fusedResult = alpha * result1 + (1 - alpha) * result2;
 else
     fusedResult = result1;
 end
+
+% if result1 < 30
+%     fusedResult = result1;
+% elseif result1 < 80
+%     fusedResult = alpha * result1 + (1 - alpha) * result2;
+% elseif result1 < 90
+%     fusedResult = 0.8 * result1 + (1 - 0.8) * result2;
+% else
+%     fusedResult = result1;
+% end
 
 if 90 < angle_DynamicPhaseComp
     doa_angle = 180 - fusedResult;

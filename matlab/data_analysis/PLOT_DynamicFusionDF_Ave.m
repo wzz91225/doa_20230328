@@ -7,7 +7,7 @@ tic;
 
 %% ##########################可视化选择##########################
 is_plot_phase = 1;
-is_plot_amplitude = 0;
+is_plot_amplitude = 1;
 is_plot_fusion = 1;
 
 is_plot_angle = 0;
