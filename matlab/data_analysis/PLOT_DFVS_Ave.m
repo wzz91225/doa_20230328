@@ -68,8 +68,17 @@ if is_plot_angle
     title(['不同' var_titlename '下动态比相测向结果与预期角度的关系']);
     xlabel('预期角度（°）');
     ylabel('动态比相测向结果（°）');
-    legend('show');
+    % legend('show');
     grid on;
+    % 美化
+    title(' ');
+    legend('show', ...
+        'Location', 'southoutside', ...
+        'NumColumns',length(var_list), ...
+        'box', 'off');
+    % legend('boxoff');
+    % angle_range = alpha_angle(end) - alpha_angle(1) + 1;
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
     
     % 绘制比幅测向结果与预期角度的关系图
     figure;
@@ -83,8 +92,17 @@ if is_plot_angle
     title(['不同' var_titlename '下比幅测向结果与预期角度的关系']);
     xlabel('预期角度（°）');
     ylabel('比幅测向结果（°）');
-    legend('show');
+    % legend('show');
     grid on;
+    % 美化
+    title(' ');
+    legend('show', ...
+        'Location', 'southoutside', ...
+        'NumColumns',length(var_list), ...
+        'box', 'off');
+    % legend('boxoff');
+    % angle_range = alpha_angle(end) - alpha_angle(1) + 1;
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
 end
 
 %% ##########################平均角度关系图##########################
@@ -151,26 +169,28 @@ if is_plot_angle_error
     
     % 遍历第二维（如SNR或CIN或SR值）
     for var_index = 1 : size(doa_phase_angle, 2)
-        % 计算时延比相测向误差的平均值
+        % 计算动态比相测向误差的平均值
         meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
             repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
             [1, 1, size(doa_phase_angle, 3)])), 3);
         % 绘制时延比相测向误差曲线
-        plot(alpha_angle, meanErrorPhase, ...
+        p1 = plot(alpha_angle, meanErrorPhase, ...
             'Color', colors(var_index, :), ...
             'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(var_index)));
+            'DisplayName', ['动态比相 ' sprintf(var_displayname, var_list(var_index))]);
+            % 'DisplayName', sprintf(var_displayname, var_list(var_index)));
         
         % 计算比幅测向误差的平均值，考虑全部范围
         meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, var_index, :) - ...
             repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
             [1, 1, size(doa_amplitude_angle, 3)])), 3);
         % 绘制比幅测向误差曲线
-        plot(alpha_angle, meanErrorAmplitude, ...
+        p2 = plot(alpha_angle, meanErrorAmplitude, ...
             '--', ...
             'Color', colors(var_index, :), ...
             'LineWidth', 1, ...
-            'HandleVisibility', 'off');
+            'DisplayName', ['传统比幅 ' sprintf(var_displayname, var_list(var_index))]);
+            % 'HandleVisibility', 'off');
 
         % % 计算比幅测向误差的平均值，只考虑≤90度范围
         % tmp = meanErrorAmplitude_N;
@@ -178,7 +198,7 @@ if is_plot_angle_error
         %     repmat(reshape(alpha_angle(1:tmp), [tmp, 1, 1]), ...
         %     [1, 1, size(doa_amplitude_angle, 3)])), 3);
         % % 绘制比幅测向误差曲线
-        % plot(alpha_angle(1:tmp), meanErrorAmplitude, ...
+        % p2 = plot(alpha_angle(1:tmp), meanErrorAmplitude, ...
         %     '--', ...
         %     'Color', colors(var_index, :), ...
         %     'LineWidth', 1, ...
@@ -198,9 +218,16 @@ if is_plot_angle_error
     else
         xlim([alpha_angle(1) alpha_angle(end)]);
     end
-    ylim([0 10]);
-    legend('show');
+    ylim([0 5]);
     grid on;
+    
+    % 美化
+    title(' ');
+    legend('show', ...
+        'Location', 'southoutside', ...
+        'NumColumns',length(var_list), ...
+        'box', 'off');
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
     
     % 打印总平均误差
     fprintf(['    ' var_titlename '   比相误差' '   比幅误差\n']);

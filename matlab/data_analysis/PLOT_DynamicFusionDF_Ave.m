@@ -7,7 +7,7 @@ tic;
 
 %% ##########################可视化选择##########################
 is_plot_phase = 1;
-is_plot_amplitude = 1;
+is_plot_amplitude = 0;
 is_plot_fusion = 1;
 
 is_plot_angle = 0;
@@ -222,17 +222,31 @@ if is_plot_angle_error
     % 遍历第二维（如SNR或CIN或SR值）
     for var_index = 1 : size(doa_phase_angle, 2)
 
-        % 计算时延比相测向误差的平均值
+        % 计算动态融合测向误差的平均值
+        meanErrorFusion = mean(abs(doa_fusion_angle(:, var_index, :) - ...
+            repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
+            [1, 1, size(doa_fusion_angle, 3)])), 3);
+        if is_plot_fusion
+            % 绘制动态融合测向误差曲线
+            plot(alpha_angle, meanErrorFusion, ...
+                'Color', colors(var_index, :), ...
+                'LineWidth', 1, ...
+                'DisplayName', sprintf(var_displayname, var_list(var_index)));
+                % 'DisplayName', ['动态融合 ' sprintf(var_displayname, var_list(var_index))]);
+        end
+
+        % 计算动态比相测向误差的平均值
         meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
             repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
             [1, 1, size(doa_phase_angle, 3)])), 3);
         if is_plot_phase
-            % 绘制时延比相测向误差曲线
+            % 绘制动态比相测向误差曲线
                 plot(alpha_angle, meanErrorPhase, ...
                     ':', ...
                     'Color', colors(var_index, :), ...
                     'LineWidth', 1, ...
                     'HandleVisibility', 'off');
+                    % 'DisplayName', ['动态比相 ' sprintf(var_displayname, var_list(var_index))]);
         end
         
         if is_amplitude_errorlessthan90
@@ -244,10 +258,11 @@ if is_plot_angle_error
             if is_plot_amplitude
                 % 绘制比幅测向误差曲线
                 plot(alpha_angle(1:tmp), meanErrorAmplitude, ...
-                    '--', ...
+                    ':', ...
                     'Color', colors(var_index, :), ...
                     'LineWidth', 1, ...
-                    'HandleVisibility', 'off');
+                    'DisplayName', ['传统比幅 ' sprintf(var_displayname, var_list(var_index))]);
+                    % 'HandleVisibility', 'off');
             end
         else
             % 计算比幅测向误差的平均值，考虑全部范围
@@ -257,29 +272,18 @@ if is_plot_angle_error
             if is_plot_amplitude
                 % 绘制比幅测向误差曲线
                 plot(alpha_angle, meanErrorAmplitude, ...
-                    '--', ...
+                    ':', ...
                     'Color', colors(var_index, :), ...
                     'LineWidth', 1, ...
-                    'HandleVisibility', 'off');
+                    'DisplayName', ['传统比幅 ' sprintf(var_displayname, var_list(var_index))]);
+                    % 'HandleVisibility', 'off');
             end
         end
 
-        % 计算动态融合测向误差的平均值
-        meanErrorFusion = mean(abs(doa_fusion_angle(:, var_index, :) - ...
-            repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
-            [1, 1, size(doa_fusion_angle, 3)])), 3);
-        if is_plot_fusion
-            % 绘制动态融合测向误差曲线
-            plot(alpha_angle, meanErrorFusion, ...
-                'Color', colors(var_index, :), ...
-                'LineWidth', 1, ...
-                'DisplayName', sprintf(var_displayname, var_list(var_index)));
-        end
-
         % 记录总平均误差
+        meanmeanErrorFusion(var_index) = mean(meanErrorFusion);
         meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
         meanmeanErrorAmplitude(var_index) = mean(meanErrorAmplitude);
-        meanmeanErrorFusion(var_index) = mean(meanErrorFusion);
     end
     
     hold off;
@@ -287,15 +291,18 @@ if is_plot_angle_error
     xlabel('预期角度（°）');
     ylabel('平均绝对误差（°）');
     xlim([alpha_angle(1) alpha_angle(end)]);
-    ylim([0 10]);
+    ylim([0 5]);
     % legend('show');
     grid on;
     
     % 美化
     title(' ');
-    legend('show', 'Location','southoutside','NumColumns',length(var_list));
-    % angle_range = alpha_angle(end) - alpha_angle(1) + 1;
+    legend('show', ...
+        'Location', 'southoutside', ...
+        'NumColumns',length(var_list), ...
+        'box', 'off');
     set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
+    % set(gcf, 'unit', 'centimeters', 'position', [10 5 20 13]);
 
     
     % 打印总平均误差
