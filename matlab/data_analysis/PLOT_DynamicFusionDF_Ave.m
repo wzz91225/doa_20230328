@@ -286,14 +286,17 @@ if is_plot_angle_error
     title(['不同' var_titlename '下测向结果的平均绝对误差']);
     xlabel('预期角度（°）');
     ylabel('平均绝对误差（°）');
-    if isequal(alpha_angle, (1:179))
-        xlim([0 90]);
-    else
-        xlim([alpha_angle(1) alpha_angle(end)]);
-    end
+    xlim([alpha_angle(1) alpha_angle(end)]);
     ylim([0 10]);
-    legend('show');
+    % legend('show');
     grid on;
+    
+    % 美化
+    title(' ');
+    legend('show', 'Location','southoutside','NumColumns',length(var_list));
+    % angle_range = alpha_angle(end) - alpha_angle(1) + 1;
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
+
     
     % 打印总平均误差
     fprintf(['    ' var_titlename '   比相误差' '   比幅误差' '   融合误差\n']);
