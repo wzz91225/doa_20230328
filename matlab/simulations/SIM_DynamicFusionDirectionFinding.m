@@ -1,6 +1,6 @@
 % clc;
 clear;
-% close all;
+close all;
 
 % 仿真计时开始
 tic;
@@ -11,10 +11,12 @@ tic;
 % 是否输出结果
 is_fprintf = 1;
 % 是否绘图
-is_figure = 0;
+is_figure = 1;
 
 % 是否使用滤波器
 is_filter = 0;
+% 是否使用相干积累器
+is_coherent_integration = 1;
 
 
 
@@ -28,7 +30,7 @@ frequency = 3.2e4;
 samp_rate = 6.4e6;
 
 % 信号源与接收机比相时相对角度alpha 范围[0, 180)
-alpha_angle = 0;
+alpha_angle = 34;
 % 信号源与接收机比相时相对距离d_r 单位m
 d_relative = 20 * c / frequency;    % 20倍正弦信号波长
 % 接收机水平移动速度 单位m/s
@@ -268,7 +270,7 @@ sigB_integration_sum = sigB_ch1_integration + sigB_ch2_integration;
     sigB_ch1_integration, sigB_ch2_integration, samp_rate);
 
 % 融合测向
-[~, doa_fusion_angle] = FUNC_DF2D_DirectionFindingFusionModel( ...
+doa_fusion_angle = FUNC_DF2D_DirectionFindingFusionModel( ...
     doa_amplitude_angle, doa_phase_angle);
 
 
@@ -381,78 +383,82 @@ if is_figure
     title('双通道天线截取接收信号B频谱');
     grid on;
 
+    
+    if is_filter
+        % 滤波器频率响应和相位相应
+        figure;
+        freqz(filter_b, 1, 1024, samp_rate);
+    
+    
+        % 带通滤波信号A和B
+        figure;
+    
+        subplot(2, 1, 1);
+        plot(tv_sigA(1:plot_points), sigA_ch1_filtered(1:plot_points), ...
+            'DisplayName', 'X轴通道1');
+        hold on;
+        plot(tv_sigA(1:plot_points), sigA_ch2_filtered(1:plot_points), ...
+            'DisplayName', 'Y轴通道2');
+        hold off;
+        legend('show');
+        xlabel('时间 (s)');
+        ylabel('幅值');
+        title('带通滤波双通道信号A');
+        xlim([tv_sigA(1) tv_sigA(plot_points)]);
+        ylim([-2 2]);
+        grid on;
+    
+        subplot(2, 1, 2);
+        plot(tv_sigB(1:plot_points), sigB_ch1_filtered(1:plot_points), ...
+            'DisplayName', 'X轴通道1');
+        hold on;
+        plot(tv_sigB(1:plot_points), sigB_ch2_filtered(1:plot_points), ...
+            'DisplayName', 'Y轴通道2');
+        hold off;
+        legend('show');
+        xlabel('时间 (s)');
+        ylabel('幅值');
+        title('带通滤波双通道信号B');
+        xlim([tv_sigB(1) tv_sigB(plot_points)]);
+        ylim([-2 2]);
+        grid on;
+    end
 
-    % 滤波器频率响应和相位相应
-    figure;
-    freqz(filter_b, 1, 1024, samp_rate);
 
-
-    % 带通滤波信号A和B
-    figure;
-
-    subplot(2, 1, 1);
-    plot(tv_sigA(1:plot_points), sigA_ch1_filtered(1:plot_points), ...
-        'DisplayName', 'X轴通道1');
-    hold on;
-    plot(tv_sigA(1:plot_points), sigA_ch2_filtered(1:plot_points), ...
-        'DisplayName', 'Y轴通道2');
-    hold off;
-    legend('show');
-    xlabel('时间 (s)');
-    ylabel('幅值');
-    title('带通滤波双通道信号A');
-    xlim([tv_sigA(1) tv_sigA(plot_points)]);
-    ylim([-2 2]);
-    grid on;
-
-    subplot(2, 1, 2);
-    plot(tv_sigB(1:plot_points), sigB_ch1_filtered(1:plot_points), ...
-        'DisplayName', 'X轴通道1');
-    hold on;
-    plot(tv_sigB(1:plot_points), sigB_ch2_filtered(1:plot_points), ...
-        'DisplayName', 'Y轴通道2');
-    hold off;
-    legend('show');
-    xlabel('时间 (s)');
-    ylabel('幅值');
-    title('带通滤波双通道信号B');
-    xlim([tv_sigB(1) tv_sigB(plot_points)]);
-    ylim([-2 2]);
-    grid on;
-
-
-    % 相干积累信号A和B
-    figure;
-
-    subplot(2, 1, 1);
-    plot(tv_sigA_integration, sigA_ch1_integration, ...
-        'DisplayName', 'X轴通道1');
-    hold on;
-    plot(tv_sigA_integration, sigA_ch2_integration, ...
-        'DisplayName', 'Y轴通道2');
-    hold off;
-    legend('show');
-    xlabel('时间 (s)');
-    ylabel('幅值');
-    title('相干积累双通道信号A');
-    xlim([tv_sigA_integration(1) tv_sigA_integration(end)]);
-    ylim([-2 2]);
-    grid on;
-
-    subplot(2, 1, 2);
-    plot(tv_sigB_integration, sigB_ch1_integration, ...
-        'DisplayName', 'X轴通道1');
-    hold on;
-    plot(tv_sigB_integration, sigB_ch2_integration, ...
-        'DisplayName', 'Y轴通道2');
-    hold off;
-    legend('show');
-    xlabel('时间 (s)');
-    ylabel('幅值');
-    title('相干积累双通道信号B');
-    xlim([tv_sigB_integration(1) tv_sigB_integration(end)]);
-    ylim([-2 2]);
-    grid on;
+    if is_coherent_integration
+        % 相干积累信号A和B
+        figure;
+    
+        subplot(2, 1, 1);
+        plot(tv_sigA_integration, sigA_ch1_integration, ...
+            'DisplayName', 'X轴通道1');
+        hold on;
+        plot(tv_sigA_integration, sigA_ch2_integration, ...
+            'DisplayName', 'Y轴通道2');
+        hold off;
+        legend('show');
+        xlabel('时间 (s)');
+        ylabel('幅值');
+        title('相干积累双通道信号A');
+        xlim([tv_sigA_integration(1) tv_sigA_integration(end)]);
+        ylim([-2 2]);
+        grid on;
+    
+        subplot(2, 1, 2);
+        plot(tv_sigB_integration, sigB_ch1_integration, ...
+            'DisplayName', 'X轴通道1');
+        hold on;
+        plot(tv_sigB_integration, sigB_ch2_integration, ...
+            'DisplayName', 'Y轴通道2');
+        hold off;
+        legend('show');
+        xlabel('时间 (s)');
+        ylabel('幅值');
+        title('相干积累双通道信号B');
+        xlim([tv_sigB_integration(1) tv_sigB_integration(end)]);
+        ylim([-2 2]);
+        grid on;
+    end
 end
 
 % 仿真计时结束
