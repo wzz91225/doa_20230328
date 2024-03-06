@@ -53,6 +53,6 @@ signal_rxB = signal_noisy(delay_B : delay_B+sampling_points_retain);
 
 % ##########################时延比相测向##########################
 distance = velocity_t * delta_t;
-[~, doa_angle] = FUNC_DF2D_SignalDelayPhaceComparing(sigB_filtered, sigA_filtered, frequency, delta_t, distance, c);
+[~, doa_angle] = FUNC_DF2D_SignalDelayPhaseComparing(sigB_filtered, sigA_filtered, frequency, delta_t, distance, c);
 
 end
