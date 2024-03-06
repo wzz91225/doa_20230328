@@ -51,7 +51,8 @@ grid on;
 distance_relative = 20*c/frequency;     % 相对距离
 relative_DoA = 66                       % 相对角度
 velocity_t = 1e4;                       % 卫星运动速度
-delta_t = c/frequency/2/velocity_t;     % 比相时间间隔
+baseline_coefficient = 16;               % 干涉仪基线长度系数（默认为2）
+delta_t = c/frequency/velocity_t/baseline_coefficient;  % 比相时间间隔
 sampling_points_retain = samp_rate/frequency * 100;     % 比相保留采样点数
 
 % 计算采样点延迟数量
@@ -97,8 +98,8 @@ grid on;
 [sigB_filtered, ~] = FUNC_BandpassFilter(signal_rxB, frequency, samp_rate);
 
 % 查看滤波器的频率响应
-figure(2)
-freqz(filter_b, 1, 1024, samp_rate);
+% figure(2)
+% freqz(filter_b, 1, 1024, samp_rate);
 
 % 绘制滤波后的信号
 figure(1);
