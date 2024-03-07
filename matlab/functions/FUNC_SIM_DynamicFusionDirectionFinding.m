@@ -280,7 +280,7 @@ sigB_integration_sum = sigB_ch1_integration + sigB_ch2_integration;
     sigB_ch1_integration, sigB_ch2_integration, samp_rate);
 
 % 融合测向
-[~, doa_fusion_angle] = FUNC_DF2D_DirectionFindingFusionModel( ...
+[doa_fusion_angle] = FUNC_DF2D_DirectionFindingFusionModel( ...
     doa_amplitude_angle, doa_phase_angle);
 
 end
