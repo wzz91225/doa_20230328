@@ -26,9 +26,9 @@ d_relative = 20 * c / frequency;    % 20倍正弦信号波长
 v_rx = 10e3;
 
 % 接收机比相相干积累序列数
-coherent_integration_number = 1;
+coherent_integration_number = 10;
 % 接收机比相相干积累每序列包含正弦信号序列周期数
-coherent_integration_cycles = 100;
+coherent_integration_cycles = 10;
 
 % (option) 是否使用带通滤波器（无输入则使用）
 is_bandpassfilter = 0;
@@ -43,16 +43,21 @@ snr_value = (-30:5:30);
 
 % ##########################仿真##########################
 % 仿真次数
-sim_num = 100;
+sim_num = 1000;
 
 % 测向结果数组初始化
 doa_phase_angle = ...
     zeros(length(alpha_angle), length(snr_value), sim_num);
 doa_amplitude_angle = ...
     zeros(length(alpha_angle), length(snr_value), sim_num);
+doa_fusion_angle = ...
+    zeros(length(alpha_angle), length(snr_value), sim_num);
+
 doa_phase_angle_ave = ...
     zeros(length(alpha_angle), length(snr_value));
 doa_amplitude_angle_ave = ...
+    zeros(length(alpha_angle), length(snr_value));
+doa_fusion_angle_ave = ...
     zeros(length(alpha_angle), length(snr_value));
 
 % 并行循环仿真
@@ -63,10 +68,12 @@ parfor i = 1 : len_alpha_angle
     for j = 1 : len_snr_value
         tmp_doa_phase_angle = 0;
         tmp_doa_amplitude_angle = 0;
+        tmp_doa_fusion_angle = 0;
+
         tmp_snr_value = snr_value(j);
         
         for k = 1 : sim_num
-            [tmp1, tmp2] = ...
+            [tmp1, tmp2, tmp3] = ...
                 FUNC_SIM_DynamicFusionDirectionFinding( ...
                 c, frequency, samp_rate, alpha_angle(i), ...
                 d_relative, v_rx, tmp_snr_value, ...
@@ -75,13 +82,16 @@ parfor i = 1 : len_alpha_angle
             
             doa_phase_angle(i, j, k) = tmp1;
             doa_amplitude_angle(i, j, k) = tmp2;
+            doa_fusion_angle(i, j, k) = tmp3;
 
             tmp_doa_phase_angle = tmp_doa_phase_angle + tmp1;
             tmp_doa_amplitude_angle = tmp_doa_amplitude_angle + tmp2;
+            tmp_doa_fusion_angle = tmp_doa_fusion_angle + tmp3;
         end
         
         doa_phase_angle_ave(i, j) = tmp_doa_phase_angle / sim_num;
         doa_amplitude_angle_ave(i, j) = tmp_doa_amplitude_angle / sim_num;
+        doa_fusion_angle_ave(i, j) = tmp_doa_fusion_angle / sim_num;
     end
     % disp(i);
 end
@@ -105,6 +115,7 @@ if 1
     save(fileName, 'sim_num', 'sim_timing', ...
         'doa_phase_angle', 'doa_amplitude_angle', ...
         'doa_phase_angle_ave', 'doa_amplitude_angle_ave', ...
+        'doa_fusion_angle', 'doa_fusion_angle_ave', ...
         'c', 'frequency', 'samp_rate', 'alpha_angle', ...
         'd_relative', 'v_rx', 'snr_value', ...
         'coherent_integration_number', 'coherent_integration_cycles', ...
