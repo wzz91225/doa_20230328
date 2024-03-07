@@ -34,31 +34,22 @@ options:
 
 blocks:
 - name: center_freq
-  id: variable_qtgui_range
+  id: variable
   parameters:
     comment: ''
-    gui_hint: ''
-    label: ''
-    min_len: '200'
-    orient: QtCore.Qt.Horizontal
-    rangeType: float
-    start: 10e6
-    step: '1'
-    stop: 2e9
-    value: 315e6
-    widget: counter_slider
+    value: 2.4e9
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [320, 20.0]
+    coordinate: [304, 20.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: gain_rx_A0
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: 2, 0
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -79,7 +70,7 @@ blocks:
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: 2, 1
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -100,7 +91,7 @@ blocks:
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: 3, 0
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -121,7 +112,7 @@ blocks:
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: 3, 1
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
