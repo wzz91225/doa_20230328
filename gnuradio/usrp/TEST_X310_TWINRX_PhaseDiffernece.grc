@@ -78,7 +78,7 @@ blocks:
     start: '0'
     step: '1'
     stop: '10000'
-    value: '0'
+    value: '1166'
     widget: counter_slider
   states:
     bus_sink: false
@@ -99,7 +99,7 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '1'
+    value: '47'
     widget: counter_slider
   states:
     bus_sink: false
@@ -120,13 +120,13 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '2'
+    value: '48'
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [128, 236.0]
+    coordinate: [136, 236.0]
     rotation: 0
     state: true
 - name: gain_rx_B1
@@ -141,7 +141,7 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '3'
+    value: '41'
     widget: counter_slider
   states:
     bus_sink: false
@@ -162,13 +162,13 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '4'
+    value: '43'
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [128, 340.0]
+    coordinate: [136, 340.0]
     rotation: 0
     state: true
 - name: pi
@@ -187,12 +187,42 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 6.4e6
+    value: 3.2e6
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
     coordinate: [200, 20.0]
+    rotation: 0
+    state: enabled
+- name: HIER_complex2float_0
+  id: HIER_complex2float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 696.0]
+    rotation: 0
+    state: enabled
+- name: HIER_complex2float_0_0
+  id: HIER_complex2float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 728.0]
     rotation: 0
     state: enabled
 - name: aoa_calc_phase_diff_1
@@ -544,7 +574,7 @@ blocks:
     color8: dark red
     color9: dark green
     comment: ''
-    ctrlpanel: 'False'
+    ctrlpanel: 'True'
     entags: 'True'
     grid: 'True'
     gui_hint: ''
@@ -641,7 +671,7 @@ blocks:
     color8: dark red
     color9: dark green
     comment: ''
-    ctrlpanel: 'False'
+    ctrlpanel: 'True'
     entags: 'True'
     grid: 'True'
     gui_hint: ''
@@ -687,7 +717,7 @@ blocks:
     tr_mode: qtgui.TRIG_MODE_AUTO
     tr_slope: qtgui.TRIG_SLOPE_POS
     tr_tag: '""'
-    type: complex
+    type: float
     update_time: '0.10'
     width1: '1'
     width10: '1'
@@ -707,7 +737,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 700.0]
+    coordinate: [1040, 692.0]
     rotation: 0
     state: enabled
 - name: uhd_usrp_source_0_1
@@ -1304,6 +1334,8 @@ blocks:
     state: enabled
 
 connections:
+- [HIER_complex2float_0, '0', qtgui_time_sink_x_0_0_0, '0']
+- [HIER_complex2float_0_0, '0', qtgui_time_sink_x_0_0_0, '1']
 - [aoa_calc_phase_diff_1, '0', qtgui_number_sink_0, '0']
 - [blocks_add_xx_0, '0', blocks_delay_0, '0']
 - [blocks_add_xx_1, '0', blocks_delay_1, '0']
@@ -1311,11 +1343,11 @@ connections:
 - [blocks_complex_to_magphase_0, '1', qtgui_time_sink_x_0_0, '0']
 - [blocks_complex_to_magphase_0_0, '0', blocks_null_sink_0, '1']
 - [blocks_complex_to_magphase_0_0, '1', qtgui_time_sink_x_0_0, '1']
+- [blocks_delay_0, '0', HIER_complex2float_0, '0']
 - [blocks_delay_0, '0', blocks_complex_to_magphase_0, '0']
-- [blocks_delay_0, '0', qtgui_time_sink_x_0_0_0, '0']
 - [blocks_delay_0, '0', virtual_sink_4, '0']
+- [blocks_delay_1, '0', HIER_complex2float_0_0, '0']
 - [blocks_delay_1, '0', blocks_complex_to_magphase_0_0, '0']
-- [blocks_delay_1, '0', qtgui_time_sink_x_0_0_0, '1']
 - [blocks_delay_1, '0', virtual_sink_5, '0']
 - [uhd_usrp_source_0_1, '0', qtgui_sink_x_0_1, '0']
 - [uhd_usrp_source_0_1, '0', virtual_sink_0, '0']
@@ -1334,4 +1366,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.6.0
+  grc_version: 3.10.9.2
