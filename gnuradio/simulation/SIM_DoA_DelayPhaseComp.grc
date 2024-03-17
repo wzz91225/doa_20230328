@@ -72,7 +72,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [136, 132.0]
+    coordinate: [144, 132.0]
     rotation: 0
     state: true
 - name: amplitude_noise

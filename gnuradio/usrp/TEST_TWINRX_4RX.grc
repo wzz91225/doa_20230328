@@ -63,7 +63,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 20.0]
+    coordinate: [24, 132.0]
     rotation: 0
     state: true
 - name: gain_rx_A1
@@ -84,7 +84,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [608, 20.0]
+    coordinate: [24, 236.0]
     rotation: 0
     state: true
 - name: gain_rx_B0
@@ -105,7 +105,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 20.0]
+    coordinate: [24, 340.0]
     rotation: 0
     state: true
 - name: gain_rx_B1
@@ -126,14 +126,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [864, 20.0]
+    coordinate: [24, 444.0]
     rotation: 0
     state: true
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: 32e3
+    value: 32e5
   states:
     bus_sink: false
     bus_source: false
@@ -167,7 +167,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1088, 180.0]
+    coordinate: [1144, 172.0]
     rotation: 0
     state: disabled
 - name: qtgui_sink_x_0_0
@@ -196,7 +196,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1088, 324.0]
+    coordinate: [1144, 316.0]
     rotation: 0
     state: disabled
 - name: qtgui_sink_x_0_0_0
@@ -225,7 +225,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 292.0]
+    coordinate: [560, 244.0]
     rotation: 0
     state: enabled
 - name: qtgui_sink_x_0_0_0_0
@@ -254,7 +254,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 516.0]
+    coordinate: [560, 468.0]
     rotation: 0
     state: enabled
 - name: qtgui_sink_x_0_0_1
@@ -283,7 +283,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1088, 612.0]
+    coordinate: [1144, 604.0]
     rotation: 0
     state: disabled
 - name: qtgui_sink_x_0_0_2
@@ -399,7 +399,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 180.0]
+    coordinate: [560, 132.0]
     rotation: 0
     state: enabled
 - name: qtgui_sink_x_0_1_0
@@ -428,7 +428,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 404.0]
+    coordinate: [560, 356.0]
     rotation: 0
     state: enabled
 - name: qtgui_sink_x_0_2
@@ -457,7 +457,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1088, 468.0]
+    coordinate: [1144, 460.0]
     rotation: 0
     state: disabled
 - name: qtgui_sink_x_0_3
@@ -951,7 +951,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 180.0]
+    coordinate: [848, 172.0]
     rotation: 0
     state: disabled
 - name: uhd_usrp_source_0_0
@@ -1387,7 +1387,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 324.0]
+    coordinate: [848, 316.0]
     rotation: 0
     state: disabled
 - name: uhd_usrp_source_0_0_0
@@ -1823,7 +1823,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 612.0]
+    coordinate: [848, 604.0]
     rotation: 0
     state: disabled
 - name: uhd_usrp_source_0_1
@@ -2259,7 +2259,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 180.0]
+    coordinate: [216, 132.0]
     rotation: 0
     state: enabled
 - name: uhd_usrp_source_0_2
@@ -2695,7 +2695,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 468.0]
+    coordinate: [848, 460.0]
     rotation: 0
     state: disabled
 - name: uhd_usrp_source_1
