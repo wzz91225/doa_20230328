@@ -11,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: EXP_ChsCalibration_4ch_X310TWINRX
+    id: EXP_ChsCalibrating_4ch_X310TWINRX
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -22,7 +22,7 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: Not titled yet
+    title: ChannelsCalibradting
     window_size: (1000,1000)
   states:
     bus_sink: false
@@ -42,14 +42,98 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 132.0]
+    coordinate: [24, 196.0]
     rotation: 0
     state: true
+- name: delay_1
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: sink2+1, 0, 1, 1
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: '10000'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 708.0]
+    rotation: 0
+    state: enabled
+- name: delay_2
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: sink2+1, 1, 1, 1
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: '10000'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 812.0]
+    rotation: 0
+    state: enabled
+- name: delay_3
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: sink2+1, 2, 1, 1
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: '10000'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 916.0]
+    rotation: 0
+    state: enabled
+- name: delay_4
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: sink2+1, 3, 1, 1
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: '10000'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 1020.0]
+    rotation: 0
+    state: enabled
 - name: gain_rx1
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: 0,0
+    gui_hint: sink1+1, 0
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -58,19 +142,19 @@ blocks:
     step: '1'
     stop: '93'
     value: '40'
-    widget: counter
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 196.0]
+    coordinate: [128, 196.0]
     rotation: 0
     state: true
 - name: gain_rx2
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: 0,1
+    gui_hint: sink1+1, 1
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -79,19 +163,19 @@ blocks:
     step: '1'
     stop: '93'
     value: '41'
-    widget: counter
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [136, 196.0]
+    coordinate: [128, 300.0]
     rotation: 0
     state: true
 - name: gain_rx3
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: 0,2
+    gui_hint: sink1+1, 2
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -100,19 +184,19 @@ blocks:
     step: '1'
     stop: '93'
     value: '39'
-    widget: counter
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 300.0]
+    coordinate: [128, 404.0]
     rotation: 0
     state: true
 - name: gain_rx4
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: 0,3
+    gui_hint: sink1+1, 3
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -121,98 +205,98 @@ blocks:
     step: '1'
     stop: '93'
     value: '41'
-    widget: counter
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [136, 300.0]
+    coordinate: [128, 508.0]
     rotation: 0
     state: true
 - name: multiply_1
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: 1,0
+    gui_hint: sink2+2, 0, 1, 1
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0.5'
-    step: 1e-2
+    step: 1e-3
     stop: '1.5'
     value: '1'
-    widget: counter
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 412.0]
+    coordinate: [152, 708.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: multiply_2
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: 1,1
+    gui_hint: sink2+2, 1, 1, 1
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0.5'
-    step: 1e-2
+    step: 1e-3
     stop: '1.5'
-    value: '1.00'
-    widget: counter
+    value: '1.02'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [144, 412.0]
+    coordinate: [152, 812.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: multiply_3
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: 1,2
+    gui_hint: sink2+2, 2, 1, 1
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0.5'
-    step: 1e-2
+    step: 1e-3
     stop: '1.5'
-    value: '1.05'
-    widget: counter
+    value: '1.049'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 516.0]
+    coordinate: [152, 916.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: multiply_4
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: 1,3
+    gui_hint: sink2+2, 3, 1, 1
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0.5'
-    step: 1e-2
+    step: 1e-3
     stop: '1.5'
-    value: '0.97'
-    widget: counter
+    value: '0.974'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [144, 516.0]
+    coordinate: [152, 1020.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: pi
   id: variable
   parameters:
@@ -224,7 +308,7 @@ blocks:
     bus_structure: null
     coordinate: [296, 20.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: samp_rate
   id: variable
   parameters:
@@ -235,6 +319,86 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [200, 20.0]
+    rotation: 0
+    state: enabled
+- name: sink1
+  id: variable
+  parameters:
+    comment: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 116.0]
+    rotation: 0
+    state: enabled
+- name: sink1_max
+  id: variable
+  parameters:
+    comment: ''
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 116.0]
+    rotation: 0
+    state: enabled
+- name: sink2
+  id: variable
+  parameters:
+    comment: ''
+    value: sink1+sink1_max
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 628.0]
+    rotation: 0
+    state: enabled
+- name: sink2_max
+  id: variable
+  parameters:
+    comment: ''
+    value: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [280, 628.0]
+    rotation: 0
+    state: enabled
+- name: variable_qtgui_label_0
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: None
+    gui_hint: sink1,0,1,4
+    label: '"NI ETTUS USRP X310 with Dual TWINRX"'
+    type: string
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 116.0]
+    rotation: 0
+    state: enabled
+- name: variable_qtgui_label_1
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: None
+    gui_hint: sink2,0,1,4
+    label: '"4 RX Channels Calibrating"'
+    type: string
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 628.0]
     rotation: 0
     state: enabled
 - name: HIER_complex2float_0
@@ -249,7 +413,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 240.0]
+    coordinate: [856, 712.0]
     rotation: 0
     state: enabled
 - name: HIER_complex2float_1
@@ -264,7 +428,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 272.0]
+    coordinate: [856, 744.0]
     rotation: 0
     state: enabled
 - name: HIER_complex2float_2
@@ -279,7 +443,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 304.0]
+    coordinate: [856, 776.0]
     rotation: 0
     state: enabled
 - name: HIER_complex2float_3
@@ -294,7 +458,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 336.0]
+    coordinate: [856, 808.0]
     rotation: 0
     state: enabled
 - name: aoa_calc_phase_diff_1
@@ -311,7 +475,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 664.0]
+    coordinate: [584, 1272.0]
     rotation: 0
     state: enabled
 - name: aoa_calc_phase_diff_1_0
@@ -328,7 +492,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 752.0]
+    coordinate: [584, 1336.0]
     rotation: 0
     state: enabled
 - name: aoa_calc_phase_diff_1_1
@@ -345,7 +509,151 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 840.0]
+    coordinate: [584, 1400.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_magphase_0
+  id: blocks_complex_to_magphase
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 1008.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_magphase_1
+  id: blocks_complex_to_magphase
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 1072.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_magphase_2
+  id: blocks_complex_to_magphase
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 1136.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_magphase_3
+  id: blocks_complex_to_magphase
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [512, 1200.0]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: delay_1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    showports: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 708.0]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_0_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: delay_3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    showports: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 876.0]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_1
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: delay_2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    showports: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 796.0]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_1_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: delay_4
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    showports: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 964.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_xx_0
@@ -363,7 +671,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 236.0]
+    coordinate: [592, 708.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_xx_1
@@ -381,7 +689,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 276.0]
+    coordinate: [592, 796.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_xx_2
@@ -399,7 +707,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 316.0]
+    coordinate: [592, 876.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_xx_3
@@ -417,7 +725,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 356.0]
+    coordinate: [592, 964.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_0
@@ -449,7 +757,70 @@ blocks:
     factor8: '1'
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
-    gui_hint: ''
+    gui_hint: sink2+4, 2, 1, 2
+    label1: '"RX1 & RX2"'
+    label10: ''
+    label2: '"RX1 & RX3"'
+    label3: '"RX1 & RX4"'
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: pi
+    min: -pi
+    name: '"RX Phase Differences"'
+    nconnections: '3'
+    type: float
+    unit1: '"Angle"'
+    unit10: ''
+    unit2: '"Angle"'
+    unit3: '"Angle"'
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [904, 1284.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_1
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_VERT
+    gui_hint: sink2+4, 0, 1, 2
     label1: ''
     label10: ''
     label2: ''
@@ -460,10 +831,10 @@ blocks:
     label7: ''
     label8: ''
     label9: ''
-    max: pi
-    min: -pi
-    name: '""'
-    nconnections: '3'
+    max: '1'
+    min: '0'
+    name: '"RX Magnitude"'
+    nconnections: '4'
     type: float
     unit1: ''
     unit10: ''
@@ -475,12 +846,128 @@ blocks:
     unit7: ''
     unit8: ''
     unit9: ''
-    update_time: '0.25'
+    update_time: '0.50'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [848, 680.0]
+    coordinate: [808, 1008.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: sink1+2,0,1,2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Signal RX1"'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 196.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_sink_x_1
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: sink1+2,2,1,2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Signal RX2"'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 260.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_sink_x_2
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: sink1+3,2,1,2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Signal RX4"'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 396.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_sink_x_3
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: sink1+3,0,1,2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Signal RX3"'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 332.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_0
@@ -514,7 +1001,7 @@ blocks:
     ctrlpanel: 'True'
     entags: 'True'
     grid: 'True'
-    gui_hint: ''
+    gui_hint: sink2+3, 0, 1, 2
     label1: Signal 1
     label10: Signal 10
     label2: Signal 2
@@ -558,7 +1045,7 @@ blocks:
     tr_slope: qtgui.TRIG_SLOPE_POS
     tr_tag: '""'
     type: float
-    update_time: '0.10'
+    update_time: '0.25'
     width1: '1'
     width10: '1'
     width2: '1'
@@ -577,7 +1064,104 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 240.0]
+    coordinate: [1048, 712.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_time_sink_x_0_1
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'True'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'True'
+    entags: 'True'
+    grid: 'True'
+    gui_hint: sink2+3, 2, 1, 2
+    label1: Signal 1
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"RX Phase"'
+    nconnections: '4'
+    size: '1024'
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_AUTO
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.25'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Phase
+    ymax: '1'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 1136.0]
     rotation: 0
     state: enabled
 - name: uhd_usrp_source_0
@@ -1013,7 +1597,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 132.0]
+    coordinate: [312, 196.0]
     rotation: 0
     state: enabled
 - name: virtual_sink_0
@@ -1021,12 +1605,25 @@ blocks:
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_A1
+    stream_id: RX_1
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 380.0]
+    coordinate: [696, 468.0]
+    rotation: 0
+    state: true
+- name: virtual_sink_0_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RXCali_1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 844.0]
     rotation: 0
     state: true
 - name: virtual_sink_1
@@ -1034,12 +1631,25 @@ blocks:
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_A2
+    stream_id: RX_2
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 420.0]
+    coordinate: [696, 508.0]
+    rotation: 0
+    state: true
+- name: virtual_sink_1_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RXCali_2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 884.0]
     rotation: 0
     state: true
 - name: virtual_sink_2
@@ -1047,12 +1657,25 @@ blocks:
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_B1
+    stream_id: RX_3
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 460.0]
+    coordinate: [696, 548.0]
+    rotation: 0
+    state: true
+- name: virtual_sink_2_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RXCali_3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 924.0]
     rotation: 0
     state: true
 - name: virtual_sink_3
@@ -1060,90 +1683,181 @@ blocks:
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_B2
+    stream_id: RX_4
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 500.0]
+    coordinate: [696, 588.0]
     rotation: 0
     state: true
-- name: virtual_source_0_0_0
-  id: virtual_source
+- name: virtual_sink_3_0
+  id: virtual_sink
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_A1
+    stream_id: RXCali_4
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 660.0]
+    coordinate: [856, 964.0]
+    rotation: 0
+    state: true
+- name: virtual_source_0_0_0_1
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RX_1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 708.0]
     rotation: 0
     state: enabled
-- name: virtual_source_0_0_0_0
+- name: virtual_source_0_0_0_1_0
   id: virtual_source
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_A1
+    stream_id: RXCali_1
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 748.0]
+    coordinate: [304, 1020.0]
     rotation: 0
     state: enabled
-- name: virtual_source_0_0_0_0_0
+- name: virtual_source_0_0_0_1_0_0
   id: virtual_source
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_A1
+    stream_id: RXCali_1
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 836.0]
+    coordinate: [304, 1268.0]
     rotation: 0
     state: enabled
-- name: virtual_source_0_1
+- name: virtual_source_0_1_0
   id: virtual_source
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_B1
+    stream_id: RX_3
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 788.0]
+    coordinate: [304, 876.0]
     rotation: 0
     state: enabled
-- name: virtual_source_1_0_0
+- name: virtual_source_0_1_0_0
   id: virtual_source
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_A2
+    stream_id: RXCali_3
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 700.0]
+    coordinate: [304, 1148.0]
     rotation: 0
     state: enabled
-- name: virtual_source_1_1
+- name: virtual_source_0_1_0_0_0
   id: virtual_source
   parameters:
     alias: ''
     comment: ''
-    stream_id: RX_B2
+    stream_id: RXCali_3
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 876.0]
+    coordinate: [304, 1380.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_1_0_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RX_2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 796.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_1_0_0_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RXCali_2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 1084.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_1_0_0_0_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RXCali_2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 1332.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_1_1_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RX_4
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 964.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_1_1_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RXCali_4
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 1212.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_1_1_0_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: RXCali_4
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 1428.0]
     rotation: 0
     state: enabled
 
@@ -1155,24 +1869,48 @@ connections:
 - [aoa_calc_phase_diff_1, '0', qtgui_number_sink_0, '0']
 - [aoa_calc_phase_diff_1_0, '0', qtgui_number_sink_0, '1']
 - [aoa_calc_phase_diff_1_1, '0', qtgui_number_sink_0, '2']
+- [blocks_complex_to_magphase_0, '0', qtgui_number_sink_1, '0']
+- [blocks_complex_to_magphase_0, '1', qtgui_time_sink_x_0_1, '0']
+- [blocks_complex_to_magphase_1, '0', qtgui_number_sink_1, '1']
+- [blocks_complex_to_magphase_1, '1', qtgui_time_sink_x_0_1, '1']
+- [blocks_complex_to_magphase_2, '0', qtgui_number_sink_1, '2']
+- [blocks_complex_to_magphase_2, '1', qtgui_time_sink_x_0_1, '2']
+- [blocks_complex_to_magphase_3, '0', qtgui_number_sink_1, '3']
+- [blocks_complex_to_magphase_3, '1', qtgui_time_sink_x_0_1, '3']
+- [blocks_delay_0, '0', blocks_multiply_const_xx_0, '0']
+- [blocks_delay_0_0, '0', blocks_multiply_const_xx_2, '0']
+- [blocks_delay_1, '0', blocks_multiply_const_xx_1, '0']
+- [blocks_delay_1_0, '0', blocks_multiply_const_xx_3, '0']
 - [blocks_multiply_const_xx_0, '0', HIER_complex2float_0, '0']
-- [blocks_multiply_const_xx_0, '0', virtual_sink_0, '0']
+- [blocks_multiply_const_xx_0, '0', virtual_sink_0_0, '0']
 - [blocks_multiply_const_xx_1, '0', HIER_complex2float_1, '0']
-- [blocks_multiply_const_xx_1, '0', virtual_sink_1, '0']
+- [blocks_multiply_const_xx_1, '0', virtual_sink_1_0, '0']
 - [blocks_multiply_const_xx_2, '0', HIER_complex2float_2, '0']
-- [blocks_multiply_const_xx_2, '0', virtual_sink_2, '0']
+- [blocks_multiply_const_xx_2, '0', virtual_sink_2_0, '0']
 - [blocks_multiply_const_xx_3, '0', HIER_complex2float_3, '0']
-- [blocks_multiply_const_xx_3, '0', virtual_sink_3, '0']
-- [uhd_usrp_source_0, '0', blocks_multiply_const_xx_0, '0']
-- [uhd_usrp_source_0, '1', blocks_multiply_const_xx_1, '0']
-- [uhd_usrp_source_0, '2', blocks_multiply_const_xx_2, '0']
-- [uhd_usrp_source_0, '3', blocks_multiply_const_xx_3, '0']
-- [virtual_source_0_0_0, '0', aoa_calc_phase_diff_1, '0']
-- [virtual_source_0_0_0_0, '0', aoa_calc_phase_diff_1_0, '0']
-- [virtual_source_0_0_0_0_0, '0', aoa_calc_phase_diff_1_1, '0']
-- [virtual_source_0_1, '0', aoa_calc_phase_diff_1_0, '1']
-- [virtual_source_1_0_0, '0', aoa_calc_phase_diff_1, '1']
-- [virtual_source_1_1, '0', aoa_calc_phase_diff_1_1, '1']
+- [blocks_multiply_const_xx_3, '0', virtual_sink_3_0, '0']
+- [uhd_usrp_source_0, '0', qtgui_sink_x_0, '0']
+- [uhd_usrp_source_0, '0', virtual_sink_0, '0']
+- [uhd_usrp_source_0, '1', qtgui_sink_x_1, '0']
+- [uhd_usrp_source_0, '1', virtual_sink_1, '0']
+- [uhd_usrp_source_0, '2', qtgui_sink_x_3, '0']
+- [uhd_usrp_source_0, '2', virtual_sink_2, '0']
+- [uhd_usrp_source_0, '3', qtgui_sink_x_2, '0']
+- [uhd_usrp_source_0, '3', virtual_sink_3, '0']
+- [virtual_source_0_0_0_1, '0', blocks_delay_0, '0']
+- [virtual_source_0_0_0_1_0, '0', blocks_complex_to_magphase_0, '0']
+- [virtual_source_0_0_0_1_0_0, '0', aoa_calc_phase_diff_1, '0']
+- [virtual_source_0_0_0_1_0_0, '0', aoa_calc_phase_diff_1_0, '0']
+- [virtual_source_0_0_0_1_0_0, '0', aoa_calc_phase_diff_1_1, '0']
+- [virtual_source_0_1_0, '0', blocks_delay_0_0, '0']
+- [virtual_source_0_1_0_0, '0', blocks_complex_to_magphase_2, '0']
+- [virtual_source_0_1_0_0_0, '0', aoa_calc_phase_diff_1_0, '1']
+- [virtual_source_1_0_0_0, '0', blocks_delay_1, '0']
+- [virtual_source_1_0_0_0_0, '0', blocks_complex_to_magphase_1, '0']
+- [virtual_source_1_0_0_0_0_0, '0', aoa_calc_phase_diff_1, '1']
+- [virtual_source_1_1_0, '0', blocks_delay_1_0, '0']
+- [virtual_source_1_1_0_0, '0', blocks_complex_to_magphase_3, '0']
+- [virtual_source_1_1_0_0_0, '0', aoa_calc_phase_diff_1_1, '1']
 
 metadata:
   file_format: 1
