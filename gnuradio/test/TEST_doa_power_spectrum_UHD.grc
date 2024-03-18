@@ -262,7 +262,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 32e3
+    value: 32e5
   states:
     bus_sink: false
     bus_source: false
@@ -417,6 +417,7 @@ blocks:
     offset: '0'
     phase: '0'
     samp_rate: samp_rate
+    showports: 'False'
     type: complex
     waveform: analog.GR_COS_WAVE
   states:
@@ -425,7 +426,7 @@ blocks:
     bus_structure: null
     coordinate: [40, 180.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: blocks_null_sink_0
   id: blocks_null_sink
   parameters:
@@ -1107,7 +1108,7 @@ blocks:
     bus_structure: null
     coordinate: [392, 300.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: qtgui_vector_sink_f_0
   id: qtgui_vector_sink_f
   parameters:
@@ -1458,7 +1459,7 @@ blocks:
     bus_structure: null
     coordinate: [392, 172.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: uhd_usrp_source_0
   id: uhd_usrp_source
   parameters:
@@ -2064,4 +2065,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.4.0
+  grc_version: 3.10.9.2

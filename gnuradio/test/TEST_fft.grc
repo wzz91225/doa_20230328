@@ -58,7 +58,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '1024'
+    value: '2048'
   states:
     bus_sink: false
     bus_source: false
@@ -77,8 +77,8 @@ blocks:
     rangeType: float
     start: '0'
     step: '1'
-    stop: 1e4
-    value: 1e3
+    stop: 32e4
+    value: 32e3
     widget: counter_slider
   states:
     bus_sink: false
@@ -91,7 +91,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '32000'
+    value: 32e5
   states:
     bus_sink: false
     bus_source: false
@@ -112,6 +112,7 @@ blocks:
     offset: '0'
     phase: '0'
     samp_rate: samp_rate
+    showports: 'False'
     type: complex
     waveform: analog.GR_COS_WAVE
   states:
@@ -519,4 +520,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.4.0
+  grc_version: 3.10.9.2
