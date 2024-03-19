@@ -602,8 +602,8 @@ blocks:
       \  elif key == \"delta_t\":\n                self.delta_t = value\n\n      \
       \      # compute\n            alpha_sin = np.sin(self.azimuth * self.pi / 180)\n\
       \            alpha_cos = np.cos(self.azimuth * self.pi / 180)\n            dis_s\
-      \ = self.v * self.delta_t\n            distance_1 = self.dis_r\n           \
-      \ distance_2 = np.sqrt((self.dis_r * alpha_cos + dis_s)**2 + (self.dis_r * alpha_sin)**2)\n\
+      \ = self.v * self.delta_t\n            distance_1 = np.sqrt((self.dis_r * alpha_cos\
+      \ + dis_s)**2 + (self.dis_r * alpha_sin)**2)\n            distance_2 = self.dis_r\n\
       \            delay_1 = int((distance_1 / self.c) * self.samp_rate)\n       \
       \     delay_2 = int((distance_2 / self.c + self.delta_t) * self.samp_rate)\n\
       \n            self.message_port_pub(pmt.intern(\"delay_1\"), pmt.from_long(delay_1))\n\
@@ -656,9 +656,9 @@ blocks:
       \ (properties work, too).\n        self.pi = pi\n        self.c = c\n      \
       \  self.frequency = frequency\n        self.v_t = v_t\n        self.delta_t\
       \ = delta_t\n\n    def work(self, input_items, output_items):\n        \"\"\"\
-      Dynamic Phase Comparison\"\"\"\n        actual_delta_phi = input_items[0] -\
-      \ 2 * self.pi * self.frequency * self.delta_t\n        actual_delta_phi = (actual_delta_phi\
-      \ + self.pi) % (2 * self.pi) - self.pi\n        alpha = np.arccos(actual_delta_phi\
+      Dynamic Phase Comparison\"\"\"\n        actual_delta_phi = - input_items[0]\
+      \ + 2 * self.pi * self.frequency * self.delta_t\n        actual_delta_phi =\
+      \ (actual_delta_phi + self.pi) % (2 * self.pi) - self.pi\n        alpha = np.arccos(actual_delta_phi\
       \ * self.c / self.frequency / 2 / self.pi / self.v_t / self.delta_t)\n     \
       \   output_items[0][:] = alpha\n        output_items[1][:] = np.rad2deg(alpha)\n\
       \        # output_items[2][:] = actual_delta_phi\n        return len(output_items[0])\n"
