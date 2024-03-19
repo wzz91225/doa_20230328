@@ -45,13 +45,13 @@ blocks:
     start: '1'
     step: '1'
     stop: 1e4
-    value: 1e3
+    value: 1.8e3
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [696, 1052.0]
+    coordinate: [704, 1052.0]
     rotation: 0
     state: enabled
 - name: TH_Factor_Rise
@@ -66,7 +66,7 @@ blocks:
     start: '1'
     step: '1'
     stop: 1e4
-    value: 1e3
+    value: 1.8e3
     widget: counter_slider
   states:
     bus_sink: false
@@ -85,10 +85,10 @@ blocks:
     orient: QtCore.Qt.Horizontal
     rangeType: float
     start: '0'
-    step: '1'
-    stop: '179'
+    step: 1e-1
+    stop: '180'
     value: '90'
-    widget: counter_slider
+    widget: eng
   states:
     bus_sink: false
     bus_source: false
@@ -135,7 +135,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 1052.0]
+    coordinate: [832, 1052.0]
     rotation: 0
     state: enabled
 - name: actual_velocity
@@ -312,7 +312,7 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '40'
+    value: '50'
     widget: counter_slider
   states:
     bus_sink: false
@@ -333,7 +333,7 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '41'
+    value: '49'
     widget: counter_slider
   states:
     bus_sink: false
@@ -375,7 +375,7 @@ blocks:
     start: '0.5'
     step: 1e-3
     stop: '1.5'
-    value: '0.832'
+    value: '1.042'
     widget: counter_slider
   states:
     bus_sink: false
@@ -544,7 +544,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '2'
+    value: '3'
   states:
     bus_sink: false
     bus_source: false
@@ -568,7 +568,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '2'
+    value: '5'
   states:
     bus_sink: false
     bus_source: false
@@ -2690,6 +2690,69 @@ blocks:
     coordinate: [632, 3844.0]
     rotation: 0
     state: disabled
+- name: qtgui_number_sink_4_1
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '1'
+    color1: ("blue", "red")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: sink6+2, 0, 1, 4
+    label1: Ave.
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '180'
+    min: '0'
+    name: '"DF Result 1"'
+    nconnections: '1'
+    type: float
+    unit1: "\"\xB0\""
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [952, 3516.0]
+    rotation: 0
+    state: enabled
 - name: qtgui_number_sink_5
   id: qtgui_number_sink
   parameters:
@@ -2750,7 +2813,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 3740.0]
+    coordinate: [960, 3740.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_5_0
@@ -2816,6 +2879,69 @@ blocks:
     coordinate: [632, 4044.0]
     rotation: 0
     state: disabled
+- name: qtgui_number_sink_5_1
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '1'
+    color1: ("blue", "red")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: sink7+4,0,1,4
+    label1: Ave.
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '180'
+    min: '0'
+    name: '"DF Result 2"'
+    nconnections: '1'
+    type: float
+    unit1: "\"\xB0\""
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [952, 3852.0]
+    rotation: 0
+    state: enabled
 - name: qtgui_number_sink_6
   id: qtgui_number_sink
   parameters:
@@ -3163,11 +3289,11 @@ blocks:
     entags: 'True'
     grid: 'True'
     gui_hint: sink5+3, 0, 1, 4
-    label1: Signal 1
+    label1: Signal 1 Sampled 1st
     label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
+    label2: Signal 2 Sampled 1st
+    label3: Signal 1 Sampled 2nd
+    label4: Signal 2 Sampled 2nd
     label5: Signal 5
     label6: Signal 6
     label7: Signal 7
@@ -3184,7 +3310,7 @@ blocks:
     marker7: '-1'
     marker8: '-1'
     marker9: '-1'
-    name: '"Delay Signals"'
+    name: '"Two-Channel Signals Sampled Twice"'
     nconnections: '4'
     size: '1024'
     srate: samp_rate
@@ -3623,7 +3749,7 @@ blocks:
     comment: ''
     grid: 'False'
     gui_hint: sink3+2, 2, 1, 2
-    label1: RX1
+    label1: RX2
     label10: ''
     label2: ''
     label3: ''
@@ -4269,7 +4395,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 2116.0]
+    coordinate: [720, 2100.0]
     rotation: 0
     state: enabled
 - name: virtual_sink_5_0_0_0
@@ -4451,9 +4577,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [912, 3516.0]
+    coordinate: [920, 3628.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: virtual_sink_8_0
   id: virtual_sink
   parameters:
@@ -4464,9 +4590,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 3852.0]
+    coordinate: [904, 3964.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: virtual_sink_8_0_0
   id: virtual_sink
   parameters:
@@ -5076,7 +5202,7 @@ connections:
 - [blocks_float_to_short_0, '0', virtual_sink_7, '0']
 - [blocks_multiply_const_vxx_0, '0', qtgui_number_sink_2, '0']
 - [blocks_multiply_const_vxx_0, '0', virtual_sink_5_1_0, '0']
-- [blocks_multiply_const_vxx_0_0, '0', qtgui_number_sink_2, '2']
+- [blocks_multiply_const_vxx_0_0, '0', qtgui_number_sink_2, '1']
 - [blocks_multiply_const_vxx_0_0, '0', virtual_sink_5_0_0_0, '0']
 - [blocks_multiply_const_xx_0, '0', HIER_complex2float_0, '0']
 - [blocks_multiply_const_xx_0, '0', virtual_sink_0_0, '0']
@@ -5118,11 +5244,12 @@ connections:
 - [blocks_xor_xx_1, '0', blocks_sample_and_hold_xx_0_1_1, '1']
 - [blocks_xor_xx_1_0, '0', virtual_sink_4_0, '0']
 - [blocks_xor_xx_1_1, '0', blocks_sample_and_hold_xx_0_1_1_1, '1']
-- [epy_block_0, '0', qtgui_number_sink_2, '1']
+- [epy_block_0, '0', qtgui_number_sink_2, '2']
 - [epy_block_0, '0', virtual_sink_5_1, '0']
 - [epy_block_0_0, '0', qtgui_number_sink_2, '3']
 - [epy_block_0_0, '0', virtual_sink_5_0_0, '0']
 - [epy_block_0_0_0, '0', qtgui_number_sink_5, '0']
+- [epy_block_0_0_0, '0', qtgui_number_sink_5_1, '0']
 - [epy_block_0_0_0, '0', virtual_sink_8_0, '0']
 - [epy_block_0_1, delay_1, blocks_delay_0_1, dly]
 - [epy_block_0_1, delay_1, blocks_delay_0_1_0, dly]
@@ -5131,6 +5258,7 @@ connections:
 - [epy_block_0_2, '0', epy_block_1, '0']
 - [epy_block_0_2_0, '0', epy_block_1, '1']
 - [epy_block_1, '0', qtgui_number_sink_4, '0']
+- [epy_block_1, '0', qtgui_number_sink_4_1, '0']
 - [epy_block_1, '0', virtual_sink_8, '0']
 - [epy_block_2, '0', qtgui_number_sink_6, '0']
 - [epy_block_2, '0', virtual_sink_5_0_0_0_1, '0']
