@@ -105,7 +105,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1112, 132.0]
+    coordinate: [1224, 132.0]
     rotation: 0
     state: true
 - name: c
@@ -160,6 +160,27 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [24, 132.0]
+    rotation: 0
+    state: true
+- name: frequency_shift
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: -1e2
+    step: 1e-2
+    stop: +1e2
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1096, 132.0]
     rotation: 0
     state: true
 - name: pi
@@ -645,7 +666,7 @@ blocks:
     c: c
     comment: ''
     delta_t: Delta_t
-    frequency: frequency
+    frequency: frequency+frequency_shift
     maxoutbuf: '0'
     minoutbuf: '0'
     pi: pi
