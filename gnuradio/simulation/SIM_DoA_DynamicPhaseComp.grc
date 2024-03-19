@@ -591,7 +591,7 @@ blocks:
       \ = v\n        self.delta_t = delta_t\n\n        # \u6CE8\u518C\u6D88\u606F\u7AEF\
       \u53E3\n        self.message_port_register_in(pmt.intern(\"update_params\"))\n\
       \        self.set_msg_handler(pmt.intern(\"update_params\"), self.handle_msg)\n\
-      \n        self.message_port_register_out(pmt.intern('delay_B'))\n        self.message_port_register_out(pmt.intern('delay_A'))\n\
+      \n        self.message_port_register_out(pmt.intern('delay_2'))\n        self.message_port_register_out(pmt.intern('delay_1'))\n\
       \    \n\n    def handle_msg(self, msg):\n        # \u89E3\u6790\u6D88\u606F\u5E76\
       \u66F4\u65B0\u53C2\u6570\n        if pmt.is_pair(msg):\n            key = pmt.to_python(pmt.car(msg))\n\
       \            value = pmt.to_python(pmt.cdr(msg))\n            print(key, value)\n\
@@ -606,8 +606,8 @@ blocks:
       \ distance_2 = np.sqrt((self.dis_r * alpha_cos + dis_s)**2 + (self.dis_r * alpha_sin)**2)\n\
       \            delay_1 = int((distance_1 / self.c) * self.samp_rate)\n       \
       \     delay_2 = int((distance_2 / self.c + self.delta_t) * self.samp_rate)\n\
-      \n            self.message_port_pub(pmt.intern(\"delay_A\"), pmt.from_long(delay_1))\n\
-      \            self.message_port_pub(pmt.intern(\"delay_B\"), pmt.from_long(delay_2))\n\
+      \n            self.message_port_pub(pmt.intern(\"delay_1\"), pmt.from_long(delay_1))\n\
+      \            self.message_port_pub(pmt.intern(\"delay_2\"), pmt.from_long(delay_2))\n\
       \            print(distance_1, distance_2)\n            print(delay_1, delay_2)\n\
       \n\n    # def work(self, input_items, output_items):\n    #     \"\"\"\"\"\"\
       \n    #     return len(output_items[0])\n"
@@ -627,8 +627,8 @@ blocks:
   states:
     _io_cache: ('delay_calc(epb)', 'blk', [('samp_rate', '32000.0'), ('pi', '3.14159'),
       ('c', '299792000.0'), ('frequency', '0'), ('dis_r', '0'), ('azimuth', '0'),
-      ('v', '0'), ('delta_t', '0')], [('update_params', 'message', 1)], [('delay_A',
-      'message', 1), ('delay_B', 'message', 1)], 'Embedded Python Block example -
+      ('v', '0'), ('delta_t', '0')], [('update_params', 'message', 1)], [('delay_1',
+      'message', 1), ('delay_2', 'message', 1)], 'Embedded Python Block example -
       a simple multiply const', ['azimuth', 'c', 'delta_t', 'dis_r', 'frequency',
       'pi', 'samp_rate', 'v'])
     bus_sink: false
@@ -1133,8 +1133,8 @@ connections:
 - [blocks_var_to_msg_1_0_0_0, msgout, epy_block_0, update_params]
 - [blocks_var_to_msg_1_0_0_0_0, msgout, epy_block_0, update_params]
 - [blocks_var_to_msg_1_0_0_0_0_0, msgout, epy_block_0, update_params]
-- [epy_block_0, delay_A, blocks_delay_0, dly]
-- [epy_block_0, delay_B, blocks_delay_0_0, dly]
+- [epy_block_0, delay_1, blocks_delay_0, dly]
+- [epy_block_0, delay_2, blocks_delay_0_0, dly]
 - [epy_block_0_0, '0', blocks_null_sink_0, '0']
 - [epy_block_0_0, '1', virtual_sink_0, '0']
 - [virtual_source_0, '0', HIER_DataError_0_0, '0']
