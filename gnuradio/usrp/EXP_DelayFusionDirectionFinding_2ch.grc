@@ -100,7 +100,7 @@ blocks:
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: sink5+1, 0, 1, 1
+    gui_hint: sink5+1, 0, 1, 2
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -109,7 +109,7 @@ blocks:
     step: c/actual_frequency
     stop: 1e5*c/actual_frequency
     value: 10*c/actual_frequency
-    widget: eng
+    widget: eng_slider
   states:
     bus_sink: false
     bus_source: false
@@ -142,7 +142,7 @@ blocks:
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: sink5+1, 1, 1, 1
+    gui_hint: sink5+1, 2, 1, 2
     label: ''
     min_len: '200'
     orient: QtCore.Qt.Horizontal
@@ -151,7 +151,7 @@ blocks:
     step: '1'
     stop: 1000e3
     value: 1000e3
-    widget: eng
+    widget: eng_slider
   states:
     bus_sink: false
     bus_source: false
@@ -271,7 +271,7 @@ blocks:
     step: '1'
     stop: 1e6
     value: 1e2
-    widget: eng
+    widget: eng_slider
   states:
     bus_sink: false
     bus_source: false
@@ -537,7 +537,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [200, 3268.0]
+    coordinate: [192, 3268.0]
     rotation: 0
     state: enabled
 - name: sink6_max
@@ -549,7 +549,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [264, 3268.0]
+    coordinate: [256, 3268.0]
     rotation: 0
     state: enabled
 - name: sink7
@@ -702,7 +702,7 @@ blocks:
     comment: ''
     formatter: None
     gui_hint: sink7,0,1,4
-    label: '"Delay Phase Comparison Algorithm"'
+    label: '"Dynamic Phase Comparison Algorithm"'
     type: string
     value: ''
   states:
@@ -737,7 +737,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [384, 3660.0]
+    coordinate: [360, 3660.0]
     rotation: 0
     state: enabled
 - name: HIER_PowerSpectrum_0
@@ -2572,7 +2572,7 @@ blocks:
     alias: ''
     autoscale: 'False'
     avg: '0'
-    color1: ("black", "black")
+    color1: ("blue", "red")
     color10: ("black", "black")
     color2: ("black", "black")
     color3: ("black", "black")
@@ -2595,7 +2595,7 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: sink6+1, 0, 1, 4
-    label1: ''
+    label1: angle
     label10: ''
     label2: ''
     label3: ''
@@ -2656,7 +2656,7 @@ blocks:
     factor7: '1'
     factor8: '1'
     factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_HORIZ
+    graph_type: qtgui.NUM_GRAPH_NONE
     gui_hint: sink7+2,0,1,4
     label1: '"Phase Difference"'
     label10: ''
@@ -2698,7 +2698,7 @@ blocks:
     alias: ''
     autoscale: 'False'
     avg: '0'
-    color1: ("black", "black")
+    color1: ("blue", "red")
     color10: ("black", "black")
     color2: ("black", "black")
     color3: ("black", "black")
@@ -2721,7 +2721,7 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: sink7+3,0,1,4
-    label1: ''
+    label1: angle
     label10: ''
     label2: ''
     label3: ''
@@ -2784,7 +2784,7 @@ blocks:
     factor9: '1'
     graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: sink8+1,0,1,4
-    label1: ''
+    label1: angle
     label10: ''
     label2: ''
     label3: ''
@@ -3244,7 +3244,7 @@ blocks:
     alpha7: '1.0'
     alpha8: '1.0'
     alpha9: '1.0'
-    autoscale: 'False'
+    autoscale: 'True'
     axislabels: 'True'
     color1: blue
     color10: dark blue
@@ -3257,9 +3257,9 @@ blocks:
     color8: dark red
     color9: dark green
     comment: ''
-    ctrlpanel: 'False'
+    ctrlpanel: 'True'
     entags: 'True'
-    grid: 'False'
+    grid: 'True'
     gui_hint: sink7+1,0,1,4
     label1: Signal 1
     label10: Signal 10
