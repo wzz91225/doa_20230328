@@ -22,7 +22,7 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: Experiment - Delay Fusion Direction Finding
+    title: USRP Direction Finding Experiment
     window_size: (1000,1000)
   states:
     bus_sink: false
@@ -130,7 +130,7 @@ blocks:
     step: 1e-3
     stop: int(samp_rate / 10)
     value: '32000'
-    widget: eng_slider
+    widget: eng
   states:
     bus_sink: false
     bus_source: false
@@ -312,7 +312,7 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '50'
+    value: '46'
     widget: counter_slider
   states:
     bus_sink: false
@@ -333,7 +333,7 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '49'
+    value: '45'
     widget: counter_slider
   states:
     bus_sink: false
@@ -375,7 +375,7 @@ blocks:
     start: '0.5'
     step: 1e-3
     stop: '1.5'
-    value: '1.042'
+    value: '1'
     widget: counter_slider
   states:
     bus_sink: false
@@ -2529,7 +2529,7 @@ blocks:
     factor7: '1'
     factor8: '1'
     factor9: '1'
-    graph_type: qtgui.NUM_GRAPH_NONE
+    graph_type: qtgui.NUM_GRAPH_HORIZ
     gui_hint: sink3+3, 0, 1, 1
     label1: '"RX 1 (0: Undetected; 1:Detected)"'
     label10: ''
@@ -2571,7 +2571,7 @@ blocks:
     alias: ''
     autoscale: 'False'
     avg: '0'
-    color1: ("blue", "red")
+    color1: ("black", "black")
     color10: ("black", "black")
     color2: ("black", "black")
     color3: ("black", "black")
@@ -2760,7 +2760,7 @@ blocks:
     alias: ''
     autoscale: 'False'
     avg: '0'
-    color1: ("blue", "red")
+    color1: ("black", "black")
     color10: ("black", "black")
     color2: ("black", "black")
     color3: ("black", "black")
@@ -3285,7 +3285,7 @@ blocks:
     color8: dark red
     color9: dark green
     comment: ''
-    ctrlpanel: 'True'
+    ctrlpanel: 'False'
     entags: 'True'
     grid: 'True'
     gui_hint: sink5+3, 0, 1, 4
