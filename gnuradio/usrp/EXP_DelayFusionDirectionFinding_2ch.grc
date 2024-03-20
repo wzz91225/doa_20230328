@@ -312,7 +312,7 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '46'
+    value: '47'
     widget: counter_slider
   states:
     bus_sink: false
@@ -333,7 +333,7 @@ blocks:
     start: '0'
     step: '1'
     stop: '93'
-    value: '45'
+    value: '46'
     widget: counter_slider
   states:
     bus_sink: false
