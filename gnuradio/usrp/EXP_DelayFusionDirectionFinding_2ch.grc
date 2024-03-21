@@ -2017,7 +2017,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 3748.0]
+    coordinate: [592, 3748.0]
     rotation: 0
     state: enabled
 - name: epy_block_0_1
@@ -2813,7 +2813,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [960, 3740.0]
+    coordinate: [936, 3740.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_5_0
@@ -2939,7 +2939,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 3852.0]
+    coordinate: [928, 3852.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_6
