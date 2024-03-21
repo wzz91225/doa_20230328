@@ -33,7 +33,7 @@ options:
     state: enabled
 
 blocks:
-- name: actual_azimuth
+- name: Delta_t
   id: variable_qtgui_range
   parameters:
     comment: ''
@@ -42,16 +42,16 @@ blocks:
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: float
-    start: '0'
-    step: '1'
-    stop: '180'
-    value: '90'
-    widget: counter_slider
+    start: 1e-6
+    step: 1e-6
+    stop: c/frequency/velocity_t
+    value: c/frequency/2/velocity_t / 1
+    widget: counter
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 132.0]
+    coordinate: [936, 132.0]
     rotation: 0
     state: true
 - name: amplitude
@@ -105,7 +105,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [160, 772.0]
+    coordinate: [1224, 132.0]
     rotation: 0
     state: true
 - name: c
@@ -118,27 +118,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [408, 20.0]
-    rotation: 0
-    state: true
-- name: delta_t
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: ''
-    label: ''
-    min_len: '200'
-    orient: QtCore.Qt.Horizontal
-    rangeType: float
-    start: 1e-6
-    step: 1e-6
-    stop: c/frequency/velocity
-    value: c/frequency/2/velocity
-    widget: counter
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [936, 132.0]
     rotation: 0
     state: true
 - name: distance_relative
@@ -201,7 +180,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 772.0]
+    coordinate: [1096, 132.0]
     rotation: 0
     state: true
 - name: pi
@@ -214,6 +193,27 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [304, 20.0]
+    rotation: 0
+    state: true
+- name: relative_DoA
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '180'
+    value: '90'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 132.0]
     rotation: 0
     state: true
 - name: samp_rate
@@ -249,7 +249,7 @@ blocks:
     coordinate: [272, 132.0]
     rotation: 0
     state: true
-- name: velocity
+- name: velocity_t
   id: variable_qtgui_range
   parameters:
     comment: ''
@@ -299,7 +299,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 1144.0]
+    coordinate: [1480, 600.0]
     rotation: 0
     state: enabled
 - name: analog_const_source_x_0_0
@@ -308,7 +308,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    const: actual_azimuth
+    const: relative_DoA
     maxoutbuf: '0'
     minoutbuf: '0'
     type: float
@@ -316,7 +316,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 1172.0]
+    coordinate: [1224, 628.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -356,7 +356,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 896.0]
+    coordinate: [1176, 312.0]
     rotation: 0
     state: enabled
 - name: band_pass_filter_0
@@ -381,7 +381,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 836.0]
+    coordinate: [936, 252.0]
     rotation: 0
     state: enabled
 - name: band_pass_filter_0_0
@@ -406,7 +406,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 1012.0]
+    coordinate: [936, 428.0]
     rotation: 0
     state: enabled
 - name: blocks_delay_0
@@ -481,7 +481,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [960, 896.0]
+    coordinate: [1688, 312.0]
     rotation: 0
     state: enabled
 - name: blocks_var_to_msg_1_0
@@ -526,8 +526,8 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    msgname: actual_azimuth
-    target: actual_azimuth
+    msgname: DoA
+    target: relative_DoA
   states:
     bus_sink: false
     bus_source: false
@@ -543,8 +543,8 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    msgname: v
-    target: velocity
+    msgname: v_t
+    target: velocity_t
   states:
     bus_sink: false
     bus_source: false
@@ -561,7 +561,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     msgname: delta_t
-    target: delta_t
+    target: Delta_t
   states:
     bus_sink: false
     bus_source: false
@@ -572,6 +572,7 @@ blocks:
 - name: epy_block_0
   id: epy_block
   parameters:
+    DoA: relative_DoA
     _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
       \ GRC will instantiate the first class it finds\nto get ports and parameters\
       \ of your block. The arguments to __init__  will\nbe the parameters. All of\
@@ -579,58 +580,56 @@ blocks:
       from gnuradio import gr\nimport pmt\n\n\nclass blk(gr.sync_block):  # other\
       \ base classes are basic_block, decim_block, interp_block\n    \"\"\"Embedded\
       \ Python Block example - a simple multiply const\"\"\"\n\n    def __init__(self,\
-      \ samp_rate=32e3, pi=3.14159, c=299.792e6, frequency=0, dis_r=0, azimuth=0,\
-      \ v=0, delta_t=0):  # only default arguments here\n        \"\"\"arguments to\
-      \ this function show up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n\
+      \ samp_rate=32e3, pi=3.14159, c=299.792e6, frequency=0, dis_r=0, DoA=0, v_t=0,\
+      \ delta_t=0):  # only default arguments here\n        \"\"\"arguments to this\
+      \ function show up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n\
       \            self,\n            name='delay_calc(epb)',   # will show up in\
       \ GRC\n            in_sig=[],\n            out_sig=[]\n        )\n        #\
       \ if an attribute with the same name as a parameter is found,\n        # a callback\
       \ is registered (properties work, too).\n        self.samp_rate = samp_rate\n\
       \        self.pi = pi\n        self.c = c\n\n        self.frequency = frequency\n\
-      \        self.dis_r = dis_r\n        self.azimuth = azimuth\n        self.v\
-      \ = v\n        self.delta_t = delta_t\n\n        # \u6CE8\u518C\u6D88\u606F\u7AEF\
-      \u53E3\n        self.message_port_register_in(pmt.intern(\"update_params\"))\n\
-      \        self.set_msg_handler(pmt.intern(\"update_params\"), self.handle_msg)\n\
-      \n        self.message_port_register_out(pmt.intern('delay_2'))\n        self.message_port_register_out(pmt.intern('delay_1'))\n\
+      \        self.dis_r = dis_r\n        self.DoA = DoA\n        self.v_t = v_t\n\
+      \        self.delta_t = delta_t\n\n        # \u6CE8\u518C\u6D88\u606F\u7AEF\u53E3\
+      \n        self.message_port_register_in(pmt.intern(\"update_params\"))\n   \
+      \     self.set_msg_handler(pmt.intern(\"update_params\"), self.handle_msg)\n\
+      \n        self.message_port_register_out(pmt.intern('delay_B'))\n        self.message_port_register_out(pmt.intern('delay_A'))\n\
       \    \n\n    def handle_msg(self, msg):\n        # \u89E3\u6790\u6D88\u606F\u5E76\
       \u66F4\u65B0\u53C2\u6570\n        if pmt.is_pair(msg):\n            key = pmt.to_python(pmt.car(msg))\n\
       \            value = pmt.to_python(pmt.cdr(msg))\n            print(key, value)\n\
       \n            if key == \"frequency\":\n                self.frequency = value\n\
       \            elif key == \"dis_r\":\n                self.dis_r = value\n  \
-      \          elif key == \"azimuth\":\n                self.azimuth = value\n\
-      \            elif key == \"v\":\n                self.v = value\n          \
-      \  elif key == \"delta_t\":\n                self.delta_t = value\n\n      \
-      \      # compute\n            alpha_sin = np.sin(self.azimuth * self.pi / 180)\n\
-      \            alpha_cos = np.cos(self.azimuth * self.pi / 180)\n            dis_s\
-      \ = self.v * self.delta_t\n            distance_1 = np.sqrt((self.dis_r * alpha_cos\
-      \ - dis_s/2)**2 + (self.dis_r * alpha_sin)**2)\n            distance_2 = np.sqrt((self.dis_r\
-      \ * alpha_cos + dis_s/2)**2 + (self.dis_r * alpha_sin)**2)\n            delay_1\
-      \ = int((distance_1 / self.c) * self.samp_rate)\n            delay_2 = int((distance_2\
+      \          elif key == \"DoA\":\n                self.DoA = value\n        \
+      \    elif key == \"v_t\":\n                self.v_t = value\n            elif\
+      \ key == \"delta_t\":\n                self.delta_t = value\n\n            #\
+      \ compute\n            alpha_sin = np.sin(self.DoA * self.pi / 180)\n      \
+      \      alpha_cos = np.cos(self.DoA * self.pi / 180)\n            dis_at = self.v_t\
+      \ * self.delta_t\n            distance_A = np.sqrt((self.dis_r * alpha_cos -\
+      \ dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n            distance_B = np.sqrt((self.dis_r\
+      \ * alpha_cos + dis_at/2)**2 + (self.dis_r * alpha_sin)**2)\n            delay_A\
+      \ = int((distance_A / self.c) * self.samp_rate)\n            delay_B = int((distance_B\
       \ / self.c + self.delta_t) * self.samp_rate)\n\n            self.message_port_pub(pmt.intern(\"\
-      delay_1\"), pmt.from_long(delay_1))\n            self.message_port_pub(pmt.intern(\"\
-      delay_2\"), pmt.from_long(delay_2))\n            print(distance_1, distance_2)\n\
-      \            print(delay_1, delay_2)\n\n\n    # def work(self, input_items,\
+      delay_A\"), pmt.from_long(delay_A))\n            self.message_port_pub(pmt.intern(\"\
+      delay_B\"), pmt.from_long(delay_B))\n            print(distance_A, distance_B)\n\
+      \            print(delay_A, delay_B)\n\n\n    # def work(self, input_items,\
       \ output_items):\n    #     \"\"\"\"\"\"\n    #     return len(output_items[0])\n"
     affinity: ''
     alias: ''
-    azimuth: actual_azimuth
     c: c
     comment: ''
-    delta_t: delta_t
+    delta_t: Delta_t
     dis_r: distance_relative
     frequency: frequency
     maxoutbuf: '0'
     minoutbuf: '0'
     pi: pi
     samp_rate: samp_rate
-    v: velocity
+    v_t: velocity_t
   states:
     _io_cache: ('delay_calc(epb)', 'blk', [('samp_rate', '32000.0'), ('pi', '3.14159'),
-      ('c', '299792000.0'), ('frequency', '0'), ('dis_r', '0'), ('azimuth', '0'),
-      ('v', '0'), ('delta_t', '0')], [('update_params', 'message', 1)], [('delay_1',
-      'message', 1), ('delay_2', 'message', 1)], 'Embedded Python Block example -
-      a simple multiply const', ['azimuth', 'c', 'delta_t', 'dis_r', 'frequency',
-      'pi', 'samp_rate', 'v'])
+      ('c', '299792000.0'), ('frequency', '0'), ('dis_r', '0'), ('DoA', '0'), ('v_t',
+      '0'), ('delta_t', '0')], [('update_params', 'message', 1)], [('delay_A', 'message',
+      1), ('delay_B', 'message', 1)], 'Embedded Python Block example - a simple multiply
+      const', ['DoA', 'c', 'delta_t', 'dis_r', 'frequency', 'pi', 'samp_rate', 'v_t'])
     bus_sink: false
     bus_source: false
     bus_structure: null
@@ -646,19 +645,19 @@ blocks:
       \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
       from gnuradio import gr\n\n\nclass blk(gr.sync_block):  # other base classes\
       \ are basic_block, decim_block, interp_block\n    \"\"\"Embedded Python Block\
-      \ - Dynamic Phase Comparison\"\"\"\n\n    def __init__(self, pi=3.141592653589793,\
+      \ example - a simple multiply const\"\"\"\n\n    def __init__(self, pi=3.141592653589793,\
       \ c=299792458, frequency=0, v_t=0, delta_t=0):  # only default arguments here\n\
       \        \"\"\"arguments to this function show up as parameters in GRC\"\"\"\
-      \n        gr.sync_block.__init__(\n            self,\n            name='Dynamic\
-      \ Phase Comparison (EPB)',   # will show up in GRC\n            in_sig=[np.float32],\n\
+      \n        gr.sync_block.__init__(\n            self,\n            name='Embedded\
+      \ Python Block',   # will show up in GRC\n            in_sig=[np.float32],\n\
       \            out_sig=[np.float32, np.float32]\n        )\n        # if an attribute\
       \ with the same name as a parameter is found,\n        # a callback is registered\
       \ (properties work, too).\n        self.pi = pi\n        self.c = c\n      \
       \  self.frequency = frequency\n        self.v_t = v_t\n        self.delta_t\
       \ = delta_t\n\n    def work(self, input_items, output_items):\n        \"\"\"\
-      Dynamic Phase Comparison\"\"\"\n        actual_delta_phi = input_items[0] -\
-      \ 2 * self.pi * self.frequency * self.delta_t\n        actual_delta_phi = (actual_delta_phi\
-      \ + self.pi) % (2 * self.pi) - self.pi\n        alpha = np.arccos(actual_delta_phi\
+      example: multiply with constant\"\"\"\n        actual_delta_phi = input_items[0]\
+      \ - 2 * self.pi * self.frequency * self.delta_t\n        actual_delta_phi =\
+      \ (actual_delta_phi + self.pi) % (2 * self.pi) - self.pi\n        alpha = np.arccos(actual_delta_phi\
       \ * self.c / self.frequency / 2 / self.pi / self.v_t / self.delta_t)\n     \
       \   output_items[0][:] = alpha\n        output_items[1][:] = np.rad2deg(alpha)\n\
       \        # output_items[2][:] = actual_delta_phi\n        return len(output_items[0])\n"
@@ -666,23 +665,86 @@ blocks:
     alias: ''
     c: c
     comment: ''
-    delta_t: delta_t
+    delta_t: Delta_t
     frequency: frequency+frequency_shift
     maxoutbuf: '0'
     minoutbuf: '0'
     pi: pi
-    v_t: velocity
+    v_t: velocity_t
   states:
-    _io_cache: ('Dynamic Phase Comparison (EPB)', 'blk', [('pi', '3.141592653589793'),
-      ('c', '299792458'), ('frequency', '0'), ('v_t', '0'), ('delta_t', '0')], [('0',
-      'float', 1)], [('0', 'float', 1), ('1', 'float', 1)], 'Embedded Python Block
-      - Dynamic Phase Comparison', ['c', 'delta_t', 'frequency', 'pi', 'v_t'])
+    _io_cache: ('Embedded Python Block', 'blk', [('pi', '3.141592653589793'), ('c',
+      '299792458'), ('frequency', '0'), ('v_t', '0'), ('delta_t', '0')], [('0', 'float',
+      1)], [('0', 'float', 1), ('1', 'float', 1)], 'Embedded Python Block example
+      - a simple multiply const', ['c', 'delta_t', 'frequency', 'pi', 'v_t'])
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [688, 876.0]
+    coordinate: [1440, 292.0]
     rotation: 0
     state: enabled
+- name: qtgui_number_sink_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '""'
+    nconnections: '3'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1488.0, 40]
+    rotation: 90
+    state: disabled
 - name: qtgui_number_sink_0
   id: qtgui_number_sink
   parameters:
@@ -743,7 +805,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [652.0, 576]
+    coordinate: [652.0, 632]
     rotation: 270
     state: true
 - name: qtgui_number_sink_1
@@ -806,7 +868,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 996.0]
+    coordinate: [1440, 452.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_2
@@ -869,7 +931,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 996.0]
+    coordinate: [1632, 452.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_3
@@ -932,9 +994,72 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 1124.0]
+    coordinate: [1632, 580.0]
     rotation: 0
     state: enabled
+- name: qtgui_number_sink_4
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: pi
+    min: -pi
+    name: '""'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1348.0, 136]
+    rotation: 90
+    state: disabled
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -1029,7 +1154,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808.0, 576]
+    coordinate: [760.0, 632]
     rotation: 270
     state: true
 - name: virtual_sink_0
@@ -1037,38 +1162,12 @@ blocks:
   parameters:
     alias: ''
     comment: ''
-    stream_id: DF_Result
+    stream_id: DoA_result
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [960, 924.0]
-    rotation: 0
-    state: enabled
-- name: virtual_sink_1
-  id: virtual_sink
-  parameters:
-    alias: ''
-    comment: ''
-    stream_id: Signal_1
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [936, 308.0]
-    rotation: 0
-    state: enabled
-- name: virtual_sink_2
-  id: virtual_sink
-  parameters:
-    alias: ''
-    comment: ''
-    stream_id: Signal_2
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [936, 436.0]
+    coordinate: [1688, 340.0]
     rotation: 0
     state: enabled
 - name: virtual_source_0
@@ -1076,38 +1175,12 @@ blocks:
   parameters:
     alias: ''
     comment: ''
-    stream_id: DF_Result
+    stream_id: DoA_result
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 1028.0]
-    rotation: 0
-    state: enabled
-- name: virtual_source_1
-  id: virtual_source
-  parameters:
-    alias: ''
-    comment: ''
-    stream_id: Signal_1
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [32, 892.0]
-    rotation: 0
-    state: enabled
-- name: virtual_source_2
-  id: virtual_source
-  parameters:
-    alias: ''
-    comment: ''
-    stream_id: Signal_2
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [40, 1068.0]
+    coordinate: [1208, 484.0]
     rotation: 0
     state: enabled
 
@@ -1121,27 +1194,26 @@ connections:
 - [analog_sig_source_x_0, '0', blocks_multiply_const_xx_0, '0']
 - [analog_sig_source_x_0, '0', qtgui_time_sink_x_0, '0']
 - [aoa_calc_phase_diff_0, '0', epy_block_0_0, '0']
+- [aoa_calc_phase_diff_0, '0', qtgui_number_sink_4, '0']
 - [band_pass_filter_0, '0', aoa_calc_phase_diff_0, '0']
 - [band_pass_filter_0_0, '0', aoa_calc_phase_diff_0, '1']
+- [blocks_delay_0, '0', band_pass_filter_0, '0']
 - [blocks_delay_0, '0', qtgui_time_sink_x_0, '1']
-- [blocks_delay_0, '0', virtual_sink_1, '0']
+- [blocks_delay_0_0, '0', band_pass_filter_0_0, '0']
 - [blocks_delay_0_0, '0', qtgui_time_sink_x_0, '2']
-- [blocks_delay_0_0, '0', virtual_sink_2, '0']
 - [blocks_multiply_const_xx_0, '0', HIER_AddGaussianNoise_0, '0']
 - [blocks_var_to_msg_1_0, msgout, epy_block_0, update_params]
 - [blocks_var_to_msg_1_0_0, msgout, epy_block_0, update_params]
 - [blocks_var_to_msg_1_0_0_0, msgout, epy_block_0, update_params]
 - [blocks_var_to_msg_1_0_0_0_0, msgout, epy_block_0, update_params]
 - [blocks_var_to_msg_1_0_0_0_0_0, msgout, epy_block_0, update_params]
-- [epy_block_0, delay_1, blocks_delay_0, dly]
-- [epy_block_0, delay_2, blocks_delay_0_0, dly]
+- [epy_block_0, delay_A, blocks_delay_0, dly]
+- [epy_block_0, delay_B, blocks_delay_0_0, dly]
 - [epy_block_0_0, '0', blocks_null_sink_0, '0']
 - [epy_block_0_0, '1', virtual_sink_0, '0']
 - [virtual_source_0, '0', HIER_DataError_0_0, '0']
 - [virtual_source_0, '0', qtgui_number_sink_1, '0']
 - [virtual_source_0, '0', qtgui_number_sink_2, '0']
-- [virtual_source_1, '0', band_pass_filter_0, '0']
-- [virtual_source_2, '0', band_pass_filter_0_0, '0']
 
 metadata:
   file_format: 1
