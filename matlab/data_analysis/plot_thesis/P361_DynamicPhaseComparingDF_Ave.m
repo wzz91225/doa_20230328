@@ -49,7 +49,7 @@ end
 if is_plot_angle
     % 绘制时延比相测向角度与角度的关系图
     figure;
-    subplot(1,2,1);
+    % subplot(1,2,1);
     hold on;
     for i = 1:length(var_list)
         plot(alpha_angle, doa_phase_angle(:, i), ...
@@ -57,21 +57,27 @@ if is_plot_angle
             'DisplayName', sprintf(var_displayname, var_list(i)));
     end
     hold off;
-    xlabel('实际角度 (°)');
-    ylabel('动态比相算法测向结果 (°)');
-    % legend('show');
-    grid on;
+    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}动态比相算法测向结果 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xticks((0:30:180));
+    yticks((0:30:180));
     xlim([0 180]);
     ylim([0 180]);
-    % set(gcf, 'unit', 'centimeters', 'position', [10 5 12 10.2]);
-    set(gcf, 'unit', 'centimeters', 'position', [10 5 24 10]);
+    grid on;
+    box on;
+    set(gca, ...
+        'FontName', 'Times New Roman', ...
+        'FontSize', 10.5, ...
+        'LineWid', 1);
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 12 10.2]);
+    % set(gcf, 'unit', 'centimeters', 'position', [10 5 24 10]);
 end
 
 
 % ##########################角度误差图##########################
 if is_plot_angle_error
-    % figure;
-    subplot(1,2,2);
+    figure;
+    % subplot(1,2,2);
     hold on; % 保持当前图形
     
     % 预定义颜色数组或使用MATLAB颜色图
@@ -103,19 +109,19 @@ if is_plot_angle_error
     end
     
     hold off;
-    xlabel('实际角度 (°)');
-    ylabel('平均绝对误差 (°)');
-    xlim([alpha_angle(1) alpha_angle(end)]);
+    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xticks((0:30:180));
+    yticks((0:0.5:3));
+    xlim([alpha_angle(1) alpha_angle(end)+1]);
     ylim([0 3]);
     grid on;
-    
-    % 美化
-    title(' ');
-    % legend('show', ...
-    %     'Location', 'southoutside', ...
-    %     'NumColumns',4, ...
-    %     'box', 'off');
-    % set(gcf, 'unit', 'centimeters', 'position', [10 5 12 12]);
+    box on;
+    set(gca, ...
+        'FontName', 'Times New Roman', ...
+        'FontSize', 10.5, ...
+        'LineWid', 1);
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 12 10.2]);
     
     % 打印总平均误差
     fprintf(['    ' var_titlename '   比相误差\n']);

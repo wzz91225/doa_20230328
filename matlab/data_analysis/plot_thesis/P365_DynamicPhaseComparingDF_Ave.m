@@ -89,15 +89,24 @@ if is_plot_angle_error
     end
     
     hold off;
-    xlabel('实际角度 (°)');
-    ylabel('平均绝对误差 (°)');
-    xlim([alpha_angle(1) alpha_angle(end)]);
-    ylim([0 10]);
+    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xticks((0:30:180));
+    yticks((0:1.5:9));
+    xlim([alpha_angle(1) alpha_angle(end)+1]);
+    ylim([0 9]);
     grid on;
+    box on;
+    set(gca, ...
+        'FontName', 'Times New Roman', ...
+        'FontSize', 10.5, ...
+        'LineWid', 1);
     
     % 美化
     title(' ');
     legend('show', ...
+        'FontName', 'Times New Roman', ...
+        'FontSize', 10.5, ...
         'Location', 'southoutside', ...
         'NumColumns',3, ...
         'box', 'off');

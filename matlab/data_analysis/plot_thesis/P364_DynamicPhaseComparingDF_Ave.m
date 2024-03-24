@@ -12,7 +12,7 @@ is_plot_angle_error = 1;
 
 % ##########################读取数据文件##########################
 % 指定.mat文件的路径
-matFilePath = 'matlab/simulation_results/SIMDATA-240301_055538-DynamicPhaseComparingDF_Ave_SNR_180x13x1000x2e2_CIN1x100.mat';
+matFilePath = 'matlab/simulation_results/SIMDATA-240301_122743-DynamicFusionDF_Ave_SR_NoFilter_180x6x1000_CI1x100_-15dB.mat';
 
 % % 弹出文件选择对话框让用户选择.mat文件
 % [fileName, filePath] = uigetfile('matlab/simulation_results/*.mat', ...
@@ -72,15 +72,15 @@ if is_plot_angle_error
     linelist = ["-", "--", "-.", ":"];
     
     % 遍历第二维（如SNR或CIN或SR值）
-    for var_index = 1 : 2 : 11
+    for var_index = 1:6
         % 计算时延比相测向误差的平均值
         meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
             repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
             [1, 1, size(doa_phase_angle, 3)])), 3);
         % 绘制时延比相测向误差曲线
         plot(alpha_angle, meanErrorPhase, ...
-            "-", ...
-            'Color', colors((var_index-1)/2+1, :), ...
+            '-', ...
+            'Color', colors(var_index, :), ...
             'LineWidth', 1, ...
             'DisplayName', sprintf(var_displayname, var_list(var_index)));
 
@@ -89,68 +89,24 @@ if is_plot_angle_error
     end
     
     hold off;
-    xlabel('实际角度 (°)');
-    ylabel('平均绝对误差 (°)');
-    xlim([alpha_angle(1) alpha_angle(end)]);
-    ylim([0 90]);
+    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xticks((0:30:180));
+    yticks((0:1:6));
+    xlim([alpha_angle(1) alpha_angle(end)+1]);
+    ylim([0 6]);
     grid on;
+    box on;
+    set(gca, ...
+        'FontName', 'Times New Roman', ...
+        'FontSize', 10.5, ...
+        'LineWid', 1);
     
     % 美化
     title(' ');
     legend('show', ...
-        'Location', 'southoutside', ...
-        'NumColumns',4, ...
-        'box', 'off');
-    set(gcf, 'unit', 'centimeters', 'position', [10 5 12 12]);
-    
-    % 打印总平均误差
-    fprintf(['    ' var_titlename '   比相误差\n']);
-    disp([var_list.' meanmeanErrorPhase]);
-end
-
-% ##########################角度误差图##########################
-if is_plot_angle_error
-    figure;
-    hold on; % 保持当前图形
-    
-    % 预定义颜色数组或使用MATLAB颜色图
-    colors = lines(size(doa_phase_angle, 2)); % 'lines'是MATLAB内置的颜色图之一
-    
-    % 测向误差计算角度数量
-    % meanErrorPhase_N = length(alpha_angle);
-
-    % 总平均误差
-    meanmeanErrorPhase = zeros(size(doa_phase_angle, 2), 1);
-
-    linelist = ["-", "--", "-.", ":"];
-    
-    % 遍历第二维（如SNR或CIN或SR值）
-    for var_index = 1 : 2 : 11
-        % 计算时延比相测向误差的平均值
-        meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
-            repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
-            [1, 1, size(doa_phase_angle, 3)])), 3);
-        % 绘制时延比相测向误差曲线
-        plot(alpha_angle, meanErrorPhase, ...
-            "-", ...
-            'Color', colors((var_index-1)/2+1, :), ...
-            'LineWidth', 1, ...
-            'DisplayName', sprintf(var_displayname, var_list(var_index)));
-
-        % 记录总平均误差
-        meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
-    end
-    
-    hold off;
-    xlabel('实际角度 (°)');
-    ylabel('平均绝对误差 (°)');
-    xlim([alpha_angle(1) alpha_angle(end)]);
-    ylim([0 3]);
-    grid on;
-    
-    % 美化
-    title(' ');
-    legend('show', ...
+        'FontName', 'Times New Roman', ...
+        'FontSize', 10.5, ...
         'Location', 'southoutside', ...
         'NumColumns',4, ...
         'box', 'off');

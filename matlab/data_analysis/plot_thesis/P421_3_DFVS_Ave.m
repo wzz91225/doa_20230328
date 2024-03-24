@@ -45,7 +45,7 @@ end
 if length(snr_value) > 1
     var_list = snr_value;
     var_displayname = '%d dB';
-    var_titlename = '信噪比';
+    var_titlename = '\fontname{宋体}信噪比\fontname{Times New Roman}';
 elseif length(coherent_integration_number) > 1
     var_list = coherent_integration_number;
     var_displayname = 'N_{CI} = %d';
@@ -93,70 +93,30 @@ if is_plot_angle
         'LineWidth', 1.5, ...
         'DisplayName', '传统比幅算法');
     hold off;
-    xlabel('实际角度 (°)');
-    ylabel('测向结果 (°)');
-    % legend('show');
+
+    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}测向结果 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xticks((0:30:180));
+    yticks((0:30:180));
+    xlim([0 180]);
+    ylim([0 180]);
     grid on;
+    box on;
+    set(gca, ...
+        'FontName', 'Times New Roman', ...
+        'FontSize', 10.5, ...
+        'LineWid', 1);
+    
     % 美化
     title(' ');
     legend('show', ...
+        'FontName', '宋体', ...
+        'FontSize', 10.5, ...
         'Location', 'southoutside', ...
         'NumColumns', 2, ...
         'box', 'off');
-    xlim([0 180]);
-    ylim([0 180]);
     set(gcf, 'unit', 'centimeters', 'position', [10 5 12 11.5]);
 end
-
-% if is_plot_angle
-%         % 绘制时延比相测向结果与预期角度的关系图
-%     figure;
-%     hold on;
-%     for i = 1:length(var_list)
-%         plot(alpha_angle, doa_phase_angle(:, i), ...
-%             'LineWidth', 1, ...
-%             'DisplayName', sprintf(var_displayname, var_list(i)));
-%     end
-%     hold off;
-%     title(['不同' var_titlename '下动态比相测向结果与预期角度的关系']);
-%     xlabel('预期角度（°）');
-%     ylabel('动态比相测向结果（°）');
-%     % legend('show');
-%     grid on;
-%     % 美化
-%     title(' ');
-%     legend('show', ...
-%         'Location', 'southoutside', ...
-%         'NumColumns',length(var_list), ...
-%         'box', 'off');
-%     % legend('boxoff');
-%     % angle_range = alpha_angle(end) - alpha_angle(1) + 1;
-%     set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
-% 
-%     % 绘制比幅测向结果与预期角度的关系图
-%     figure;
-%     hold on;
-%     for i = 1:length(var_list)
-%         plot(alpha_angle, doa_amplitude_angle(:, i), ...
-%             'LineWidth', 1, ...
-%             'DisplayName', sprintf(var_displayname, var_list(i)));
-%     end
-%     hold off;
-%     title(['不同' var_titlename '下比幅测向结果与预期角度的关系']);
-%     xlabel('预期角度（°）');
-%     ylabel('比幅测向结果（°）');
-%     % legend('show');
-%     grid on;
-%     % 美化
-%     title(' ');
-%     legend('show', ...
-%         'Location', 'southoutside', ...
-%         'NumColumns',length(var_list), ...
-%         'box', 'off');
-%     % legend('boxoff');
-%     % angle_range = alpha_angle(end) - alpha_angle(1) + 1;
-%     set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
-% end
 
 
 %% ##########################角度误差图##########################
@@ -194,6 +154,12 @@ if is_plot_angle_error
             'DisplayName', ['动态比相 ' sprintf(var_displayname, var_list(var_index))]);
             % 'DisplayName', sprintf(var_displayname, var_list(var_index)));
         
+        % 记录总平均误差
+        meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
+    end
+
+    % 遍历第二维（如SNR或CIN或SR值）
+    for var_index = 1 : size(doa_phase_angle, 2)
         % % 计算比幅测向误差的平均值，考虑全部范围
         % meanErrorAmplitude = mean(abs(doa_amplitude_angle(:, var_index, :) - ...
         %     repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
@@ -220,29 +186,33 @@ if is_plot_angle_error
             % 'HandleVisibility', 'off');
 
         % 记录总平均误差
-        meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
         meanmeanErrorAmplitude(var_index) = mean(meanErrorAmplitude);
     end
     
     hold off;
-    title(['不同' var_titlename '下测向结果的平均绝对误差']);
-    xlabel('实际角度（°）');
-    ylabel('平均绝对误差（°）');
-    if isequal(alpha_angle, (1:179))
-        xlim([0 90]);
-    else
-        xlim([alpha_angle(1) alpha_angle(end)]);
-    end
-    ylim([0 5]);
+    
+    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xticks((0:30:180));
+    yticks((0:0.5:3));
+    xlim([alpha_angle(1) alpha_angle(end)+1]);
+    ylim([0 3]);
     grid on;
+    box on;
+    set(gca, ...
+        'FontSize', 10.5, ...
+        'LineWid', 1);
+        % 'FontName', 'Times New Roman', ...
     
     % 美化
     title(' ');
     legend('show', ...
+        'FontName', '宋体', ...
+        'FontSize', 10.5, ...
         'Location', 'southoutside', ...
-        'NumColumns',length(var_list), ...
+        'NumColumns', 2, ...
         'box', 'off');
-    set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 12 12.5]);
     
     % 打印总平均误差
     fprintf(['    ' var_titlename '   比相误差' '   比幅误差\n']);
@@ -340,22 +310,29 @@ if is_plot_angle_error
     end
     
     hold off;
-    title(['不同' var_titlename '下测向结果的平均绝对误差']);
-    xlabel('实际角度（°）');
-    ylabel('平均绝对误差（°）');
-    xlim([alpha_angle(1) alpha_angle(end)]);
-    ylim([0 5]);
-    % legend('show');
+
+    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xticks((0:30:180));
+    yticks((0:0.5:3));
+    xlim([alpha_angle(1) alpha_angle(end)+1]);
+    ylim([0 3]);
     grid on;
+    box on;
+    set(gca, ...
+        'FontSize', 10.5, ...
+        'LineWid', 1);
+        % 'FontName', 'Times New Roman', ...
     
     % 美化
     title(' ');
     legend('show', ...
+        'FontName', '宋体', ...
+        'FontSize', 10.5, ...
         'Location', 'southoutside', ...
-        'NumColumns',length(var_list), ...
+        'NumColumns', 2, ...
         'box', 'off');
-    set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
-    % set(gcf, 'unit', 'centimeters', 'position', [10 5 20 13]);
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 12 12.5]);
 
     
     % 打印总平均误差

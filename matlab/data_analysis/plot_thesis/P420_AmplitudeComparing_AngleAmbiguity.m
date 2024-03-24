@@ -78,3 +78,4 @@ for i = 1:size(start_points, 1)
 end
 
 hold off;
+box on;

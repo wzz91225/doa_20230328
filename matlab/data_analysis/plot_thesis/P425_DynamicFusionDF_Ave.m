@@ -19,7 +19,7 @@ is_amplitude_errorlessthan90 = 1;
 
 %% ##########################读取数据文件##########################
 % 指定.mat文件的路径
-matFilePath = 'matlab/simulation_results/SIMDATA-240302_181421-DynamicFusionDF_Ave_180x7x1000x2e2_merged.mat';
+matFilePath = 'matlab/simulation_results/SIMDATA-240227_081730-DynamicFusionDF_Ave_SR_180x6x1000_-15dB.mat';
 
 % 从.mat文件中加载数据
 load(matFilePath);
@@ -97,7 +97,7 @@ if is_plot_angle_error
     % linelist = ["-", "--", "-.", ":"];
 
     % 遍历第二维（如SNR或CIN或SR值）
-    for var_index = 1:1:7
+    for var_index = 1:1:6
 
         % 计算动态融合测向误差的平均值
         meanErrorFusion = mean(abs(doa_fusion_angle(:, var_index, :) - ...
@@ -108,7 +108,7 @@ if is_plot_angle_error
             plot(alpha_angle, meanErrorFusion, ...
                 "-", ...
                 'Color', colors((var_index-1)/1+1, :), ...
-                'LineWidth', 1.5, ...
+                    'LineWidth', 1.5, ...
                 'DisplayName', sprintf(var_displayname, var_list(var_index)));
                 % 'DisplayName', ['动态融合 ' sprintf(var_displayname, var_list(var_index))]);
         end
@@ -165,20 +165,29 @@ if is_plot_angle_error
     end
     
     hold off;
-    xlabel('实际角度（°）');
-    ylabel('平均绝对误差（°）');
-    xlim([alpha_angle(1) alpha_angle(end)]);
-    ylim([0 5]);
-    % legend('show');
+
+    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xticks((0:30:180));
+    yticks((0:1:6));
+    xlim([alpha_angle(1) alpha_angle(end)+1]);
+    ylim([0 6]);
     grid on;
+    box on;
+    set(gca, ...
+        'FontSize', 10.5, ...
+        'LineWid', 1);
+        % 'FontName', 'Times New Roman', ...
     
     % 美化
     title(' ');
     legend('show', ...
+        'FontName', '宋体', ...
+        'FontSize', 10.5, ...
         'Location', 'southoutside', ...
-        'NumColumns', 7, ...
+        'NumColumns', 6, ...
         'box', 'off');
-    set(gcf, 'unit', 'centimeters', 'position', [10 5 20 12]);
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 20.5 12]);
 
     
     % 打印总平均误差
