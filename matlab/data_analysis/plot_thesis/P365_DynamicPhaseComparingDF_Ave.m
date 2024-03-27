@@ -89,7 +89,7 @@ if is_plot_angle_error
     end
     
     hold off;
-    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xlabel('\fontname{宋体}期望角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     xticks((0:30:180));
     yticks((0:1.5:9));

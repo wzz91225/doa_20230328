@@ -38,7 +38,7 @@ end
 
 % ##########################确定二维变量##########################
 if length(snr_value) > 1
-    var_list = snr_value;
+    var_list = snr_value+30;
     var_displayname = '%d dB';
     var_titlename = '信噪比';
 elseif length(coherent_integration_cycles) > 1
@@ -50,7 +50,7 @@ elseif length(samp_rate) > 1
     var_displayname = '%0.1f MHz';
     var_titlename = '采样率';
 else
-    var_list = snr_value;
+    var_list = snr_value+30;
     var_displayname = '%d dB';
     var_titlename = '信噪比';
 end
@@ -89,7 +89,7 @@ if is_plot_angle_error
     end
     
     hold off;
-    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xlabel('\fontname{宋体}期望角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     ylabel('\fontname{宋体}动态比相算法测向结果 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     xticks((0:30:180));
     yticks((0:15:90));
@@ -151,7 +151,7 @@ if is_plot_angle_error
     end
     
     hold off;
-    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xlabel('\fontname{宋体}期望角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     ylabel('\fontname{宋体}动态比相算法测向结果 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     xticks((0:30:180));
     yticks((0:0.5:3));

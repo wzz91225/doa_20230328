@@ -43,7 +43,7 @@ end
 
 %% ##########################确定二维变量##########################
 if length(snr_value) > 1
-    var_list = snr_value;
+    var_list = snr_value+30;
     var_displayname = '%d dB';
     var_titlename = '\fontname{宋体}信噪比\fontname{Times New Roman}';
 elseif length(coherent_integration_number) > 1
@@ -94,7 +94,7 @@ if is_plot_angle
         'DisplayName', '传统比幅算法');
     hold off;
 
-    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xlabel('\fontname{宋体}期望角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     ylabel('\fontname{宋体}测向结果 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     xticks((0:30:180));
     yticks((0:30:180));
@@ -191,7 +191,7 @@ if is_plot_angle_error
     
     hold off;
     
-    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xlabel('\fontname{宋体}期望角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     xticks((0:30:180));
     yticks((0:0.5:3));
@@ -319,7 +319,7 @@ if is_plot_angle_error
     
     hold off;
 
-    xlabel('\fontname{宋体}实际角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    xlabel('\fontname{宋体}期望角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     xticks((0:30:180));
     yticks((0:0.5:3));
