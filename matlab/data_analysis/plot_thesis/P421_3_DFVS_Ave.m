@@ -257,7 +257,12 @@ if is_plot_angle_error
                 'DisplayName', ['动态融合 ' sprintf(var_displayname, var_list(var_index))]);
                 % 'DisplayName', sprintf(var_displayname, var_list(var_index)));
         end
+        % 记录总平均误差
+        meanmeanErrorFusion(var_index) = mean(meanErrorFusion);
+    end
 
+    % 遍历第二维（如SNR或CIN或SR值）
+    for var_index = 1 : size(doa_phase_angle, 2)
         % 计算动态比相测向误差的平均值
         meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
             repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
@@ -271,7 +276,12 @@ if is_plot_angle_error
                     'DisplayName', ['动态比相 ' sprintf(var_displayname, var_list(var_index))]);
                     % 'HandleVisibility', 'off');
         end
+        % 记录总平均误差
+        meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
+    end
         
+    % 遍历第二维（如SNR或CIN或SR值）
+    for var_index = 1 : size(doa_phase_angle, 2)
         if is_amplitude_errorlessthan90
             % 计算比幅测向误差的平均值，只考虑≤90度范围
             tmp = meanErrorAmplitude_N;
@@ -304,8 +314,6 @@ if is_plot_angle_error
         end
 
         % 记录总平均误差
-        meanmeanErrorFusion(var_index) = mean(meanErrorFusion);
-        meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
         meanmeanErrorAmplitude(var_index) = mean(meanErrorAmplitude);
     end
     
