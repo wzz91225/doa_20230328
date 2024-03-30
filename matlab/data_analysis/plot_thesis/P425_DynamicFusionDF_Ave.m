@@ -49,6 +49,15 @@ elseif length(samp_rate) > 1
     var_titlename = '采样率';
 end
 
+if alpha_angle(end) == 180
+    tmp = length(alpha_angle);
+    alpha_angle(tmp) = [];
+    doa_phase_angle(tmp, :, :) = [];
+    doa_amplitude_angle(tmp, :, :) = [];
+    if exist('doa_fusion_angle', 'var')
+        doa_fusion_angle(tmp, :, :) = [];
+    end
+end
 
 
 %% ##########################测向融合##########################
