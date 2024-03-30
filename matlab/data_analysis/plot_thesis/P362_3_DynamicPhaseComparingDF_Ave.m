@@ -90,7 +90,7 @@ if is_plot_angle_error
     
     hold off;
     xlabel('\fontname{宋体}期望角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
-    ylabel('\fontname{宋体}动态比相算法测向结果 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     xticks((0:30:180));
     yticks((0:15:90));
     xlim([alpha_angle(1) alpha_angle(end)+1]);
@@ -152,7 +152,7 @@ if is_plot_angle_error
     
     hold off;
     xlabel('\fontname{宋体}期望角度 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
-    ylabel('\fontname{宋体}动态比相算法测向结果 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
+    ylabel('\fontname{宋体}平均绝对误差 \fontname{Times New Roman}(°)', 'FontSize', 10.5);
     xticks((0:30:180));
     yticks((0:0.5:3));
     xlim([alpha_angle(1) alpha_angle(end)+1]);
