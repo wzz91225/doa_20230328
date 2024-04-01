@@ -49,6 +49,10 @@ elseif length(frequency) > 1
     var_list = frequency./1e3;
     var_displayname = '%0.1f kHz';
     var_titlename = '信号频率';
+elseif length(d_relative) > 1
+    var_list = d_relative ./ c .* frequency;
+    var_displayname = '%d \lambda';
+    var_titlename = '相对距离';
 elseif length(samp_rate) > 1
     var_list = samp_rate./1e6;
     var_displayname = '%f MHz';
