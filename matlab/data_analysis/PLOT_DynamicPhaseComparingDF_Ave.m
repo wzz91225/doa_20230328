@@ -45,9 +45,13 @@ elseif length(coherent_integration_cycles) > 1
     var_list = coherent_integration_cycles;
     var_displayname = 'N_{Cyc} = %d';
     var_titlename = '信号周期数';
+elseif length(frequency) > 1
+    var_list = frequency./1e3;
+    var_displayname = '%0.1f kHz';
+    var_titlename = '信号频率';
 elseif length(samp_rate) > 1
     var_list = samp_rate./1e6;
-    var_displayname = '%0.1f MHz';
+    var_displayname = '%f MHz';
     var_titlename = '采样率';
 else
     var_list = snr_value;
