@@ -122,7 +122,7 @@ if is_plot_angle_error
         'DisplayName', 'Dynamic Phase Comparison');
         % 'DisplayName', sprintf(var_displayname, var_list(var_index)));
     % SNR标注
-    text(alpha_angle(110), meanErrorPhase(120)+0.4, '-10dB\rightarrow');
+    text(alpha_angle(110), meanErrorPhase(120)+0.4, '-10 dB\rightarrow');
     % 计算比幅测向误差的平均值，只考虑≤90度范围
     tmp = meanErrorAmplitude_N;
     meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:tmp, var_index, :) - ...
@@ -135,7 +135,7 @@ if is_plot_angle_error
         'LineWidth', 1, ...
         'DisplayName', 'Amplitude Comparison');
     % SNR标注
-    text(alpha_angle(45), meanErrorAmplitude(50)+0.15, '\downarrow-10dB');
+    text(alpha_angle(45), meanErrorAmplitude(50)+0.15, '\downarrow-10 dB');
     % 记录总平均误差
     meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
     meanmeanErrorAmplitude(var_index) = mean(meanErrorAmplitude);
@@ -153,7 +153,7 @@ if is_plot_angle_error
         'HandleVisibility', 'off');
         % 'DisplayName', sprintf(var_displayname, var_list(var_index)));
     % SNR标注
-    text(alpha_angle(122), meanErrorPhase(135)+0.15, '0dB\rightarrow');
+    text(alpha_angle(122), meanErrorPhase(135)+0.15, '0 dB\rightarrow');
     % 计算比幅测向误差的平均值，只考虑≤90度范围
     tmp = meanErrorAmplitude_N;
     meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:tmp, var_index, :) - ...
@@ -166,7 +166,7 @@ if is_plot_angle_error
         'LineWidth', 1, ...
         'HandleVisibility', 'off');
     % SNR标注
-    text(alpha_angle(40), meanErrorAmplitude(50)+0.1, '\downarrow0dB');
+    text(alpha_angle(40), meanErrorAmplitude(50)+0.1, '\downarrow0 dB');
     % 记录总平均误差
     meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
     meanmeanErrorAmplitude(var_index) = mean(meanErrorAmplitude);
@@ -184,7 +184,7 @@ if is_plot_angle_error
         'HandleVisibility', 'off');
         % 'DisplayName', sprintf(var_displayname, var_list(var_index)));
     % SNR标注
-    text(alpha_angle(127), meanErrorPhase(125)+0.03, '10dB\rightarrow');
+    text(alpha_angle(125), meanErrorPhase(125)+0.03, '10 dB\rightarrow');
     % 计算比幅测向误差的平均值，只考虑≤90度范围
     tmp = meanErrorAmplitude_N;
     meanErrorAmplitude = mean(abs(doa_amplitude_angle(1:tmp, var_index, :) - ...
@@ -197,7 +197,7 @@ if is_plot_angle_error
         'LineWidth', 1, ...
         'HandleVisibility', 'off');
     % SNR标注
-    text(alpha_angle(35), meanErrorAmplitude(50)+0.1, '\downarrow10dB');
+    text(alpha_angle(33), meanErrorAmplitude(50)+0.1, '\downarrow10 dB');
     % 记录总平均误差
     meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
     meanmeanErrorAmplitude(var_index) = mean(meanErrorAmplitude);

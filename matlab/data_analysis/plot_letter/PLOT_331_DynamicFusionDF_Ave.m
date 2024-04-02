@@ -164,7 +164,7 @@ if is_plot_angle_error
             'DisplayName', 'Dynamic Fusion');
     end
     % SNR标注
-    text(127, 1.2, '\uparrow-10dB');
+    text(127, 1.2, '\uparrow-10 dB');
     % 计算动态比相测向误差的平均值
     meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
         repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
@@ -178,7 +178,7 @@ if is_plot_angle_error
                 'DisplayName', 'Dynamic Phase Comparison');
     end
     % SNR标注
-    text(53, 1.4, '\downarrow-10dB');
+    text(53, 1.4, '\downarrow-10 dB');
     % 记录总平均误差
     meanmeanErrorFusion(var_index) = mean(meanErrorFusion);
     meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
@@ -197,7 +197,7 @@ if is_plot_angle_error
             'HandleVisibility', 'off');
     end
     % SNR标注
-    text(130, 0.35, '\uparrow0dB');
+    text(130, 0.35, '\uparrow0 dB');
     % 计算动态比相测向误差的平均值
     meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
         repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
@@ -211,7 +211,7 @@ if is_plot_angle_error
                 'HandleVisibility', 'off');
     end
     % SNR标注
-    text(40, 0.58, '\downarrow0dB');
+    text(40, 0.58, '\downarrow0 dB');
     % 记录总平均误差
     meanmeanErrorFusion(var_index) = mean(meanErrorFusion);
     meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
@@ -230,7 +230,7 @@ if is_plot_angle_error
             'HandleVisibility', 'off');
     end
     % SNR标注
-    text(133, 0.07, '\uparrow10dB');
+    text(133, 0.07, '\uparrow10 dB');
     % 计算动态比相测向误差的平均值
     meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
         repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
@@ -244,7 +244,7 @@ if is_plot_angle_error
                 'HandleVisibility', 'off');
     end
     % SNR标注
-    text(28, 0.3, '\downarrow10dB');
+    text(28, 0.3, '\downarrow10 dB');
     % 记录总平均误差
     meanmeanErrorFusion(var_index) = mean(meanErrorFusion);
     meanmeanErrorPhase(var_index) = mean(meanErrorPhase);
