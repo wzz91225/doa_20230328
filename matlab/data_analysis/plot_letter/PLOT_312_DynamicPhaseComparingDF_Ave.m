@@ -17,7 +17,7 @@ load(matFilePath);
 
 % ##########################确定二维变量##########################
 var_list = d_relative ./ c .* frequency;
-var_displayname = 'd_r = %dλ';
+var_displayname = '%d λ';
 var_titlename = '相对距离';
 
 % ##########################角度误差图##########################
