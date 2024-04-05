@@ -12,7 +12,7 @@ is_plot_angle_error = 1;
 
 % ##########################读取数据文件##########################
 % 指定.mat文件的路径
-matFilePath = 'matlab/simulation_results/SIMDATA-240301_055538-DynamicPhaseComparingDF_Ave_SNR_180x13x1000x2e2_CIN1x100.mat';
+matFilePath = 'matlab/simulation_results/SIMDATA-240301_205001-DynamicPhaseComparingDF_Ave_CIC_180x9x1000x2e2_-15dB.mat';
 
 % % 弹出文件选择对话框让用户选择.mat文件
 % [fileName, filePath] = uigetfile('matlab/simulation_results/*.mat', ...
@@ -114,7 +114,7 @@ if is_plot_angle_error
     linelist = ["-", "--", "-.", ":"];
     
     % 遍历第二维（如SNR或CIN或SR值）
-    for var_index = 3 : 2 : 9
+    for var_index = 3:2:9
         % 计算时延比相测向误差的平均值
         meanErrorPhase = mean(abs(doa_phase_angle(:, var_index, :) - ...
             repmat(reshape(alpha_angle, [length(alpha_angle), 1, 1]), ...
@@ -134,16 +134,16 @@ if is_plot_angle_error
     xlabel('Expected (°)');
     ylabel('Average Absolute Error (°)');
     xlim([alpha_angle(1) alpha_angle(end)]);
-    ylim([0 3]);
+    ylim([0 5]);
     grid on;
     
     % 美化
     title(' ');
     legend('show', ...
         'Location', 'southoutside', ...
-        'NumColumns',4, ...
+        'NumColumns',2, ...
         'box', 'off');
-    set(gcf, 'unit', 'centimeters', 'position', [10 5 12 12]);
+    set(gcf, 'unit', 'centimeters', 'position', [10 5 12 12.5]);
     
     % 打印总平均误差
     fprintf(['    ' var_titlename '   比相误差\n']);
