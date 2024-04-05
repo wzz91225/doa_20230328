@@ -20,7 +20,7 @@ c = 299792458;
 
 
 % 信号源频率 单位Hz
-frequency = [3.2e3 3.2e4 3.2e5];
+frequency = [3e3 3e4 3e5 3e6 3e7];
 % 接收机信号采样率 单位Hz
 samp_rate = frequency * 200;
 % 信号源与接收机比相时相对距离d_r 单位m
